@@ -7,12 +7,16 @@ module.exports = {
   ],
   theme: {
   	extend: {
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
+  		fontFamily: {
+  			sans: ['Inter', 'system-ui', 'sans-serif'],
   		},
   		colors: {
+  			'otx-bordo': '#7A0D1A',
+  			'otx-bordo-light': '#9A1525',
+  			'otx-dark': '#0B0B0F',
+  			'otx-gray': '#F5F6F8',
+  			'otx-gray-light': '#EDEDED',
+  			'otx-text': '#111111',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -53,6 +57,11 @@ module.exports = {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
+  		},
+  		borderRadius: {
+  			lg: 'var(--radius)',
+  			md: 'calc(var(--radius) - 2px)',
+  			sm: 'calc(var(--radius) - 4px)'
   		},
   		keyframes: {
   			'accordion-down': {
