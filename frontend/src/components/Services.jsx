@@ -13,6 +13,22 @@ const iconMap = {
 };
 
 const Services = () => {
+  const handleServiceClick = (serviceName) => {
+    // Dispatch event to prefill contact form
+    window.dispatchEvent(new CustomEvent('prefillContactForm', {
+      detail: {
+        servicio: serviceName,
+        asunto: `Consulta sobre: ${serviceName}`
+      }
+    }));
+
+    // Scroll to contact section
+    const contactSection = document.getElementById('contacto');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="servicios" className="py-24 bg-otx-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,14 +46,15 @@ const Services = () => {
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => {
+          {services.map((service) => {
             const IconComponent = iconMap[service.icon];
             const isLarge = service.id === 7; // M365 gets special treatment
             
             return (
-              <div
+              <button
                 key={service.id}
-                className={`group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-transparent hover:border-otx-bordo/20 ${
+                onClick={() => handleServiceClick(service.title)}
+                className={`group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-transparent hover:border-otx-bordo/20 text-left w-full ${
                   isLarge ? 'md:col-span-2 lg:col-span-1' : ''
                 }`}
               >
@@ -56,9 +73,14 @@ const Services = () => {
                   {service.description}
                 </p>
 
+                {/* CTA hint */}
+                <span className="inline-block mt-4 text-sm text-otx-bordo opacity-0 group-hover:opacity-100 transition-opacity">
+                  Click para consultar →
+                </span>
+
                 {/* Hover Indicator */}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-otx-bordo rounded-b-2xl transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-              </div>
+              </button>
             );
           })}
         </div>
@@ -77,11 +99,23 @@ const Services = () => {
                 </p>
               </div>
             </div>
-            <a href="#planes-m365" className="flex-shrink-0">
-              <button className="bg-otx-bordo hover:bg-otx-bordo-light text-white font-medium px-8 py-3 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-otx-bordo/30">
-                Ver planes M365
-              </button>
-            </a>
+            <button 
+              onClick={() => {
+                // Scroll to M365 tab in pricing
+                const planesSection = document.getElementById('planes');
+                if (planesSection) {
+                  planesSection.scrollIntoView({ behavior: 'smooth' });
+                  // Small delay to let scroll complete, then click M365 tab
+                  setTimeout(() => {
+                    const m365Tab = document.querySelector('[value="m365"]');
+                    if (m365Tab) m365Tab.click();
+                  }, 500);
+                }
+              }}
+              className="flex-shrink-0 bg-otx-bordo hover:bg-otx-bordo-light text-white font-medium px-8 py-3 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-otx-bordo/30"
+            >
+              Ver planes M365
+            </button>
           </div>
         </div>
       </div>
