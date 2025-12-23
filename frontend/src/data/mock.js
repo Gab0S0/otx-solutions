@@ -3,7 +3,7 @@
 export const companyInfo = {
   name: "OTX Solutions",
   tagline: "Excelencia en Operaciones Tecnológicas",
-  whatsapp: "5491524021747",
+  whatsapp: "5491124021747",
   email: "otame.drive@gmail.com",
   location: "CABA, Buenos Aires, Argentina",
   experience: "10+",
