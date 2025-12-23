@@ -1,12 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Check, User, Building2, Cloud, Info } from 'lucide-react';
 import { Button } from './ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
-import { planesParticulares, planesPymes, planesM365, condicionesGenerales, companyInfo, whatsappMessage } from '../data/mock';
+import { planesParticulares, planesPymes, planesM365, condicionesGenerales, companyInfo } from '../data/mock';
 
 const Pricing = () => {
-  const whatsappUrl = `https://wa.me/${companyInfo.whatsapp}?text=${whatsappMessage}`;
+  const scrollToContactWithPlan = (planName, openWhatsApp = false) => {
+    // Dispatch event to prefill contact form
+    window.dispatchEvent(new CustomEvent('prefillContactForm', {
+      detail: {
+        plan: planName,
+        asunto: `Interesado en: ${planName}`
+      }
+    }));
+
+    // Scroll to contact section
+    const contactSection = document.getElementById('contacto');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Optionally open WhatsApp
+    if (openWhatsApp) {
+      const msg = `Hola, estoy interesado en el ${planName}.%0A%0AMe gustaría recibir más información.%0A%0A¡Gracias!`;
+      const whatsappUrl = `https://wa.me/${companyInfo.whatsapp}?text=${msg}`;
+      setTimeout(() => {
+        window.open(whatsappUrl, '_blank');
+      }, 300);
+    }
+  };
 
   return (
     <section id="planes" className="py-24 bg-white">
@@ -41,17 +64,17 @@ const Pricing = () => {
 
           {/* Particulares */}
           <TabsContent value="particulares">
-            <PlanesParticulares whatsappUrl={whatsappUrl} />
+            <PlanesParticulares onSelectPlan={scrollToContactWithPlan} />
           </TabsContent>
 
           {/* Pymes */}
           <TabsContent value="pymes">
-            <PlanesPymes whatsappUrl={whatsappUrl} />
+            <PlanesPymes onSelectPlan={scrollToContactWithPlan} />
           </TabsContent>
 
           {/* M365 */}
           <TabsContent value="m365" id="planes-m365">
-            <PlanesM365 whatsappUrl={whatsappUrl} />
+            <PlanesM365 onSelectPlan={scrollToContactWithPlan} />
           </TabsContent>
         </Tabs>
 
@@ -66,7 +89,7 @@ const Pricing = () => {
   );
 };
 
-const PlanesParticulares = ({ whatsappUrl }) => {
+const PlanesParticulares = ({ onSelectPlan }) => {
   return (
     <div className="space-y-12">
       {/* Plans Grid */}
@@ -102,17 +125,16 @@ const PlanesParticulares = ({ whatsappUrl }) => {
               ))}
             </ul>
 
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-              <Button
-                className={`w-full ${
-                  plan.popular
-                    ? 'bg-otx-bordo hover:bg-otx-bordo-light text-white'
-                    : 'bg-otx-gray hover:bg-otx-bordo hover:text-white text-otx-text'
-                }`}
-              >
-                Contratar
-              </Button>
-            </a>
+            <Button
+              onClick={() => onSelectPlan(`${plan.name} - ${plan.price}${plan.period}`)}
+              className={`w-full ${
+                plan.popular
+                  ? 'bg-otx-bordo hover:bg-otx-bordo-light text-white'
+                  : 'bg-otx-gray hover:bg-otx-bordo hover:text-white text-otx-text'
+              }`}
+            >
+              Contratar
+            </Button>
           </div>
         ))}
       </div>
@@ -169,7 +191,7 @@ const PlanesParticulares = ({ whatsappUrl }) => {
   );
 };
 
-const PlanesPymes = ({ whatsappUrl }) => {
+const PlanesPymes = ({ onSelectPlan }) => {
   return (
     <div className="space-y-12">
       {/* Plans Grid */}
@@ -213,17 +235,16 @@ const PlanesPymes = ({ whatsappUrl }) => {
               ))}
             </ul>
 
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-              <Button
-                className={`w-full ${
-                  plan.popular
-                    ? 'bg-otx-bordo hover:bg-otx-bordo-light text-white'
-                    : 'bg-otx-gray hover:bg-otx-bordo hover:text-white text-otx-text'
-                }`}
-              >
-                Solicitar información
-              </Button>
-            </a>
+            <Button
+              onClick={() => onSelectPlan(`${plan.name} - ${plan.price}${plan.period}`)}
+              className={`w-full ${
+                plan.popular
+                  ? 'bg-otx-bordo hover:bg-otx-bordo-light text-white'
+                  : 'bg-otx-gray hover:bg-otx-bordo hover:text-white text-otx-text'
+              }`}
+            >
+              Solicitar información
+            </Button>
           </div>
         ))}
       </div>
@@ -247,7 +268,7 @@ const PlanesPymes = ({ whatsappUrl }) => {
   );
 };
 
-const PlanesM365 = ({ whatsappUrl }) => {
+const PlanesM365 = ({ onSelectPlan }) => {
   return (
     <div className="space-y-8">
       <div className="grid md:grid-cols-3 gap-6">
@@ -273,11 +294,12 @@ const PlanesM365 = ({ whatsappUrl }) => {
               ))}
             </ul>
 
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-              <Button className="w-full bg-otx-bordo hover:bg-otx-bordo-light text-white">
-                Consultar
-              </Button>
-            </a>
+            <Button 
+              onClick={() => onSelectPlan(`Microsoft 365 - ${plan.name}`)}
+              className="w-full bg-otx-bordo hover:bg-otx-bordo-light text-white"
+            >
+              Consultar
+            </Button>
           </div>
         ))}
       </div>
