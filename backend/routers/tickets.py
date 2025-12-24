@@ -107,6 +107,7 @@ async def create_ticket(ticket: TicketCreate, request: Request):
         "mensaje": ticket.mensaje,
         "plan": ticket.plan or "",
         "servicio": ticket.servicio or "",
+        "canal": ticket.canal or "TicketWeb",
         "ip": client_ip
     }
     
