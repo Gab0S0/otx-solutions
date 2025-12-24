@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, MapPin, Clock, Send, MessageSquare, AlertCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Send, MessageSquare, AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -25,6 +25,7 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const [ticketCreated, setTicketCreated] = useState(null);
 
   // Listen for custom events to prefill form
   useEffect(() => {
@@ -42,15 +43,20 @@ const Contact = () => {
     return () => window.removeEventListener('prefillContactForm', handlePrefill);
   }, []);
 
-  const generateWhatsAppMessage = () => {
-    let msg = `Hola, necesito soporte técnico remoto.%0A%0A`;
+  const generateWhatsAppMessage = (ticketId = null) => {
+    let msg = `Hola, `;
+    if (ticketId) {
+      msg += `acabo de crear el ticket ${ticketId}.%0A%0A`;
+    } else {
+      msg += `necesito soporte técnico remoto.%0A%0A`;
+    }
     if (formData.plan) {
       msg += `Plan interesado: ${formData.plan}%0A`;
     }
     if (formData.servicio) {
       msg += `Servicio: ${formData.servicio}%0A`;
     }
-    msg += `%0AMi problema es: [DESCRIBIR BREVEMENTE]%0ATipo de equipo: [PC / Notebook / Mac]%0ASistema operativo: [Windows / macOS / Otro]%0ASoy: [Particular / Pyme]%0A%0A¡Gracias!`;
+    msg += `%0ASoy: [Particular / Pyme]%0A%0A¡Gracias!`;
     return msg;
   };
 
@@ -63,7 +69,8 @@ const Contact = () => {
   };
 
   const handleSelectChange = (name, value) => {
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const finalValue = value === '__empty__' ? '' : value;
+    setFormData(prev => ({ ...prev, [name]: finalValue }));
     setError(null);
   };
 
@@ -82,26 +89,16 @@ const Contact = () => {
         mensaje: formData.mensaje,
         plan: formData.plan || null,
         servicio: formData.servicio || null,
-        website: formData.website // Honeypot
+        website: formData.website,
+        canal: 'Landing'
       });
 
       if (response.data.success) {
-        toast.success('¡Ticket enviado correctamente!', {
-          description: response.data.message
+        setTicketCreated({
+          id: response.data.ticket_id,
+          message: response.data.message
         });
-
-        // Reset form
-        setFormData({
-          nombre: '',
-          email: '',
-          telefono: '',
-          tipo: '',
-          asunto: '',
-          mensaje: '',
-          plan: '',
-          servicio: '',
-          website: ''
-        });
+        toast.success('¡Ticket creado!');
       }
     } catch (err) {
       const errorMessage = err.response?.data?.detail || 'Error al enviar el ticket. Por favor intentá de nuevo o contactanos por WhatsApp.';
@@ -112,6 +109,21 @@ const Contact = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const resetForm = () => {
+    setFormData({
+      nombre: '',
+      email: '',
+      telefono: '',
+      tipo: '',
+      asunto: '',
+      mensaje: '',
+      plan: '',
+      servicio: '',
+      website: ''
+    });
+    setTicketCreated(null);
   };
 
   // Service options for dropdown
@@ -195,166 +207,210 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Ticket Form */}
+          {/* Ticket Form or Success */}
           <div className="bg-otx-gray rounded-2xl p-8">
-            <h3 className="text-xl font-bold text-otx-text mb-6">Abrir un Ticket</h3>
-            
-            {error && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-                <AlertCircle className="text-red-500 flex-shrink-0 mt-0.5" size={20} />
-                <p className="text-red-700 text-sm">{error}</p>
-              </div>
-            )}
-            
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Honeypot - hidden from users */}
-              <div className="absolute -left-[9999px]" aria-hidden="true">
-                <Input
-                  type="text"
-                  name="website"
-                  value={formData.website}
-                  onChange={handleChange}
-                  tabIndex={-1}
-                  autoComplete="off"
-                />
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="nombre">Nombre completo *</Label>
-                  <Input
-                    id="nombre"
-                    name="nombre"
-                    value={formData.nombre}
-                    onChange={handleChange}
-                    placeholder="Juan Pérez"
-                    required
-                    className="bg-white border-otx-gray focus:border-otx-bordo"
-                  />
+            {ticketCreated ? (
+              // Success view
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle className="text-green-600" size={32} />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email *</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="juan@email.com"
-                    required
-                    className="bg-white border-otx-gray focus:border-otx-bordo"
-                  />
+                
+                <h3 className="text-2xl font-bold text-otx-text mb-2">¡Ticket Creado!</h3>
+                
+                <div className="bg-white rounded-xl p-4 mb-6 inline-block">
+                  <p className="text-sm text-otx-text/70 mb-1">Tu número de ticket:</p>
+                  <p className="text-3xl font-bold text-otx-bordo">{ticketCreated.id}</p>
+                </div>
+                
+                <p className="text-otx-text/70 mb-6">
+                  Te responderemos a la brevedad. Para una respuesta más rápida:
+                </p>
+                
+                <div className="space-y-3">
+                  <a 
+                    href={`https://wa.me/${companyInfo.whatsapp}?text=${generateWhatsAppMessage(ticketCreated.id)}`} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <Button className="w-full bg-green-500 hover:bg-green-600 text-white gap-2">
+                      <MessageSquare size={18} />
+                      Abrir WhatsApp
+                    </Button>
+                  </a>
+                  
+                  <Button variant="outline" onClick={resetForm} className="w-full gap-2">
+                    <ArrowLeft size={18} />
+                    Enviar otro ticket
+                  </Button>
                 </div>
               </div>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="telefono">Teléfono</Label>
-                  <Input
-                    id="telefono"
-                    name="telefono"
-                    value={formData.telefono}
-                    onChange={handleChange}
-                    placeholder="11 1234-5678"
-                    className="bg-white border-otx-gray focus:border-otx-bordo"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="tipo">Tipo de cliente *</Label>
-                  <Select value={formData.tipo} onValueChange={(value) => handleSelectChange('tipo', value)} required>
-                    <SelectTrigger className="bg-white border-otx-gray focus:border-otx-bordo">
-                      <SelectValue placeholder="Seleccionar..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="particular">Particular</SelectItem>
-                      <SelectItem value="pyme">Pyme</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="servicio">Servicio (opcional)</Label>
-                  <Select value={formData.servicio} onValueChange={(value) => handleSelectChange('servicio', value)}>
-                    <SelectTrigger className="bg-white border-otx-gray focus:border-otx-bordo">
-                      <SelectValue placeholder="Seleccionar servicio..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {serviceOptions.map(opt => (
-                        <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="plan">Plan interesado (opcional)</Label>
-                  <Select value={formData.plan} onValueChange={(value) => handleSelectChange('plan', value)}>
-                    <SelectTrigger className="bg-white border-otx-gray focus:border-otx-bordo">
-                      <SelectValue placeholder="Seleccionar plan..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Asistencia Única - $15.000">Asistencia Única - $15.000</SelectItem>
-                      <SelectItem value="Pack 5 Intervenciones - $65.000">Pack 5 Intervenciones - $65.000</SelectItem>
-                      <SelectItem value="Plan Mensual - $25.000/mes">Plan Mensual - $25.000/mes</SelectItem>
-                      <SelectItem value="Pyme Basic - $70.000/mes">Pyme Basic - $70.000/mes</SelectItem>
-                      <SelectItem value="Pyme Pro - $120.000/mes">Pyme Pro - $120.000/mes</SelectItem>
-                      <SelectItem value="Microsoft 365 - Consultar">Microsoft 365 - Consultar</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="asunto">Asunto *</Label>
-                <Input
-                  id="asunto"
-                  name="asunto"
-                  value={formData.asunto}
-                  onChange={handleChange}
-                  placeholder="Problema con mi PC / Consulta sobre planes / etc."
-                  required
-                  className="bg-white border-otx-gray focus:border-otx-bordo"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="mensaje">Descripción del problema *</Label>
-                <Textarea
-                  id="mensaje"
-                  name="mensaje"
-                  value={formData.mensaje}
-                  onChange={handleChange}
-                  placeholder="Describí tu problema o consulta con el mayor detalle posible..."
-                  required
-                  minLength={10}
-                  rows={5}
-                  className="bg-white border-otx-gray focus:border-otx-bordo resize-none"
-                />
-              </div>
-
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-otx-bordo hover:bg-otx-bordo-light text-white gap-2 py-6 transition-all duration-300 hover:shadow-lg hover:shadow-otx-bordo/30"
-              >
-                {isSubmitting ? (
-                  <span className="flex items-center gap-2">
-                    <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Enviando...
-                  </span>
-                ) : (
-                  <>
-                    <Send size={18} />
-                    Enviar Ticket
-                  </>
+            ) : (
+              // Form view
+              <>
+                <h3 className="text-xl font-bold text-otx-text mb-6">Abrir un Ticket</h3>
+                
+                {error && (
+                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
+                    <AlertCircle className="text-red-500 flex-shrink-0 mt-0.5" size={20} />
+                    <p className="text-red-700 text-sm">{error}</p>
+                  </div>
                 )}
-              </Button>
+                
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Honeypot - hidden from users */}
+                  <div className="absolute -left-[9999px]" aria-hidden="true">
+                    <Input
+                      type="text"
+                      name="website"
+                      value={formData.website}
+                      onChange={handleChange}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
 
-              <p className="text-otx-text/50 text-xs text-center">
-                Te responderemos a la brevedad por email. Para urgencias, contactanos por WhatsApp.
-              </p>
-            </form>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="nombre">Nombre completo *</Label>
+                      <Input
+                        id="nombre"
+                        name="nombre"
+                        value={formData.nombre}
+                        onChange={handleChange}
+                        placeholder="Juan Pérez"
+                        required
+                        className="bg-white border-otx-gray focus:border-otx-bordo"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email *</Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="juan@email.com"
+                        required
+                        className="bg-white border-otx-gray focus:border-otx-bordo"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="telefono">Teléfono</Label>
+                      <Input
+                        id="telefono"
+                        name="telefono"
+                        value={formData.telefono}
+                        onChange={handleChange}
+                        placeholder="11 1234-5678"
+                        className="bg-white border-otx-gray focus:border-otx-bordo"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="tipo">Tipo de cliente *</Label>
+                      <Select value={formData.tipo} onValueChange={(value) => handleSelectChange('tipo', value)} required>
+                        <SelectTrigger className="bg-white border-otx-gray focus:border-otx-bordo">
+                          <SelectValue placeholder="Seleccionar..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="particular">Particular</SelectItem>
+                          <SelectItem value="pyme">Pyme</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="servicio">Servicio</Label>
+                      <Select value={formData.servicio || '__empty__'} onValueChange={(value) => handleSelectChange('servicio', value)}>
+                        <SelectTrigger className="bg-white border-otx-gray focus:border-otx-bordo">
+                          <SelectValue placeholder="Opcional" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="__empty__">— Ninguno —</SelectItem>
+                          {serviceOptions.map(opt => (
+                            <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="plan">Plan interesado</Label>
+                      <Select value={formData.plan || '__empty__'} onValueChange={(value) => handleSelectChange('plan', value)}>
+                        <SelectTrigger className="bg-white border-otx-gray focus:border-otx-bordo">
+                          <SelectValue placeholder="Opcional" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="__empty__">— Ninguno —</SelectItem>
+                          <SelectItem value="Asistencia Única - $15.000">Asistencia Única - $15.000</SelectItem>
+                          <SelectItem value="Pack 5 Intervenciones - $65.000">Pack 5 Intervenciones - $65.000</SelectItem>
+                          <SelectItem value="Plan Mensual - $25.000/mes">Plan Mensual - $25.000/mes</SelectItem>
+                          <SelectItem value="Pyme Basic - $70.000/mes">Pyme Basic - $70.000/mes</SelectItem>
+                          <SelectItem value="Pyme Pro - $120.000/mes">Pyme Pro - $120.000/mes</SelectItem>
+                          <SelectItem value="Microsoft 365 - Consultar">Microsoft 365 - Consultar</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="asunto">Asunto *</Label>
+                    <Input
+                      id="asunto"
+                      name="asunto"
+                      value={formData.asunto}
+                      onChange={handleChange}
+                      placeholder="Problema con mi PC / Consulta sobre planes / etc."
+                      required
+                      className="bg-white border-otx-gray focus:border-otx-bordo"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="mensaje">Descripción del problema *</Label>
+                    <Textarea
+                      id="mensaje"
+                      name="mensaje"
+                      value={formData.mensaje}
+                      onChange={handleChange}
+                      placeholder="Describí tu problema o consulta con el mayor detalle posible..."
+                      required
+                      minLength={10}
+                      rows={5}
+                      className="bg-white border-otx-gray focus:border-otx-bordo resize-none"
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-otx-bordo hover:bg-otx-bordo-light text-white gap-2 py-6 transition-all duration-300 hover:shadow-lg hover:shadow-otx-bordo/30"
+                  >
+                    {isSubmitting ? (
+                      <span className="flex items-center gap-2">
+                        <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Enviando...
+                      </span>
+                    ) : (
+                      <>
+                        <Send size={18} />
+                        Enviar Ticket
+                      </>
+                    )}
+                  </Button>
+
+                  <p className="text-otx-text/50 text-xs text-center">
+                    Te responderemos a la brevedad por email. Para urgencias, contactanos por WhatsApp.
+                  </p>
+                </form>
+              </>
+            )}
           </div>
         </div>
       </div>
