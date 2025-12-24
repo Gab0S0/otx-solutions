@@ -11,6 +11,7 @@ import WhyUs from "./components/WhyUs";
 import FAQ from "./components/FAQ";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import TicketPage from "./components/TicketPage";
 
 const LandingPage = () => {
   return (
@@ -36,6 +37,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/ticket" element={<TicketPage />} />
         </Routes>
       </BrowserRouter>
       <Toaster position="top-right" richColors />
