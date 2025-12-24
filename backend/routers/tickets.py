@@ -27,6 +27,7 @@ class TicketCreate(BaseModel):
     mensaje: str = Field(..., min_length=10, max_length=2000)
     plan: Optional[str] = Field(None, max_length=100)
     servicio: Optional[str] = Field(None, max_length=100)
+    canal: Optional[str] = Field("TicketWeb", max_length=50)
     # Honeypot field - should be empty
     website: Optional[str] = Field(None, max_length=0)
 
