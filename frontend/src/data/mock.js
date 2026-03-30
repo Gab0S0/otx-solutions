@@ -7,7 +7,7 @@ export const companyInfo = {
   email: "solutionsotx@gmail.com",
   location: "CABA, Buenos Aires, Argentina",
   experience: "10+",
-  casesResolved: "3000+"
+  casesResolved: "1000+"
 };
 
 export const services = [
