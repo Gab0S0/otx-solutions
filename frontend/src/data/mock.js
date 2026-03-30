@@ -246,52 +246,62 @@ export const faqData = [
   {
     id: 1,
     question: "¿Cómo funciona el soporte remoto?",
-    answer: "Usamos software seguro (como TeamViewer o AnyDesk) para conectarnos a tu equipo con tu autorización. Vos ves todo lo que hacemos en pantalla."
+    answer:
+      "Usamos software seguro (como TeamViewer o AnyDesk) para conectarnos a tu equipo con tu autorización. Vos ves todo lo que hacemos en pantalla."
   },
   {
     id: 2,
     question: "¿Es seguro darles acceso a mi computadora?",
-    answer: "Totalmente. Usamos conexiones encriptadas y solo accedemos cuando vos lo autorizás. Apenas terminamos, la sesión se cierra."
+    answer:
+      "Totalmente. Usamos conexiones encriptadas y solo accedemos cuando vos lo autorizás. Apenas terminamos, la sesión se cierra."
   },
   {
     id: 3,
     question: "¿Qué cuenta como una intervención?",
-    answer: "Una intervención es la resolución de un incidente o tarea principal (ej: eliminar un virus, configurar el mail, solucionar un error). Si durante la sesión surge otra tarea distinta, se coordina como intervención aparte."
+    answer:
+      "Una intervención es la resolución de un incidente o tarea principal (ej: eliminar un virus, configurar el mail, solucionar un error). Si durante la sesión surge otra tarea distinta, se coordina como intervención aparte."
   },
   {
     id: 4,
     question: "¿Cómo se cuenta el mes en los planes?",
-    answer: "El mes se cuenta como 30 días desde la fecha de activación, no por mes calendario. Por ejemplo, si activás el 15 de marzo, tu ciclo va del 15/3 al 14/4."
+    answer:
+      "El mes se cuenta como 30 días desde que activás el plan (no por mes calendario). Por ejemplo, si activás el 15/3, tu ciclo va del 15/3 al 14/4."
   },
   {
     id: 5,
-    question: "¿Las intervenciones o horas no usadas se acumulan?",
-    answer: "No. Las intervenciones (particulares) y horas (pymes) son por período y no se transfieren al siguiente. Te recomendamos aprovecharlas para mantenimiento preventivo."
+    question: "¿Las intervenciones u horas no usadas se acumulan?",
+    answer:
+      "No. Las intervenciones (particulares) y horas (pymes) son por período y no se transfieren al siguiente. Te recomendamos aprovecharlas para mantenimiento preventivo."
   },
   {
     id: 6,
     question: "¿Los precios pueden cambiar?",
-    answer: "Sí, los precios de lista se actualizan mensualmente según IPC INDEC. Sin embargo, el precio se mantiene durante el período que ya abonaste. Las renovaciones se facturan al precio vigente. En el plan anual, el precio se congela 90 días y luego se ajusta trimestralmente."
+    answer:
+      "Sí, los precios de lista se actualizan mensualmente según IPC INDEC. De todas formas, el precio se mantiene durante el período que ya abonaste. Las renovaciones se facturan al precio vigente."
   },
   {
     id: 7,
     question: "¿Puedo cancelar mi plan en cualquier momento?",
-    answer: "Sí. Podés solicitar la baja cuando quieras y se efectiviza al finalizar el período ya abonado (no se devuelve proporcional). Si contrataste con descuento (3 o 12 meses) y cancelás antes de cumplir el compromiso, se recalcula a tarifa sin descuento y se cobra la diferencia."
+    answer:
+      "Sí. Podés solicitar la baja cuando quieras y se efectiviza al finalizar el período ya abonado (no se devuelve proporcional). Si contrataste con descuento (3 o 12 meses) y cancelás antes de cumplir el compromiso, se recalcula a tarifa sin descuento y se cobra la diferencia."
   },
   {
     id: 8,
     question: "¿Qué pasa si no pueden resolver el problema de forma remota?",
-    answer: "Te lo decimos antes de cobrarte. Si el problema requiere intervención física (ej: cambio de disco, reparación de hardware), te informamos y la gestión de un servicio técnico externo queda a tu cargo."
+    answer:
+      "Te lo decimos antes de cobrarte. Si el problema requiere intervención física (ej: cambio de disco, reparación de hardware), te informamos y la gestión de un servicio técnico externo queda a tu cargo."
   },
   {
     id: 9,
     question: "¿Recuperan datos de discos dañados?",
-    answer: "Hacemos recuperación básica de archivos y restauración desde backups existentes. Casos de daño físico o recuperación forense no están incluidos. Si necesitás un laboratorio especializado, te orientamos pero la contratación la gestionás vos."
+    answer:
+      "Hacemos recuperación básica de archivos y restauración desde backups existentes. Casos de daño físico o recuperación forense no están incluidos. Si necesitás un laboratorio especializado, te orientamos pero la contratación la gestionás vos."
   },
   {
     id: 10,
     question: "¿Cómo es el proceso de implementación de Microsoft 365?",
-    answer: "Relevamos tu situación actual, creamos el tenant, configuramos dominio/usuarios/MFA y capacitamos a tu equipo. El proceso lleva entre 3 y 10 días hábiles según complejidad."
+    answer:
+      "Relevamos tu situación actual, creamos el tenant, configuramos dominio/usuarios/MFA y capacitamos a tu equipo. El proceso lleva entre 3 y 10 días hábiles según complejidad."
   }
 ];
 
