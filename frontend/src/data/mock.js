@@ -6,7 +6,7 @@ export const companyInfo = {
   whatsapp: "5491124021747",
   email: "solutionsotx@gmail.com",
   location: "CABA, Buenos Aires, Argentina",
-  experience: "+10+",
+  experience: "+10",
   casesResolved: "+1.000"
 };
 
@@ -212,7 +212,7 @@ export const howItWorks = [
 export const whyUs = [
   {
     id: 1,
-    title: "10+ Años de Experiencia",
+    title: "+10 Años de Experiencia",
     description: "Conocemos el rubro de punta a punta.",
     icon: "Award"
   },
