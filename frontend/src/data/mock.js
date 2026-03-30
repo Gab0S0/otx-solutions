@@ -6,8 +6,8 @@ export const companyInfo = {
   whatsapp: "5491124021747",
   email: "solutionsotx@gmail.com",
   location: "CABA, Buenos Aires, Argentina",
-  experience: "10+",
-  casesResolved: "1000+"
+  experience: "+10+",
+  casesResolved: "+1.000"
 };
 
 export const services = [
@@ -218,7 +218,7 @@ export const whyUs = [
   },
   {
     id: 2,
-    title: "+3.000 Casos Resueltos",
+    title: "+1.000 Casos Resueltos",
     description: "En CABA y alrededores, con clientes que vuelven.",
     icon: "CheckCircle"
   },
