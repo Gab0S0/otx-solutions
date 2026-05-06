@@ -25,18 +25,20 @@ const Hero = () => {
           <div className="space-y-8">
             <div className="inline-flex items-center gap-2 bg-otx-bordo/20 border border-otx-bordo/30 rounded-full px-4 py-2">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-otx-gray-light text-sm">Disponibles Lun-Vie 9 a 18 hs</span>
-            </div>
+              <span className="text-otx-gray-light text-sm">
+  Asistencia remota con coordinación previa
+</span>
             
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Tu Soporte IT Remoto en{' '}
-              <span className="text-otx-bordo">Buenos Aires</span>
-            </h1>
+  Soporte IT remoto para{' '}
+  <span className="text-otx-bordo">personas y pymes</span>
+</h1>
             
             <p className="text-xl text-otx-gray-light max-w-xl">
-              Resolvemos tus problemas técnicos sin que te muevas de tu casa u oficina. 
-              Atención rápida para particulares y pymes en CABA.
-            </p>
+  Diagnóstico y resolución remota de problemas en Windows, Office, correo,
+  impresoras, programas y configuración general. Atención clara, rápida y
+  profesional.
+</p>
 
             {/* Stats */}
             <div className="flex flex-wrap gap-6">
