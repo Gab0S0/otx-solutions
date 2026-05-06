@@ -14,46 +14,47 @@ export const services = [
   {
     id: 1,
     title: "Soporte Técnico Remoto",
-    description: "Nos conectamos a tu equipo y solucionamos el problema en tiempo real.",
+    description: "Nos conectamos a tu equipo con tu autorización para diagnosticar y resolver problemas técnicos comunes.",
     icon: "Monitor"
   },
   {
     id: 2,
-    title: "Limpieza y Optimización de PC",
-    description: "Eliminamos virus, malware y dejamos tu computadora volando.",
+    title: "Optimización de PC",
+    description: "Revisamos lentitud, programas innecesarios, configuración de inicio, estado general de Windows y funcionamiento básico.",
     icon: "Sparkles"
   },
   {
     id: 3,
     title: "Configuración de Software",
-    description: "Instalamos y configuramos programas, drivers y sistemas operativos.",
+    description: "Instalamos y configuramos programas, drivers, herramientas de trabajo, correo, Office y aplicaciones de uso diario.",
     icon: "Settings"
   },
   {
     id: 4,
-    title: "Backup y Recuperación de Datos",
-    description: "Configuramos backups automáticos y recuperamos archivos desde respaldos existentes. Casos de daño físico de disco o recuperación forense no están incluidos.",
+    title: "Backup y Recuperación Básica",
+    description: "Configuramos respaldos simples y recuperamos archivos desde backups existentes. No incluye recuperación forense ni daño físico de discos.",
     icon: "HardDrive"
   },
   {
     id: 5,
     title: "Soporte para Home Office",
-    description: "Configuramos VPN, herramientas colaborativas y todo lo que necesités para trabajar remoto.",
+    description: "Configuramos herramientas de trabajo remoto, correo, accesos, impresoras, VPN y aplicaciones colaborativas.",
     icon: "Home"
   },
   {
     id: 6,
     title: "Asesoramiento IT para Pymes",
-    description: "Te ayudamos a elegir el hardware y software ideal para tu negocio.",
+    description: "Ayudamos a pequeños negocios a ordenar sus equipos, software, correo, usuarios y necesidades técnicas básicas.",
     icon: "Lightbulb"
   },
   {
     id: 7,
     title: "Microsoft 365 para Pymes",
-    description: "Implementamos y gestionamos tu entorno Microsoft 365 de forma profesional.",
+    description: "Implementamos y gestionamos entornos Microsoft 365 para mejorar correo, usuarios, seguridad y colaboración.",
     icon: "Cloud"
   }
 ];
+
 export const planesParticulares = {
   planes: [
     {
@@ -187,10 +188,10 @@ export const planesM365 = [
     id: 1,
     name: "Implementación Inicial",
     price: "Desde $85.000",
-    description: "Hasta 10 usuarios. Tenant, dominio, usuarios, MFA, config básica.",
+    description: "Hasta 10 usuarios. Tenant, dominio, usuarios, MFA y configuración básica.",
     features: [
       "Creación de tenant",
-      "Configuración de dominios",
+      "Configuración de dominio",
       "Alta de usuarios y licencias",
       "Activación de MFA",
       "Configuración básica de seguridad"
@@ -200,19 +201,19 @@ export const planesM365 = [
     id: 2,
     name: "Gestión Mensual",
     price: "Desde $25.000/mes",
-    description: "Hasta 10 usuarios. Altas/bajas, soporte Teams/Outlook, gestión MFA.",
+    description: "Hasta 10 usuarios. Altas, bajas, soporte básico en Teams/Outlook y gestión MFA.",
     features: [
       "Altas y bajas de usuarios",
       "Gestión de MFA",
-      "Soporte Teams y Outlook",
-      "Resolución de incidencias"
+      "Soporte básico en Teams y Outlook",
+      "Resolución de incidencias comunes"
     ]
   },
   {
     id: 3,
     name: "SharePoint/OneDrive Básico",
     price: "Desde $45.000",
-    description: "Estructura + permisos + capacitación. Pago único.",
+    description: "Estructura inicial, permisos y capacitación básica. Pago único.",
     features: [
       "Diseño de estructura de carpetas",
       "Configuración de permisos",
@@ -225,17 +226,17 @@ export const howItWorks = [
   {
     step: 1,
     title: "Contactanos",
-    description: "Escribinos por WhatsApp o abrí un ticket describiendo tu problema."
+    description: "Escribinos por WhatsApp o abrí un ticket describiendo el problema."
   },
   {
     step: 2,
-    title: "Diagnóstico Rápido",
-    description: "En minutos evaluamos la situación y te pasamos presupuesto si corresponde."
+    title: "Coordinamos la asistencia",
+    description: "Revisamos el caso, confirmamos el alcance y coordinamos la conexión remota."
   },
   {
     step: 3,
-    title: "Lo Resolvemos",
-    description: "Nos conectamos remotamente y solucionamos. Listo, sin vueltas."
+    title: "Diagnóstico y resolución",
+    description: "Nos conectamos con tu autorización, trabajamos sobre el equipo y te informamos el resultado."
   }
 ];
 
@@ -243,31 +244,31 @@ export const whyUs = [
   {
     id: 1,
     title: "+10 Años de Experiencia",
-    description: "Conocemos el rubro de punta a punta.",
+    description: "Experiencia real en soporte IT, usuarios, equipos, redes y entornos de trabajo.",
     icon: "Award"
   },
   {
     id: 2,
     title: "+1.000 Casos Resueltos",
-    description: "En CABA y alrededores, con clientes que vuelven.",
+    description: "Resolución de incidencias técnicas para usuarios, profesionales y empresas.",
     icon: "CheckCircle"
   },
   {
     id: 3,
-    title: "Respuesta Rápida",
-    description: "Contestamos en menos de 30 minutos en horario laboral.",
+    title: "Atención Coordinada",
+    description: "Organizamos cada asistencia para entender el problema y avanzar con claridad.",
     icon: "Clock"
   },
   {
     id: 4,
     title: "Sin Letra Chica",
-    description: "Presupuestos claros antes de empezar. Sin sorpresas.",
+    description: "Alcance claro antes de empezar. Si algo requiere más tiempo o está fuera del servicio, se informa.",
     icon: "FileText"
   },
   {
     id: 5,
     title: "100% Remoto",
-    description: "No necesitás llevar tu equipo a ningún lado.",
+    description: "No necesitás llevar tu equipo a ningún lado. La asistencia se realiza por conexión remota autorizada.",
     icon: "Wifi"
   }
 ];
@@ -277,61 +278,61 @@ export const faqData = [
     id: 1,
     question: "¿Cómo funciona el soporte remoto?",
     answer:
-      "Usamos software seguro (como TeamViewer o AnyDesk) para conectarnos a tu equipo con tu autorización. Vos ves todo lo que hacemos en pantalla."
+      "Coordinamos la asistencia, te indicamos cómo abrir una herramienta segura como AnyDesk o TeamViewer y nos conectamos a tu equipo solo con tu autorización. Vos ves todo lo que hacemos en pantalla."
   },
   {
     id: 2,
-    question: "¿Es seguro darles acceso a mi computadora?",
+    question: "¿Es seguro dar acceso remoto a mi computadora?",
     answer:
-      "Totalmente. Usamos conexiones encriptadas y solo accedemos cuando vos lo autorizás. Apenas terminamos, la sesión se cierra."
+      "Sí. El acceso se realiza únicamente con tu autorización y durante la sesión acordada. Al finalizar, la conexión se cierra. Recomendamos no compartir contraseñas sensibles y permanecer presente durante la asistencia."
   },
   {
     id: 3,
-    question: "¿Qué cuenta como una intervención?",
+    question: "¿Qué incluye una asistencia remota?",
     answer:
-      "Una intervención es la resolución de un incidente o tarea principal (ej: eliminar un virus, configurar el mail, solucionar un error). Si durante la sesión surge otra tarea distinta, se coordina como intervención aparte."
+      "Incluye diagnóstico y resolución remota de un problema técnico común dentro de una intervención de hasta 1 hora. Puede ser Windows, Office, correo, impresoras, programas, lentitud, configuración general o problemas similares."
   },
   {
     id: 4,
-    question: "¿Cómo se cuenta el mes en los planes?",
+    question: "¿Qué pasa si el problema lleva más de 1 hora?",
     answer:
-      "El mes se cuenta como 30 días desde que activás el plan (no por mes calendario). Por ejemplo, si activás el 15/3, tu ciclo va del 15/3 al 14/4."
+      "Si el caso requiere más tiempo, se informa el avance y se cotiza una extensión antes de continuar. No avanzamos con costos adicionales sin avisarte."
   },
   {
     id: 5,
-    question: "¿Las intervenciones u horas no usadas se acumulan?",
+    question: "¿Qué cuenta como una asistencia?",
     answer:
-      "No. Las intervenciones (particulares) y horas (pymes) son por período y no se transfieren al siguiente. Te recomendamos aprovecharlas para mantenimiento preventivo."
+      "Una asistencia corresponde a un incidente o tarea principal. Por ejemplo: configurar un correo, resolver un error de Windows, revisar una impresora o diagnosticar lentitud. Si aparecen tareas distintas, se coordinan aparte."
   },
   {
     id: 6,
-    question: "¿Los precios pueden cambiar?",
+    question: "¿Cómo funcionan los planes para pymes?",
     answer:
-      "Sí, los precios de lista se actualizan mensualmente según IPC INDEC. De todas formas, el precio se mantiene durante el período que ya abonaste. Las renovaciones se facturan al precio vigente."
+      "Los planes pyme incluyen una cantidad mensual de asistencias remotas y una cantidad máxima de puestos de trabajo cubiertos. Los puestos se registran al contratar el plan, por ejemplo: PC Administración, Notebook Dueño o PC Caja."
   },
   {
     id: 7,
-    question: "¿Puedo cancelar mi plan en cualquier momento?",
+    question: "¿Las asistencias no usadas se acumulan?",
     answer:
-      "Sí. Podés solicitar la baja cuando quieras y se efectiviza al finalizar el período ya abonado (no se devuelve proporcional). Si contrataste con descuento (3 o 12 meses) y cancelás antes de cumplir el compromiso, se recalcula a tarifa sin descuento y se cobra la diferencia."
+      "No. Las asistencias incluidas en planes mensuales no se acumulan para el período siguiente. Podés usarlas para mantenimiento preventivo, revisión de equipos o resolver problemas pendientes."
   },
   {
     id: 8,
-    question: "¿Qué pasa si no pueden resolver el problema de forma remota?",
+    question: "¿Qué no incluye el servicio?",
     answer:
-      "Te lo decimos antes de cobrarte. Si el problema requiere intervención física (ej: cambio de disco, reparación de hardware), te informamos y la gestión de un servicio técnico externo queda a tu cargo."
+      "No incluye licencias de software, repuestos, recuperación avanzada de datos, reparación física, trabajos presenciales ni servicios que requieran intervención sobre hardware. Si el caso queda fuera del alcance remoto, se informa antes de continuar."
   },
   {
     id: 9,
     question: "¿Recuperan datos de discos dañados?",
     answer:
-      "Hacemos recuperación básica de archivos y restauración desde backups existentes. Casos de daño físico o recuperación forense no están incluidos. Si necesitás un laboratorio especializado, te orientamos pero la contratación la gestionás vos."
+      "Realizamos recuperación básica desde backups existentes o archivos accesibles. No hacemos recuperación forense ni trabajos sobre discos con daño físico. En esos casos podemos orientarte, pero la contratación de un laboratorio especializado queda a cargo del cliente."
   },
   {
     id: 10,
-    question: "¿Cómo es el proceso de implementación de Microsoft 365?",
+    question: "¿Trabajan con Microsoft 365?",
     answer:
-      "Relevamos tu situación actual, creamos el tenant, configuramos dominio/usuarios/MFA y capacitamos a tu equipo. El proceso lleva entre 3 y 10 días hábiles según complejidad."
+      "Sí. Podemos ayudar con implementación inicial, usuarios, licencias, MFA, Outlook, Teams, OneDrive y SharePoint básico. Las licencias Microsoft no están incluidas en el precio del servicio."
   }
 ];
 
