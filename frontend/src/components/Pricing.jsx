@@ -1,8 +1,7 @@
 import React from 'react';
-import { Check, User, Building2, Cloud, Info } from 'lucide-react';
+import { Check, User, Building2, Cloud } from 'lucide-react';
 import { Button } from './ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 import { planesParticulares, planesPymes, planesM365, condicionesGenerales, companyInfo } from '../data/mock';
 
 const Pricing = () => {
@@ -138,39 +137,18 @@ const PlanesParticulares = ({ onSelectPlan }) => {
           </div>
         ))}
       </div>
-
-      {/* Descuentos */}
-      <div className="bg-otx-dark rounded-2xl p-8">
-        <h4 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-          Descuentos por compromiso
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <Info size={18} className="text-otx-gray-light" />
-              </TooltipTrigger>
-              <TooltipContent className="max-w-xs">
-                <p>Aplican solo al Plan Mensual. Cobro mensual con precio fijo durante el compromiso.</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </h4>
-        <div className="grid sm:grid-cols-3 gap-4">
-          {planesParticulares.descuentos.map((desc, i) => (
-            <div key={i} className="bg-white/10 rounded-xl p-4 text-center">
-              <p className="text-otx-gray-light text-sm mb-1">{desc.compromiso}</p>
-              <p className="text-2xl font-bold text-white">{desc.precioFinal}</p>
-              {desc.descuento !== "—" && (
-                <span className="inline-block bg-otx-bordo/30 text-otx-bordo-light text-xs px-2 py-1 rounded mt-2">
-                  {desc.descuento}
-                </span>
-              )}
-            </div>
-          ))}
-        </div>
-        <p className="text-otx-gray-light text-xs mt-4 text-center">
-          Plan anual: precio congelado 90 días, luego ajustes trimestrales por IPC INDEC.
-        </p>
-      </div>
+{/* Alcance */}
+<div className="mt-8 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+  <h4 className="text-lg font-bold text-otx-text mb-3">
+    Alcance de las asistencias
+  </h4>
+  <p className="text-sm text-otx-text-light leading-relaxed">
+    Cada asistencia incluye diagnóstico y resolución remota de problemas comunes
+    dentro de una intervención de hasta 1 hora. Si el caso requiere más tiempo,
+    se informa el avance y se cotiza una extensión antes de continuar.
+  </p>
+</div>
+      
 
       {/* Extras */}
       <div className="bg-otx-gray rounded-xl p-6">
@@ -184,8 +162,8 @@ const PlanesParticulares = ({ onSelectPlan }) => {
           ))}
         </div>
         <p className="text-otx-text/60 text-xs mt-4">
-          Intervención = resolución de 1 incidente o tarea principal. Tareas extra dentro de la misma sesión se coordinan como nueva intervención.
-        </p>
+  Las asistencias no utilizadas no se acumulan. Los planes pyme cubren puestos de trabajo registrados. El mes equivale a 30 días desde la fecha de activación.
+</p>
       </div>
     </div>
   );
@@ -218,13 +196,13 @@ const PlanesPymes = ({ onSelectPlan }) => {
             </div>
             
             <div className="flex gap-4 mb-6">
-              <span className="bg-otx-bordo/10 text-otx-bordo text-sm px-3 py-1 rounded-full">
-                {plan.hours}/mes
-              </span>
-              <span className="bg-otx-gray text-otx-text/70 text-sm px-3 py-1 rounded-full">
-                {plan.equipos} equipos
-              </span>
-            </div>
+  <span className="bg-otx-bordo/10 text-otx-bordo text-sm px-3 py-1 rounded-full">
+    {plan.asistencias}
+  </span>
+  <span className="bg-otx-gray text-otx-text/70 text-sm px-3 py-1 rounded-full">
+    {plan.puestos}
+  </span>
+</div>
 
             <ul className="space-y-3 mb-8">
               {plan.features.map((feature, i) => (
