@@ -54,60 +54,55 @@ export const services = [
     icon: "Cloud"
   }
 ];
-
 export const planesParticulares = {
   planes: [
     {
       id: 1,
-      name: "Asistencia Única",
-      price: "$15.000",
+      name: "Asistencia Remota",
+      price: "$50.000",
       period: "",
-      description: "1 intervención remota (hasta 1 hora). Diagnóstico incluido.",
+      description:
+        "Diagnóstico y resolución remota para un problema puntual en tu PC o notebook.",
       features: [
-        "1 intervención remota",
-        "Hasta 1 hora de soporte",
-        "Diagnóstico incluido"
+        "1 asistencia remota",
+        "Diagnóstico inicial incluido",
+        "Resolución de problemas comunes",
+        "Hasta 1 hora de trabajo técnico remoto",
+        "Windows, Office, correo, impresoras, programas y configuración general",
+        "Recomendación final si requiere reparación física o trabajo avanzado"
       ],
       popular: false
     },
     {
       id: 2,
-      name: "Pack 5 Intervenciones",
-      price: "$65.000",
+      name: "Pack 5 Asistencias",
+      price: "$220.000",
       period: "",
-      description: "5 intervenciones (hasta 1 hora c/u). Válido por 3 meses.",
+      description:
+        "Para quienes necesitan soporte recurrente sin pagar cada asistencia por separado.",
       features: [
-        "5 intervenciones remotas",
+        "5 asistencias remotas",
         "Hasta 1 hora cada una",
         "Válido por 3 meses",
-        "Ahorrás $10.000"
+        "Ideal para personas, freelancers o profesionales independientes",
+        "Ahorrás $30.000 frente a contratarlas por separado"
       ],
       popular: true
-    },
-    {
-      id: 3,
-      name: "Plan Mensual",
-      price: "$25.000",
-      period: "/mes",
-      description: "2 intervenciones cada 30 días (hasta 1 hora c/u). No acumulables. Hasta 2 dispositivos.",
-      features: [
-        "2 intervenciones por mes",
-        "Hasta 1 hora cada una",
-        "Hasta 2 dispositivos",
-        "No acumulables"
-      ],
-      popular: false
     }
   ],
-  descuentos: [
-    { compromiso: "Mes a mes", descuento: "—", precioFinal: "$25.000" },
-    { compromiso: "3 meses", descuento: "-15%", precioFinal: "$21.250" },
-    { compromiso: "12 meses", descuento: "-20%", precioFinal: "$20.000" }
-  ],
   extras: [
-    { concepto: "Intervención adicional (con plan activo)", precio: "$9.000" },
-    { concepto: "Intervención sin plan (hasta 1h)", precio: "$25.000" },
-    { concepto: "Dispositivo adicional", precio: "$2.500 (alta única)" }
+    {
+      concepto: "Extensión adicional",
+      precio: "$30.000 cada 30 min"
+    },
+    {
+      concepto: "Trabajo fuera de alcance",
+      precio: "Se cotiza antes de continuar"
+    },
+    {
+      concepto: "Revisión preventiva simple",
+      precio: "Desde $50.000"
+    }
   ]
 };
 
@@ -115,40 +110,75 @@ export const planesPymes = {
   planes: [
     {
       id: 1,
-      name: "Pyme Basic",
-      price: "$70.000",
+      name: "Pyme Inicial",
+      price: "$120.000",
       period: "/mes",
-      hours: "6 horas",
-      equipos: "Hasta 10",
+      asistencias: "3 asistencias",
+      puestos: "Hasta 3 puestos",
+      description:
+        "Para negocios chicos que necesitan soporte remoto sin contratar técnico fijo.",
       features: [
-        "6 horas de soporte mensual",
-        "Hasta 10 equipos",
-        "Prioridad media",
-        "Reporte mensual de intervenciones"
+        "Hasta 3 asistencias remotas por mes",
+        "Cobertura para hasta 3 puestos de trabajo",
+        "Soporte para Windows, Office, correo, impresoras y configuración general",
+        "Atención por WhatsApp para coordinar casos",
+        "Diagnóstico de problemas recurrentes",
+        "Asistencias no acumulables"
       ],
       popular: false
     },
     {
       id: 2,
-      name: "Pyme Pro",
-      price: "$120.000",
+      name: "Pyme Operativo",
+      price: "$180.000",
       period: "/mes",
-      hours: "12 horas",
-      equipos: "Hasta 20",
+      asistencias: "5 asistencias",
+      puestos: "Hasta 6 puestos",
+      description:
+        "Para oficinas o comercios que dependen de sus equipos para trabajar todos los días.",
       features: [
-        "12 horas de soporte mensual",
-        "Hasta 20 equipos",
-        "Prioridad alta (<15 min respuesta)",
-        "Monitoreo básico",
-        "Asesoramiento IT incluido"
+        "Hasta 5 asistencias remotas por mes",
+        "Cobertura para hasta 6 puestos de trabajo",
+        "Prioridad frente a asistencias sueltas",
+        "Revisión básica mensual del estado de los equipos",
+        "Soporte sobre Windows, Office, correo, impresoras, aplicaciones y configuración",
+        "Recomendaciones de mejora para evitar problemas recurrentes"
       ],
       popular: true
+    },
+    {
+      id: 3,
+      name: "Pyme Plus",
+      price: "A cotizar",
+      period: "",
+      asistencias: "A medida",
+      puestos: "Más de 6 puestos",
+      description:
+        "Para pymes con más equipos, usuarios o necesidades técnicas más complejas.",
+      features: [
+        "Soporte remoto recurrente según alcance",
+        "Más de 6 puestos de trabajo",
+        "Microsoft 365, correo, usuarios y permisos",
+        "Revisión básica de red y entorno de trabajo",
+        "Documentación técnica simple",
+        "Automatizaciones o mejoras operativas según necesidad"
+      ],
+      popular: false
     }
   ],
   extras: [
-    { concepto: "Hora extra (con plan activo)", precio: "$15.000 + IVA" },
-    { concepto: "Hora suelta (sin plan)", precio: "$25.000 + IVA" },
-    { concepto: "Equipo adicional", precio: "$3.500/mes" }
+    {
+      concepto: "Asistencia adicional con plan activo",
+      precio: "$40.000"
+    },
+    {
+      concepto: "Puesto adicional",
+      precio: "A cotizar según entorno"
+    },
+    {
+      concepto: "Trabajo fuera de alcance",
+      precio: "Se informa y cotiza antes de continuar"
+    }
   ]
 };
 
