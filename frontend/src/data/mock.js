@@ -335,6 +335,7 @@ export const faqData = [
   }
 ];
 
-export const condicionesGenerales = "Precios en ARS. Actualizables según IPC. El precio se mantiene durante el período ya abonado. La baja puede solicitarse en cualquier momento y se efectiviza al finalizar el período pago. En planes con descuento, la cancelación anticipada implica ajuste retroactivo a tarifa sin descuento. En plan anual: precio congelado 90 días y ajustes trimestrales por IPC INDEC.";
+export const condicionesGenerales =
+  "Precios en ARS. Cada asistencia remota incluye diagnóstico y trabajo técnico durante hasta 1 hora. Si el caso requiere más tiempo o queda fuera del alcance remoto, se informa y cotiza antes de continuar. No incluye licencias de software, repuestos, recuperación avanzada de datos, reparación física ni trabajos presenciales. Los planes mensuales no son acumulables y se cuentan por períodos de 30 días desde la activación.";
 
-export const whatsappMessage = `Hola, necesito soporte técnico remoto.%0A%0AMi problema es: [DESCRIBIR BREVEMENTE]%0ATipo de equipo: [PC / Notebook / Mac]%0ASistema operativo: [Windows / macOS / Otro]%0ASoy: [Particular / Pyme]%0A%0A¡Gracias!`;
+export const whatsappMessage = `Hola, quiero consultar por soporte IT remoto de OTX Solutions.%0A%0AMi problema es: [DESCRIBIR BREVEMENTE]%0ATipo de equipo: [PC / Notebook / Mac]%0ASoy: [Persona / Profesional independiente / Pyme]%0A%0AGracias.`;
