@@ -200,8 +200,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-otx-text mb-1">Horario de atención</h4>
-                  <p className="text-otx-text/70">Lunes a Viernes de 9 a 18 hs</p>
-                  <p className="text-otx-text/50 text-sm">Urgencias fuera de horario: consultar disponibilidad</p>
+<p className="text-otx-text/60">Lunes a Viernes de 9 a 18 hs</p>
+<p className="text-otx-text/50 text-sm">Urgencias fuera de horario: consultar disponibilidad</p>
                 </div>
               </div>
             </div>
@@ -224,8 +224,8 @@ const Contact = () => {
                 </div>
                 
                 <p className="text-otx-text/70 mb-6">
-                  Te responderemos a la brevedad. Para una respuesta más rápida:
-                </p>
+  La forma más directa de contactarnos. Contanos brevemente el problema y coordinamos la asistencia.
+</p>
                 
                 <div className="space-y-3">
                   <a 
@@ -347,14 +347,26 @@ const Contact = () => {
                           <SelectValue placeholder="Opcional" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="__empty__">— Ninguno —</SelectItem>
-                          <SelectItem value="Asistencia Única - $15.000">Asistencia Única - $15.000</SelectItem>
-                          <SelectItem value="Pack 5 Intervenciones - $65.000">Pack 5 Intervenciones - $65.000</SelectItem>
-                          <SelectItem value="Plan Mensual - $25.000/mes">Plan Mensual - $25.000/mes</SelectItem>
-                          <SelectItem value="Pyme Basic - $70.000/mes">Pyme Basic - $70.000/mes</SelectItem>
-                          <SelectItem value="Pyme Pro - $120.000/mes">Pyme Pro - $120.000/mes</SelectItem>
-                          <SelectItem value="Microsoft 365 - Consultar">Microsoft 365 - Consultar</SelectItem>
-                        </SelectContent>
+  <SelectItem value="__empty__">— Ninguno —</SelectItem>
+  <SelectItem value="Asistencia Remota - $50.000">
+    Asistencia Remota - $50.000
+  </SelectItem>
+  <SelectItem value="Pack 5 Asistencias - $220.000">
+    Pack 5 Asistencias - $220.000
+  </SelectItem>
+  <SelectItem value="Pyme Inicial - $120.000/mes">
+    Pyme Inicial - $120.000/mes
+  </SelectItem>
+  <SelectItem value="Pyme Operativo - $180.000/mes">
+    Pyme Operativo - $180.000/mes
+  </SelectItem>
+  <SelectItem value="Pyme Plus - A cotizar">
+    Pyme Plus - A cotizar
+  </SelectItem>
+  <SelectItem value="Microsoft 365 - Consultar">
+    Microsoft 365 - Consultar
+  </SelectItem>
+</SelectContent>
                       </Select>
                     </div>
                   </div>
