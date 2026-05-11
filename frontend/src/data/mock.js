@@ -68,7 +68,7 @@ export const planesParticulares = {
         "1 asistencia remota",
         "Diagnóstico inicial incluido",
         "Resolución de problemas comunes",
-        "Hasta 1 hora de trabajo técnico remoto",
+        "1 caso principal con hasta 1 hora de trabajo técnico remoto",
         "Windows, Office, correo, impresoras, programas y configuración general",
         "Recomendación final si requiere reparación física o trabajo avanzado"
       ],
@@ -83,7 +83,7 @@ export const planesParticulares = {
         "Para quienes necesitan soporte recurrente sin pagar cada asistencia por separado.",
       features: [
         "5 asistencias remotas",
-        "Hasta 1 hora cada una",
+        "Cada asistencia cubre 1 caso principal de hasta 1 hora",
         "Válido por 3 meses",
         "Ideal para personas, freelancers o profesionales independientes",
         "Ahorrás $30.000 frente a contratarlas por separado"
@@ -92,19 +92,15 @@ export const planesParticulares = {
     }
   ],
   extras: [
-    {
-      concepto: "Extensión adicional",
-      precio: "$30.000 cada 30 min"
-    },
-    {
-      concepto: "Trabajo fuera de alcance",
-      precio: "Se cotiza antes de continuar"
-    },
-    {
-      concepto: "Revisión preventiva simple",
-      precio: "Desde $50.000"
-    }
-  ]
+  {
+    concepto: "Extensión o trabajo adicional",
+    precio: "Se cotiza antes de continuar"
+  },
+  {
+    concepto: "Trabajo fuera de alcance",
+    precio: "Se cotiza antes de continuar"
+  }
+]
 };
 
 export const planesPymes = {
@@ -280,6 +276,13 @@ export const faqData = [
     answer:
       "Coordinamos la asistencia, te indicamos cómo abrir una herramienta segura como AnyDesk o TeamViewer y nos conectamos a tu equipo solo con tu autorización. Vos ves todo lo que hacemos en pantalla."
   },
+{
+  id: 12,
+  question: "¿Qué pasa si el problema vuelve después de la asistencia?",
+  answer:
+    "Si el mismo inconveniente vuelve dentro de las 48 hs posteriores a la asistencia, revisamos el caso sin costo adicional para validar la solución aplicada. Esta revisión aplica al mismo equipo y al mismo problema atendido originalmente. No aplica a nuevos problemas, cambios realizados posteriormente, fallas de hardware, licencias, proveedores externos o casos fuera del alcance remoto."
+},
+  
   {
     id: 2,
     question: "¿Es seguro dar acceso remoto a mi computadora?",
@@ -337,6 +340,6 @@ export const faqData = [
 ];
 
 export const condicionesGenerales =
-  "Precios en ARS. Cada asistencia remota incluye diagnóstico y trabajo técnico durante hasta 1 hora. Si el caso requiere más tiempo o queda fuera del alcance remoto, se informa y cotiza antes de continuar. No incluye licencias de software, repuestos, recuperación avanzada de datos, reparación física ni trabajos presenciales. Los planes mensuales no son acumulables y se cuentan por períodos de 30 días desde la activación.";
+  "Precios en ARS. Cada asistencia remota cubre un caso principal e incluye hasta 1 hora de trabajo técnico. El tiempo no utilizado no es acumulable ni transferible. Si el caso requiere más tiempo o queda fuera del alcance remoto, se informa y cotiza antes de continuar. No incluye licencias de software, repuestos, recuperación avanzada de datos, reparación física ni trabajos presenciales. Los planes mensuales no son acumulables y se cuentan por períodos de 30 días desde la activación.";
 
 export const whatsappMessage = `Hola, quiero consultar por soporte IT remoto de OTX Solutions.%0A%0AMi problema es: [DESCRIBIR BREVEMENTE]%0ATipo de equipo: [PC / Notebook / Mac]%0ASoy: [Persona / Profesional independiente / Pyme]%0A%0AGracias.`;
