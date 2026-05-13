@@ -34,15 +34,15 @@ const Hero = () => {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Soporte IT remoto para{' '}
-              <span className="text-otx-bordo">personas y pymes</span>
-            </h1>
+  Soporte IT remoto para que un{' '}
+  <span className="text-otx-bordo">problema técnico no te detenga</span>
+</h1>
 
-            <p className="text-xl text-otx-gray-light max-w-xl">
-              Diagnóstico y resolución remota de problemas en Windows, Office,
-              correo, impresoras, programas y configuración general. Atención
-              clara, rápida y profesional.
-            </p>
+<p className="text-xl text-otx-gray-light max-w-xl">
+  Diagnóstico y resolución remota de problemas en Windows, Office, correo,
+  impresoras, programas y configuración general. Atención clara, coordinada
+  y profesional.
+</p>
 
             {/* Stats */}
             <div className="flex flex-wrap gap-6">
@@ -126,8 +126,8 @@ const Hero = () => {
                 <div className="pt-4 border-t border-white/10">
                   <div className="flex items-center justify-between">
                     <span className="text-otx-gray-light text-sm">
-                      Soporte para personas y pymes
-                    </span>
+  Soporte remoto claro y coordinado
+</span>
 
                     <div className="flex -space-x-2">
                       {[1, 2, 3, 4].map((i) => (
