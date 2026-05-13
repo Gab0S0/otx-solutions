@@ -39,9 +39,9 @@ const Hero = () => {
 </h1>
 
 <p className="text-xl text-otx-gray-light max-w-xl">
-  Diagnóstico y resolución remota de problemas en Windows, Office, correo,
-  impresoras, programas y configuración general. Atención clara, coordinada
-  y profesional.
+  Diagnóstico, configuración y resolución remota de problemas técnicos en
+  computadoras, cuentas, correo, programas, impresoras y entornos de trabajo.
+  Atención clara, coordinada y profesional.
 </p>
 
             {/* Stats */}
