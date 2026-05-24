@@ -34,8 +34,8 @@ const Hero = () => {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-  Soporte IT remoto para que un{' '}
-  <span className="text-otx-bordo">problema técnico no te detenga</span>
+  Soporte remoto y{' '}
+  <span className="text-otx-bordo">soluciones IT</span>
 </h1>
 
 <p className="text-xl text-otx-gray-light max-w-xl">
