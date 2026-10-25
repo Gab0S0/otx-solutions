@@ -8,7 +8,7 @@
       "servicesCount": 7,
       "stepsCount": 3,
       "pillarsCount": 4,
-      "faqCount": 12
+      "faqCount": 7
     },
     {
       "viewport": "375x667",
@@ -18,7 +18,7 @@
       "servicesCount": 7,
       "stepsCount": 3,
       "pillarsCount": 4,
-      "faqCount": 12
+      "faqCount": 7
     },
     {
       "viewport": "390x844",
@@ -28,7 +28,7 @@
       "servicesCount": 7,
       "stepsCount": 3,
       "pillarsCount": 4,
-      "faqCount": 12
+      "faqCount": 7
     },
     {
       "viewport": "768x1024",
@@ -38,7 +38,7 @@
       "servicesCount": 7,
       "stepsCount": 3,
       "pillarsCount": 4,
-      "faqCount": 12
+      "faqCount": 7
     },
     {
       "viewport": "1280x720",
@@ -48,7 +48,7 @@
       "servicesCount": 7,
       "stepsCount": 3,
       "pillarsCount": 4,
-      "faqCount": 12
+      "faqCount": 7
     },
     {
       "viewport": "1440x900",
@@ -58,7 +58,7 @@
       "servicesCount": 7,
       "stepsCount": 3,
       "pillarsCount": 4,
-      "faqCount": 12
+      "faqCount": 7
     },
     {
       "viewport": "1920x1080",
@@ -68,14 +68,156 @@
       "servicesCount": 7,
       "stepsCount": 3,
       "pillarsCount": 4,
-      "faqCount": 12
+      "faqCount": 7
     }
   ],
-  "flowCheck": {
-    "prefilledAsunto": ""
+  "heightComparison": {
+    "services": {
+      "desktop": {
+        "before": 1478,
+        "after": 1451,
+        "diffPx": -27,
+        "diffPct": "-2%"
+      },
+      "mobile": {
+        "before": 2170,
+        "after": 1925,
+        "diffPx": -245,
+        "diffPct": "-11%"
+      }
+    },
+    "howItWorks": {
+      "desktop": {
+        "before": 667,
+        "after": 565,
+        "diffPx": -102,
+        "diffPct": "-15%"
+      },
+      "mobile": {
+        "before": 1221,
+        "after": 898,
+        "diffPx": -323,
+        "diffPct": "-26%"
+      }
+    },
+    "whyUs": {
+      "desktop": {
+        "before": 776,
+        "after": 658,
+        "diffPx": -118,
+        "diffPct": "-15%"
+      },
+      "mobile": {
+        "before": 1606,
+        "after": 957,
+        "diffPx": -649,
+        "diffPct": "-40%"
+      }
+    },
+    "faq": {
+      "desktop": {
+        "before": 1220,
+        "after": 749,
+        "diffPx": -471,
+        "diffPct": "-39%"
+      },
+      "mobile": {
+        "before": 1870,
+        "after": 1173,
+        "diffPx": -697,
+        "diffPct": "-37%"
+      }
+    },
+    "contact": {
+      "desktop": {
+        "before": 970,
+        "after": 727,
+        "diffPx": -243,
+        "diffPct": "-25%"
+      },
+      "mobile": {
+        "before": 1992,
+        "after": 1273,
+        "diffPx": -719,
+        "diffPct": "-36%"
+      }
+    },
+    "footer": {
+      "desktop": {
+        "before": 471,
+        "after": 397,
+        "diffPx": -74,
+        "diffPct": "-16%"
+      },
+      "mobile": {
+        "before": 893,
+        "after": 518,
+        "diffPx": -375,
+        "diffPct": "-42%"
+      }
+    },
+    "ticket": {
+      "desktop": {
+        "before": 1129,
+        "after": 1038,
+        "diffPx": -91,
+        "diffPct": "-8%"
+      },
+      "mobile": {
+        "before": 1342,
+        "after": 1247,
+        "diffPx": -95,
+        "diffPct": "-7%"
+      }
+    }
   },
-  "ticketCheck": {
-    "asunto": "Consulta sobre: Desarrollo de Páginas Web y Formularios",
-    "overflowDesktop": false
-  }
+  "servicePrefillCheck": {
+    "prefilledAsunto": "Consulta sobre: Asesoramiento y equipamiento",
+    "prefillPillText": "Seleccionado:Asesoramiento y equipamiento\nQuitar",
+    "activeElementId": "nombre"
+  },
+  "contactSubmitCheck": {
+    "ticketSuccessShown": true,
+    "ticketIdText": "OTX-26-0001"
+  },
+  "ticketPrefillCheck": {
+    "asunto": "Consulta sobre: Web y formularios",
+    "servicioText": "Web y formularios",
+    "ticketDotColor": "rgb(143, 227, 192)",
+    "overflowMobile": false
+  },
+  "ticketSubmitCheck": {
+    "ticketSuccessShown": true,
+    "ticketIdText": "OTX-26-0001"
+  },
+  "wordmarkCheck": {
+    "headerDotColor": "rgb(143, 227, 192)",
+    "footerDotColor": "rgb(143, 227, 192)"
+  },
+  "receivedPayloads": [
+    {
+      "nombre": "Martín Gómez",
+      "email": "martin@empresa.com.ar",
+      "telefono": null,
+      "tipo": "particular",
+      "asunto": "Consulta sobre: Asesoramiento y equipamiento",
+      "mensaje": "Necesito presupuesto para 4 notebooks de oficina y monitores.",
+      "plan": null,
+      "servicio": "Asesoramiento y equipamiento",
+      "website": "",
+      "canal": "Landing"
+    },
+    {
+      "nombre": "Laura Díaz",
+      "email": "laura@estudio.com.ar",
+      "telefono": null,
+      "tipo": "particular",
+      "asunto": "Consulta sobre: Web y formularios",
+      "mensaje": "Queremos desarrollar una página web con formulario de contacto.",
+      "plan": null,
+      "servicio": "Web y formularios",
+      "website": "",
+      "canal": "TicketWeb"
+    }
+  ]
 }

@@ -17,7 +17,7 @@ const HowItWorks = () => {
             <h2 id="how-it-works-title">Cómo trabajamos.</h2>
           </div>
           <p className="otx-section-lead">
-            Desde una asistencia remota puntual hasta un proyecto de equipamiento, desarrollo web o automatización.
+            Tres pasos claros desde tu consulta hasta la solución.
           </p>
         </div>
 
@@ -32,14 +32,13 @@ const HowItWorks = () => {
         </ol>
 
         <div className="otx-steps-bar">
-          <p>Coordinamos cada caso antes de intervenir sobre tus equipos o iniciar un desarrollo.</p>
           <div className="otx-steps-actions">
             <a className="otx-btn-primary" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
               Consultar por WhatsApp <ArrowUpRight size={17} aria-hidden="true" />
               <span className="sr-only">(abre otra pestaña)</span>
             </a>
             <button type="button" className="otx-inline-link" onClick={scrollToContact}>
-              Ir al formulario
+              Ir a Contacto
             </button>
             <Link className="otx-inline-link" to="/ticket">
               Abrir ticket

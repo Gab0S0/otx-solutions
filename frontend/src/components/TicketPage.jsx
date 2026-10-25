@@ -14,12 +14,28 @@ import './PremiumSections.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
+const normalizeServiceParam = (raw) => {
+  if (!raw) return '';
+  const exact = services.find((s) => s.title.toLowerCase() === raw.toLowerCase());
+  if (exact) return exact.title;
+  const partial = services.find(
+    (s) => raw.toLowerCase().includes(s.title.toLowerCase()) || s.title.toLowerCase().includes(raw.toLowerCase())
+  );
+  return partial ? partial.title : raw;
+};
+
+const inferClientType = (plan, servicio) => {
+  if (plan && /Empresa|Microsoft 365/i.test(plan)) return 'pyme';
+  if (servicio && /Microsoft 365/i.test(servicio)) return 'pyme';
+  return 'particular';
+};
+
 const TicketPage = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
     telefono: '',
-    tipo: '',
+    tipo: 'particular',
     asunto: '',
     mensaje: '',
     plan: '',
@@ -33,13 +49,15 @@ const TicketPage = () => {
   // Check URL params for prefill
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const plan = params.get('plan');
-    const servicio = params.get('servicio');
+    const plan = params.get('plan') || '';
+    const rawServicio = params.get('servicio') || '';
+    const servicio = normalizeServiceParam(rawServicio);
     if (plan || servicio) {
       setFormData(prev => ({
         ...prev,
-        plan: plan || '',
-        servicio: servicio || '',
+        plan,
+        servicio,
+        tipo: inferClientType(plan, servicio),
         asunto: plan ? `Interesado en: ${plan}` : servicio ? `Consulta sobre: ${servicio}` : ''
       }));
     }
@@ -53,7 +71,7 @@ const TicketPage = () => {
       msg += `quiero realizar una consulta a OTX Solutions.%0A%0A`;
     }
     if (formData.plan) {
-      msg += `Plan interesado: ${formData.plan}%0A`;
+      msg += `Plan: ${formData.plan}%0A`;
     }
     if (formData.servicio) {
       msg += `Servicio: ${formData.servicio}%0A`;
@@ -75,7 +93,17 @@ const TicketPage = () => {
 
   const handleSelectChange = (name, value) => {
     const finalValue = value === '__empty__' ? '' : value;
-    setFormData(prev => ({ ...prev, [name]: finalValue }));
+    setFormData(prev => {
+      const next = { ...prev, [name]: finalValue };
+      if (name === 'plan' && finalValue) {
+        next.asunto = `Interesado en: ${finalValue}`;
+        next.tipo = inferClientType(finalValue, next.servicio);
+      } else if (name === 'servicio' && finalValue) {
+        next.asunto = `Consulta sobre: ${finalValue}`;
+        next.tipo = inferClientType(next.plan, finalValue);
+      }
+      return next;
+    });
     setError(null);
   };
 
@@ -84,13 +112,19 @@ const TicketPage = () => {
     setIsSubmitting(true);
     setError(null);
 
+    const resolvedAsunto =
+      (formData.asunto || '').trim() ||
+      (formData.plan ? `Interesado en: ${formData.plan}` : '') ||
+      (formData.servicio ? `Consulta sobre: ${formData.servicio}` : '') ||
+      `Ticket web: ${formData.mensaje.trim().slice(0, 60)}`;
+
     try {
       const response = await axios.post(`${BACKEND_URL}/api/tickets`, {
         nombre: formData.nombre,
         email: formData.email,
         telefono: formData.telefono || null,
         tipo: formData.tipo || 'particular',
-        asunto: formData.asunto,
+        asunto: resolvedAsunto.slice(0, 200),
         mensaje: formData.mensaje,
         plan: formData.plan || null,
         servicio: formData.servicio || null,
@@ -126,20 +160,21 @@ const TicketPage = () => {
           <Link className="otx-wordmark" to="/" aria-label="otx. — OTXSolutions, volver al inicio">
             otx<span>.</span>
           </Link>
-          <div className="otx-ticket-topbar-actions">
-            <Link to="/" className="otx-inline-link">
-              <ArrowLeft size={16} aria-hidden="true" />
-              Volver al inicio
-            </Link>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="otx-btn-primary">
-              WhatsApp <ArrowUpRight size={16} aria-hidden="true" />
-              <span className="sr-only">(abre otra pestaña)</span>
-            </a>
-          </div>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="otx-btn-primary">
+            WhatsApp <ArrowUpRight size={16} aria-hidden="true" />
+            <span className="sr-only">(abre otra pestaña)</span>
+          </a>
         </div>
       </header>
 
       <main className="otx-ticket-main">
+        <div className="otx-ticket-back">
+          <Link to="/" className="otx-inline-link">
+            <ArrowLeft size={16} aria-hidden="true" />
+            Volver al inicio
+          </Link>
+        </div>
+
         {ticketCreated ? (
           <div className="otx-form-shell">
             <div className="otx-ticket-success">
@@ -152,7 +187,7 @@ const TicketPage = () => {
                 <strong>{ticketCreated.id}</strong>
               </div>
               <p className="otx-form-subtitle">
-                Te responderemos a la brevedad por correo electrónico. Si querés coordinar más rápido, podés continuar por WhatsApp.
+                Te responderemos por correo electrónico. Si querés coordinar más rápido, podés continuar por WhatsApp.
               </p>
               <div className="otx-steps-actions">
                 <a
@@ -174,10 +209,10 @@ const TicketPage = () => {
         ) : (
           <>
             <div className="otx-ticket-intro">
-              <p className="otx-eyebrow">Atención y presupuestos</p>
+              <p className="otx-eyebrow">Tickets</p>
               <h1>Abrir un ticket.</h1>
               <p className="otx-section-lead">
-                Describí tu consulta de soporte remoto, asesoramiento en equipos o proyecto digital. Revisamos el caso y te contactamos.
+                Registrá tu solicitud de soporte remoto, equipamiento o desarrollo a medida.
               </p>
             </div>
 
@@ -189,7 +224,7 @@ const TicketPage = () => {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Honeypot */}
                 <div className="absolute -left-[9999px]" aria-hidden="true">
                   <Input
@@ -204,7 +239,7 @@ const TicketPage = () => {
 
                 <div className="otx-form-grid">
                   <div className="otx-field">
-                    <Label htmlFor="ticket-nombre" className="otx-label">Nombre completo *</Label>
+                    <Label htmlFor="ticket-nombre" className="otx-label">Nombre *</Label>
                     <Input
                       id="ticket-nombre"
                       name="nombre"
@@ -249,7 +284,7 @@ const TicketPage = () => {
                         <SelectValue placeholder="Seleccionar..." />
                       </SelectTrigger>
                       <SelectContent className="otx-select-content">
-                        <SelectItem className="otx-select-item" value="particular">Particular</SelectItem>
+                        <SelectItem className="otx-select-item" value="particular">Particular / Profesional</SelectItem>
                         <SelectItem className="otx-select-item" value="pyme">Empresa</SelectItem>
                       </SelectContent>
                     </Select>
@@ -260,7 +295,7 @@ const TicketPage = () => {
                   <div className="otx-field">
                     <Label htmlFor="ticket-servicio" className="otx-label">Servicio</Label>
                     <Select value={formData.servicio || '__empty__'} onValueChange={(v) => handleSelectChange('servicio', v)}>
-                      <SelectTrigger id="ticket-servicio" aria-label="Servicio" className="otx-select-trigger min-w-0 [&>span]:min-w-0">
+                      <SelectTrigger id="ticket-servicio" aria-label="Servicio" className="otx-select-trigger min-w-0">
                         <SelectValue placeholder="Opcional" />
                       </SelectTrigger>
                       <SelectContent className="otx-select-content">
@@ -274,7 +309,7 @@ const TicketPage = () => {
                   <div className="otx-field">
                     <Label htmlFor="ticket-plan" className="otx-label">Plan interesado</Label>
                     <Select value={formData.plan || '__empty__'} onValueChange={(v) => handleSelectChange('plan', v)}>
-                      <SelectTrigger id="ticket-plan" aria-label="Plan interesado" className="otx-select-trigger min-w-0 [&>span]:min-w-0">
+                      <SelectTrigger id="ticket-plan" aria-label="Plan interesado" className="otx-select-trigger min-w-0">
                         <SelectValue placeholder="Opcional" />
                       </SelectTrigger>
                       <SelectContent className="otx-select-content">
@@ -294,7 +329,7 @@ const TicketPage = () => {
                     name="asunto"
                     value={formData.asunto}
                     onChange={handleChange}
-                    placeholder="Problema con mi PC / Consulta sobre planes / Proyecto a medida"
+                    placeholder="Soporte remoto / Presupuesto / Proyecto web o IA"
                     required
                     className="otx-input"
                   />
@@ -307,10 +342,10 @@ const TicketPage = () => {
                     name="mensaje"
                     value={formData.mensaje}
                     onChange={handleChange}
-                    placeholder="Describí tu problema o consulta con el mayor detalle posible..."
+                    placeholder="Describí tu problema o consulta..."
                     required
                     minLength={10}
-                    rows={5}
+                    rows={4}
                     className="otx-textarea"
                   />
                 </div>

@@ -12,43 +12,43 @@ export const services = [
   {
     id: 1,
     title: "Soporte Técnico Remoto",
-    description: "Atención remota para particulares y empresas. Nos conectamos a tu equipo con tu autorización para diagnosticar y resolver incidentes en Windows, Office, correo, impresoras, conectividad y aplicaciones de uso diario.",
+    description: "Nos conectamos a tu equipo con tu autorización para diagnosticar y resolver incidentes en Windows, Office, correo, impresoras, conectividad y aplicaciones de uso diario.",
     icon: "Monitor"
   },
   {
     id: 2,
-    title: "Seguridad Informática, Optimización y Mantenimiento",
-    description: "Revisamos lentitud, configuración de inicio, programas innecesarios, actualizaciones, respaldos básicos y prácticas de seguridad informática para mantener tus equipos ágiles y protegidos.",
+    title: "Seguridad y optimización",
+    description: "Revisamos lentitud, arranque del sistema, programas innecesarios, actualizaciones, copias de seguridad básicas y protección preventiva para mantener tus equipos ágiles.",
     icon: "Sparkles"
   },
   {
     id: 3,
-    title: "Asesoramiento Tecnológico y Presupuestos",
-    description: "Te ayudamos a elegir notebooks, PC gamer, computadoras para oficinas, monitores y periféricos. Elaboramos presupuestos completos según el uso real y la inversión disponible.",
+    title: "Asesoramiento y equipamiento",
+    description: "Seleccionamos notebooks, PC gamer, computadoras para oficinas completas, monitores y periféricos. Armamos presupuestos integrales según tu uso real e inversión.",
     icon: "Lightbulb"
   },
   {
     id: 4,
-    title: "Armado, Actualización y Reparación de Equipos",
-    description: "Armado de equipos a medida, ampliación de almacenamiento o memoria (SSD y RAM) y reparación de computadoras sujetas a evaluación y diagnóstico previo.",
+    title: "Armado y reparación",
+    description: "Ensamblado de equipos a medida, mejoras de almacenamiento o memoria (SSD y RAM) y reparación de hardware sujetos a evaluación y diagnóstico previo.",
     icon: "Settings"
   },
   {
     id: 5,
-    title: "Microsoft 365 para Empresas",
-    description: "Implementamos y gestionamos entornos Microsoft 365 para mejorar correo corporativo, administración de usuarios, seguridad MFA y colaboración en Teams, OneDrive y SharePoint.",
+    title: "Microsoft 365",
+    description: "Implementamos y gestionamos cuentas corporativas, dominios, licencias, seguridad MFA y herramientas colaborativas en Outlook, Teams, OneDrive y SharePoint.",
     icon: "Cloud"
   },
   {
     id: 6,
-    title: "Desarrollo de Páginas Web y Formularios",
-    description: "Diseño y desarrollo de páginas web profesionales, sitios institucionales, landing pages y formularios integrados para captar consultas, presupuestos o tickets de atención.",
+    title: "Web y formularios",
+    description: "Diseñamos y desarrollamos páginas web profesionales, sitios comerciales y formularios optimizados para móvil con derivación a WhatsApp, correo o tickets.",
     icon: "Globe"
   },
   {
     id: 7,
-    title: "Automatizaciones, Asistentes e Integraciones con IA",
-    description: "Proyectos a medida para automatizar tareas operativas, conectar formularios con planillas o canales de notificación e implementar asistentes e integraciones con inteligencia artificial.",
+    title: "Automatizaciones e IA",
+    description: "Proyectos a medida para automatizar tareas operativas, integrar formularios con planillas o notificaciones e implementar asistentes con inteligencia artificial.",
     icon: "Cpu"
   }
 ];
@@ -219,120 +219,90 @@ export const planesM365 = [
 export const howItWorks = [
   {
     step: 1,
-    title: "Consultanos tu caso",
-    description: "Escribinos por WhatsApp o abrí un ticket indicando si necesitás soporte remoto, asesoramiento en equipos o un proyecto a medida."
+    title: "Escribinos",
+    description: "Contanos por WhatsApp o formulario qué necesitás resolver o cotizar."
   },
   {
     step: 2,
-    title: "Confirmamos alcance y modalidad",
-    description: "Evaluamos el requerimiento, definimos los pasos a seguir y te informamos el costo o presupuesto antes de avanzar."
+    title: "Definimos el alcance",
+    description: "Confirmamos diagnóstico, modalidad y presupuesto antes de empezar."
   },
   {
     step: 3,
-    title: "Resolución y seguimiento",
-    description: "Realizamos la conexión remota autorizada, la intervención técnica o la entrega acordada, validando el funcionamiento final."
+    title: "Resolvemos",
+    description: "Nos conectamos con tu autorización o desarrollamos el proyecto acordado."
   }
 ];
 
 export const whyUs = [
   {
     id: 1,
-    title: "Alcance claro y sin letra chica",
-    description: "Definimos qué incluye cada asistencia o presupuesto antes de empezar. Si algo requiere más tiempo o evaluación adicional, se informa primero."
+    title: "Alcance confirmado antes de empezar",
+    description: "Informamos qué incluye cada asistencia o presupuesto de antemano. Si requiere más tiempo o evaluación adicional, se consulta antes de avanzar."
   },
   {
     id: 2,
-    title: "Soporte remoto con autorización",
-    description: "Resolvemos incidentes cotidianos por conexión remota segura y supervisada por vos, sin trasladar equipos ni perder tiempo."
+    title: "Conexión remota autorizada",
+    description: "Intervenimos en pantalla únicamente con tu permiso para resolver problemas cotidianos sin trasladar tus equipos."
   },
   {
     id: 3,
-    title: "Criterio técnico para comprar y actualizar",
-    description: "Recomendamos notebooks, PC gamer, puestos de oficina, monitores y mejoras de hardware pensando en el uso real y la durabilidad."
+    title: "Criterio real en equipamiento",
+    description: "Asesoramos en compra, armado y mejora de notebooks, PC gamer y puestos de oficina según el uso real."
   },
   {
     id: 4,
-    title: "Desarrollo web, formularios e IA a medida",
-    description: "Acompañamos a profesionales y empresas con páginas web rápidas, formularios comerciales, automatizaciones y asistentes con IA."
+    title: "Soluciones web e IA a medida",
+    description: "Desarrollamos sitios comerciales, formularios y automatizaciones pensadas para simplificar tu trabajo diario."
   }
 ];
 
 export const faqData = [
   {
     id: 1,
-    question: "¿Cómo funciona el soporte remoto?",
+    question: "¿Cómo funciona el soporte remoto y es seguro?",
     answer:
-      "Coordinamos la asistencia, te indicamos cómo abrir una herramienta segura como AnyDesk o TeamViewer y nos conectamos a tu equipo solo con tu autorización. Vos ves todo lo que hacemos en pantalla."
-  },
-  {
-    id: 12,
-    question: "¿Qué pasa si el problema vuelve después de la asistencia?",
-    answer:
-      "Si el mismo inconveniente vuelve dentro de las 48 hs posteriores a la asistencia, revisamos el caso sin costo adicional para validar la solución aplicada. Esta revisión aplica al mismo equipo y al mismo problema atendido originalmente. No aplica a nuevos problemas, cambios realizados posteriormente, fallas de hardware, licencias, proveedores externos o casos fuera del alcance remoto."
+      "Coordinamos la sesión mediante AnyDesk o TeamViewer y nos conectamos únicamente con tu autorización. Ves todo el trabajo en pantalla y, al finalizar, el acceso se cierra."
   },
   {
     id: 2,
-    question: "¿Es seguro dar acceso remoto a mi computadora?",
+    question: "¿Qué incluye una asistencia remota y cuánto dura?",
     answer:
-      "Sí. El acceso se realiza únicamente con tu autorización y durante la sesión acordada. Al finalizar, la conexión se cierra. Recomendamos no compartir contraseñas sensibles y permanecer presente durante la asistencia."
+      "Cubre el diagnóstico y la resolución de un caso principal dentro de hasta 1 hora de trabajo técnico remoto: Windows, Office, correo, impresoras, lentitud o configuración general."
   },
   {
     id: 3,
-    question: "¿Qué incluye una asistencia remota?",
+    question: "¿Qué pasa si el problema requiere más tiempo o evaluación física?",
     answer:
-      "Incluye diagnóstico y resolución remota de un problema técnico común dentro de una intervención de hasta 1 hora. Puede ser Windows, Office, correo, impresoras, programas, lentitud, seguridad básica, configuración general o problemas similares."
+      "Si el caso excede la hora o requiere intervención de hardware, te informamos el diagnóstico y cotizamos la extensión o reparación antes de continuar. Nunca aplicamos cargos sin aviso previo."
   },
   {
     id: 4,
-    question: "¿Qué pasa si el problema lleva más de 1 hora?",
+    question: "¿Cómo funcionan los planes mensuales para empresas?",
     answer:
-      "Si el caso requiere más tiempo, se informa el avance y se cotiza una extensión antes de continuar. No avanzamos con costos adicionales sin avisarte."
+      "Incluyen una cantidad mensual de asistencias remotas para puestos de trabajo registrados al contratar. Se cuentan por períodos de 30 días y las asistencias no utilizadas no se acumulan."
   },
   {
     id: 5,
-    question: "¿Qué cuenta como una asistencia?",
+    question: "¿Cómo trabajan el asesoramiento, armado y reparación de equipos?",
     answer:
-      "Una asistencia corresponde a un incidente o tarea principal. Por ejemplo: configurar un correo, resolver un error de Windows, revisar una impresora o diagnosticar lentitud. Si aparecen tareas distintas, se coordinan aparte."
+      "Armamos presupuestos completos para compra de notebooks, PC gamer, oficinas, monitores y periféricos. El ensamblado a medida, mejoras de SSD/RAM y reparaciones se realizan según evaluación previa."
   },
   {
     id: 6,
-    question: "¿Cómo funcionan los planes para empresas?",
+    question: "¿Cómo se cotizan las páginas web, formularios y automatizaciones con IA?",
     answer:
-      "Los planes de empresa incluyen una cantidad mensual de asistencias remotas y una cantidad máxima de puestos de trabajo cubiertos. Los puestos se registran al contratar el plan, por ejemplo: PC Administración, Notebook Dueño o PC Caja."
+      "Se desarrollan como proyectos a medida. Relevamos tu necesidad, definimos el alcance concreto y entregamos un presupuesto cerrado antes de iniciar."
   },
   {
     id: 7,
-    question: "¿Las asistencias no usadas se acumulan?",
+    question: "¿Qué incluye el servicio de Microsoft 365?",
     answer:
-      "No. Las asistencias incluidas en planes mensuales no se acumulan para el período siguiente. Podés usarlas para mantenimiento preventivo, optimización de equipos o resolver consultas pendientes."
-  },
-  {
-    id: 8,
-    question: "¿Cómo manejan el armado, actualización o reparación de equipos?",
-    answer:
-      "Los trabajos sobre hardware (armado de PC a medida, ampliación de SSD/RAM o reparaciones) se realizan según evaluación previa del caso. También brindamos asesoramiento y presupuestos completos para compra de notebooks, PC gamer, equipos de oficina, monitores y periféricos."
-  },
-  {
-    id: 9,
-    question: "¿Cómo se cotizan las páginas web, formularios y automatizaciones con IA?",
-    answer:
-      "Se trabajan como proyectos a medida. Relevamos tu necesidad comercial u operativa, definimos el alcance concreto (sitio web, formulario integrado, flujo automatizado o asistente con IA) y presentamos un presupuesto cerrado antes de iniciar."
-  },
-  {
-    id: 10,
-    question: "¿Trabajan con Microsoft 365?",
-    answer:
-      "Sí. Podemos ayudar con implementación inicial, usuarios, licencias, MFA, Outlook, Teams, OneDrive y SharePoint básico. Las licencias Microsoft no están incluidas en el precio del servicio."
-  },
-  {
-    id: 11,
-    question: "¿Recuperan datos de discos dañados?",
-    answer:
-      "Realizamos configuración de copias de seguridad y recuperación básica desde backups existentes o archivos accesibles. No hacemos recuperación forense ni trabajos sobre discos con daño físico."
+      "Abarca implementación inicial, dominio, alta de usuarios, seguridad MFA, Outlook, Teams, OneDrive y SharePoint básico. Las licencias de Microsoft se abonan por separado."
   }
 ];
 
 export const condicionesGenerales =
   "Precios en ARS. Cada asistencia remota cubre un caso principal e incluye hasta 1 hora de trabajo técnico. El tiempo no utilizado no es acumulable ni transferible. Si el caso requiere más tiempo o queda fuera del alcance remoto, se informa y cotiza antes de continuar. No incluye licencias de software, repuestos, recuperación avanzada de datos, reparación física ni trabajos presenciales. Los planes mensuales no son acumulables y se cuentan por períodos de 30 días desde la activación.";
 
-export const whatsappMessage = `Hola, quiero consultar por los servicios de OTX Solutions.%0A%0ANecesito ayuda con: [Soporte remoto / Asesoramiento de equipos / Desarrollo web o IA]%0ADetalle breve: [DESCRIBIR CONSULTA]%0ASoy: [Particular / Profesional / Empresa]%0A%0AGracias.`;
+export const whatsappMessage = `Hola, quiero consultar a OTX Solutions.%0A%0ANecesito ayuda con: [Soporte remoto / Equipamiento / Web o IA]%0ADetalle breve: [DESCRIBIR CONSULTA]%0A%0AGracias.`;

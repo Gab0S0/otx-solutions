@@ -6,24 +6,28 @@ import { scrollToContact } from '../lib/offer-catalog';
 import './PremiumOffer.css';
 
 const groups = [
-  { name: 'Soporte y operación IT', note: 'Atención remota principal para particulares y empresas, mantenimiento y entornos Microsoft 365.', ids: [1, 2, 5] },
-  { name: 'Equipamiento y hardware', note: 'Criterio técnico para elegir notebooks, PC gamer o equipos de oficina, armar y reparar según evaluación.', ids: [3, 4] },
-  { name: 'Web, formularios e IA', note: 'Sitios profesionales, captación de consultas y automatizaciones o asistentes a medida.', ids: [6, 7] },
+  { name: 'Soporte y operación IT', note: 'Para equipos personales y entornos de trabajo.', ids: [1, 2, 5] },
+  { name: 'Equipamiento y hardware', note: 'Compra inteligente, actualización y diagnóstico físico.', ids: [3, 4] },
+  { name: 'Web, formularios e IA', note: 'Sitios comerciales y procesos automatizados.', ids: [6, 7] },
 ];
 const hints = {
-  1: 'Atención remota principal para particulares y empresas.',
-  2: 'Protección, limpieza, inicio de Windows y mantenimiento.',
-  3: 'Notebooks, PC gamer, oficinas, monitores, periféricos y presupuestos.',
-  4: 'Ensamblado a medida, mejoras de SSD/RAM y reparación según evaluación.',
+  1: 'Servicio principal para particulares y empresas.',
+  2: 'Rendimiento, limpieza, inicio de Windows y respaldos.',
+  3: 'Notebooks, PC gamer, oficinas completas, monitores y periféricos.',
+  4: 'Ensamblado a medida, mejoras de SSD/RAM y servicio técnico.',
   5: 'Correo corporativo, usuarios, seguridad MFA y colaboración.',
-  6: 'Sitios web modernos, landing pages y formularios integrados.',
-  7: 'Flujos automatizados, asistentes e integraciones con IA a medida.',
+  6: 'Sitios rápidos, presentación comercial y captación de consultas.',
+  7: 'Asistentes, flujos de trabajo e integraciones a medida.',
 };
 
 const Services = () => {
   const [openId, setOpenId] = useState(null);
   const prefill = (service) => window.dispatchEvent(new CustomEvent('prefillContactForm', {
-    detail: { servicio: service.title, asunto: `Consulta sobre: ${service.title}` },
+    detail: {
+      servicio: service.title,
+      asunto: `Consulta sobre: ${service.title}`,
+      tipo: service.id === 5 ? 'pyme' : 'particular',
+    },
   }));
 
   return (
@@ -32,7 +36,7 @@ const Services = () => {
         <div className="offer-section-heading">
           <p className="offer-eyebrow">Servicios</p>
           <h2 id="offer-services-title">¿Qué necesitás resolver?</h2>
-          <p>Soporte técnico remoto como servicio principal, asesoramiento en equipamiento y proyectos digitales a medida.</p>
+          <p>Atención remota inmediata y soluciones técnicas a medida.</p>
         </div>
         {groups.map(group => (
           <div className="offer-service-group" key={group.name}>

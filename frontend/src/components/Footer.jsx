@@ -12,7 +12,7 @@ const Footer = () => {
     { href: '#servicios', label: 'Servicios' },
     { href: '#planes', label: 'Precios' },
     { href: '#como-funciona', label: 'Cómo trabajamos' },
-    { href: '#por-que-elegirnos', label: 'Criterio de trabajo' },
+    { href: '#por-que-elegirnos', label: 'Por qué elegirnos' },
     { href: '#faq', label: 'Preguntas frecuentes' },
     { href: '#contacto', label: 'Contacto' }
   ];
@@ -25,43 +25,45 @@ const Footer = () => {
             otx<span>.</span>
           </a>
           <p>
-            Soporte técnico remoto para particulares y empresas, seguridad y mantenimiento, asesoramiento y armado de equipos, desarrollo web y automatizaciones con IA a medida.
+            Soporte técnico remoto, equipamiento, desarrollo web e IA a medida para personas y empresas.
           </p>
         </div>
 
-        <div className="otx-footer-col">
-          <h3>Secciones</h3>
-          <ul className="otx-footer-links">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a href={link.href}>{link.label}</a>
+        <div className="otx-footer-nav-cols">
+          <div className="otx-footer-col">
+            <h3>Secciones</h3>
+            <ul className="otx-footer-links">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href}>{link.label}</a>
+                </li>
+              ))}
+              <li>
+                <Link to="/ticket">Abrir ticket</Link>
               </li>
-            ))}
-            <li>
-              <Link to="/ticket">Abrir ticket</Link>
-            </li>
-          </ul>
-        </div>
+            </ul>
+          </div>
 
-        <div className="otx-footer-col">
-          <h3>Contacto</h3>
-          <ul className="otx-footer-links">
-            <li>
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                WhatsApp: +54 9 {companyInfo.whatsapp.slice(3, 5)} {companyInfo.whatsapp.slice(5, 9)}-{companyInfo.whatsapp.slice(9)}
-              </a>
-            </li>
-            <li>
-              <a href={`mailto:${companyInfo.email}`}>{companyInfo.email}</a>
-            </li>
-            <li>{companyInfo.location}</li>
-          </ul>
+          <div className="otx-footer-col">
+            <h3>Contacto</h3>
+            <ul className="otx-footer-links">
+              <li>
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                  WhatsApp: +54 9 {companyInfo.whatsapp.slice(3, 5)} {companyInfo.whatsapp.slice(5, 9)}-{companyInfo.whatsapp.slice(9)}
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${companyInfo.email}`}>{companyInfo.email}</a>
+              </li>
+              <li>{companyInfo.location}</li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <div className="otx-footer-bottom">
-        <p>© {currentYear} {companyInfo.name}. Todos los derechos reservados.</p>
-        <p>Soporte IT, equipamiento y soluciones digitales · Buenos Aires</p>
+        <p>© {currentYear} {companyInfo.name}.</p>
+        <p>{companyInfo.location}</p>
       </div>
     </footer>
   );

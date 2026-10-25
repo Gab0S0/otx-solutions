@@ -16,15 +16,15 @@ const FAQ = () => {
             <p className="otx-eyebrow">Preguntas frecuentes</p>
             <h2 id="faq-title">Dudas habituales.</h2>
             <p className="otx-section-lead">
-              Información clara sobre cómo operamos en asistencias remotas, planes para empresas, hardware y proyectos a medida.
+              Respuestas concretas sobre soporte remoto, planes, equipamiento y desarrollos a medida.
             </p>
             <div className="otx-faq-aside-actions">
               <a className="otx-btn-primary" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                Hacer una consulta <ArrowUpRight size={17} aria-hidden="true" />
+                Consultar por WhatsApp <ArrowUpRight size={17} aria-hidden="true" />
                 <span className="sr-only">(abre otra pestaña)</span>
               </a>
               <button type="button" className="otx-inline-link" onClick={scrollToContact}>
-                Escribir en Contacto
+                Ir a Contacto
               </button>
             </div>
           </div>
