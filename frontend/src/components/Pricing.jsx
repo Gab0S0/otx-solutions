@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, User, Building2, Cloud } from 'lucide-react';
+import { Check, User, Building2, Cloud, CreditCard } from 'lucide-react';
 import { Button } from './ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import {
@@ -9,6 +9,9 @@ import {
   condicionesGenerales,
   companyInfo
 } from '../data/mock';
+
+const PAYMENT_LINK = (process.env.REACT_APP_MERCADOPAGO_PAYMENT_LINK || '').trim();
+const isValidPaymentLink = /^https:\/\/(?:www\.)?(?:mercadopago\.com\.[a-z.]+|mpago\.la)\//i.test(PAYMENT_LINK);
 
 const Pricing = () => {
   const scrollToContactWithPlan = (planName, openWhatsApp = false) => {
@@ -27,8 +30,8 @@ const Pricing = () => {
     }
 
     if (openWhatsApp) {
-      const msg = `Hola, estoy interesado en el ${planName}.%0A%0AMe gustaría recibir más información.%0A%0AGracias.`;
-      const whatsappUrl = `https://wa.me/${companyInfo.whatsapp}?text=${msg}`;
+      const msg = `Hola, estoy interesado en el ${planName}. Me gustaría conocer disponibilidad y alcance. Gracias.`;
+      const whatsappUrl = `https://wa.me/${companyInfo.whatsapp}?text=${encodeURIComponent(msg)}`;
 
       setTimeout(() => {
         window.open(whatsappUrl, '_blank');
@@ -51,7 +54,7 @@ const Pricing = () => {
 
           <p className="text-otx-text/70 text-lg">
             Soporte IT remoto para personas, profesionales independientes y pymes.
-            Sin letra chica.
+            Precios en pesos argentinos y alcance definido antes de comenzar.
           </p>
         </div>
 
@@ -158,6 +161,12 @@ const PlanesParticulares = ({ onSelectPlan }) => {
               ))}
             </ul>
 
+            {plan.id === 1 && isValidPaymentLink && (
+              <a href={PAYMENT_LINK} target="_blank" rel="noopener noreferrer"
+                 className="mb-3 flex items-center justify-center gap-2 rounded-lg bg-sky-600 px-4 py-3 text-white font-semibold hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
+                <CreditCard size={18} /> Pagar con Mercado Pago
+              </a>
+            )}
             <Button
               onClick={() =>
                 onSelectPlan(`${plan.name} - ${plan.price}${plan.period}`)
