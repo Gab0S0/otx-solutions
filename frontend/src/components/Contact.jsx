@@ -462,10 +462,10 @@ const Contact = () => {
 
                         <SelectContent>
                           <SelectItem value="__empty__">— Ninguno —</SelectItem>
-                          <SelectItem value="Asistencia Remota - $50.000">
+                          <SelectItem value="Asistencia Remota - $20.000">
                             Asistencia Remota - $50.000
                           </SelectItem>
-                          <SelectItem value="Pack 5 Asistencias - $220.000">
+                          <SelectItem value="Pack 5 Asistencias - $90.000">
                             Pack 5 Asistencias - $220.000
                           </SelectItem>
                           <SelectItem value="Pyme Inicial - $120.000/mes">
