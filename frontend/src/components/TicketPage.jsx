@@ -255,7 +255,7 @@ const TicketPage = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="particular">Particular</SelectItem>
-                    <SelectItem value="pyme">Pyme</SelectItem>
+                    <SelectItem value="pyme">Empresa</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -284,11 +284,10 @@ const TicketPage = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="__empty__">— Ninguno —</SelectItem>
-                    <SelectItem value="Asistencia Única - $15.000">Asistencia Única - $15.000</SelectItem>
-                    <SelectItem value="Pack 5 Intervenciones - $65.000">Pack 5 Intervenciones - $65.000</SelectItem>
-                    <SelectItem value="Plan Mensual - $25.000/mes">Plan Mensual - $25.000/mes</SelectItem>
-                    <SelectItem value="Pyme Basic - $70.000/mes">Pyme Basic - $70.000/mes</SelectItem>
-                    <SelectItem value="Pyme Pro - $120.000/mes">Pyme Pro - $120.000/mes</SelectItem>
+                    <SelectItem value="Asistencia Remota - $20.000">Asistencia Remota - $20.000</SelectItem>
+                    <SelectItem value="Pack 5 Asistencias - $90.000">Pack 5 Asistencias - $90.000</SelectItem>
+                    <SelectItem value="Empresa Inicial - $120.000/mes">Empresa Inicial - $120.000/mes</SelectItem>
+                    <SelectItem value="Empresa Operativa - $180.000/mes">Empresa Operativa - $180.000/mes</SelectItem>
                     <SelectItem value="Microsoft 365 - Consultar">Microsoft 365 - Consultar</SelectItem>
                   </SelectContent>
                 </Select>

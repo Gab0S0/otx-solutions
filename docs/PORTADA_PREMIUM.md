@@ -1,5 +1,7 @@
 # OTX Solutions · Propuesta de portada A, revisión Obsidian
 
+> Versión anterior. La propuesta vigente para aprobación es [Portada V2](PORTADA_V2.md).
+
 Variante de header y portada sobre `mejora-comercial-2026-10`, para el PR #1. El rediseño de las demás secciones queda pendiente de aprobación visual. No se hizo merge ni despliegue.
 
 ## Dirección visual y recursos

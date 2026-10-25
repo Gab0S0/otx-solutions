@@ -79,7 +79,7 @@ const Contact = () => {
 
     msg += `%0AMi problema es: [DESCRIBIR BREVEMENTE]%0A`;
     msg += `Tipo de equipo: [PC / Notebook / Mac]%0A`;
-    msg += `Soy: [Persona / Profesional independiente / Pyme]%0A%0A`;
+    msg += `Soy: [Persona / Profesional independiente / Empresa]%0A%0A`;
     msg += `Gracias.`;
 
     return msg;
@@ -418,7 +418,7 @@ const Contact = () => {
                           <SelectItem value="persona">
                             Persona / Profesional independiente
                           </SelectItem>
-                          <SelectItem value="pyme">Pyme</SelectItem>
+                          <SelectItem value="pyme">Empresa</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -463,19 +463,19 @@ const Contact = () => {
                         <SelectContent>
                           <SelectItem value="__empty__">— Ninguno —</SelectItem>
                           <SelectItem value="Asistencia Remota - $20.000">
-                            Asistencia Remota - $50.000
+                            Asistencia Remota - $20.000
                           </SelectItem>
                           <SelectItem value="Pack 5 Asistencias - $90.000">
-                            Pack 5 Asistencias - $220.000
+                            Pack 5 Asistencias - $90.000
                           </SelectItem>
-                          <SelectItem value="Pyme Inicial - $120.000/mes">
-                            Pyme Inicial - $120.000/mes
+                          <SelectItem value="Empresa Inicial - $120.000/mes">
+                            Empresa Inicial - $120.000/mes
                           </SelectItem>
-                          <SelectItem value="Pyme Operativo - $180.000/mes">
-                            Pyme Operativo - $180.000/mes
+                          <SelectItem value="Empresa Operativa - $180.000/mes">
+                            Empresa Operativa - $180.000/mes
                           </SelectItem>
-                          <SelectItem value="Pyme Plus - A cotizar">
-                            Pyme Plus - A cotizar
+                          <SelectItem value="Empresa Plus - A cotizar">
+                            Empresa Plus - A cotizar
                           </SelectItem>
                           <SelectItem value="Microsoft 365 - Consultar">
                             Microsoft 365 - Consultar

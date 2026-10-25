@@ -1,0 +1,13 @@
+{
+  "scores": {
+    "performance": 0.75,
+    "accessibility": 0.92
+  },
+  "metrics": {
+    "first-contentful-paint": "1.1\u00a0s",
+    "largest-contentful-paint": "4.4\u00a0s",
+    "total-blocking-time": "410\u00a0ms",
+    "cumulative-layout-shift": "0"
+  },
+  "note": "Local mobile lab run; full page. Header/hero axe checks reported separately."
+}

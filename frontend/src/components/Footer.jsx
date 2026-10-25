@@ -31,7 +31,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-otx-gray-light mb-6 max-w-md">
-              Soporte IT remoto profesional para particulares y pymes en Buenos Aires. 
+              Soporte IT remoto profesional para particulares y empresas en Buenos Aires.
               Más de 10 años de experiencia resolviendo problemas tecnológicos.
             </p>
             <div className="flex gap-4">

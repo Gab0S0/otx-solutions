@@ -93,7 +93,7 @@ const Services = () => {
                 <Cloud className="text-white" size={32} />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-white mb-2">Microsoft 365 para Pymes</h3>
+                <h3 className="text-2xl font-bold text-white mb-2">Microsoft 365 para Empresas</h3>
                 <p className="text-otx-gray-light">
                   Implementación, gestión mensual y configuración de SharePoint/OneDrive.
                 </p>

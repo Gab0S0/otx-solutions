@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Check, User, Building2, Cloud, CreditCard } from 'lucide-react';
 import { Button } from './ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
@@ -14,6 +14,15 @@ const PAYMENT_LINK = (process.env.REACT_APP_MERCADOPAGO_PAYMENT_LINK || '').trim
 const isValidPaymentLink = /^https:\/\/(?:www\.)?(?:mercadopago\.com\.[a-z.]+|mpago\.la)\//i.test(PAYMENT_LINK);
 
 const Pricing = () => {
+  const [category, setCategory] = useState('particulares');
+  useEffect(() => {
+    const selectCategory = ({ detail }) => {
+      if (['particulares', 'pymes', 'm365'].includes(detail)) setCategory(detail);
+    };
+    window.addEventListener('otx:select-plan-category', selectCategory);
+    return () => window.removeEventListener('otx:select-plan-category', selectCategory);
+  }, []);
+
   const scrollToContactWithPlan = (planName, openWhatsApp = false) => {
     window.dispatchEvent(
       new CustomEvent('prefillContactForm', {
@@ -53,16 +62,17 @@ const Pricing = () => {
           </h2>
 
           <p className="text-otx-text/70 text-lg">
-            Soporte IT remoto para personas, profesionales independientes y pymes.
+            Soporte IT remoto para personas, profesionales independientes y empresas.
             Precios en pesos argentinos y alcance definido antes de comenzar.
           </p>
         </div>
 
         {/* Tabs */}
-        <Tabs defaultValue="particulares" className="w-full">
+        <Tabs value={category} onValueChange={setCategory} className="w-full">
           <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-12 bg-otx-gray p-1 rounded-xl">
             <TabsTrigger
               value="particulares"
+              aria-label="Personas"
               className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-otx-bordo rounded-lg"
             >
               <User size={18} />
@@ -71,18 +81,20 @@ const Pricing = () => {
 
             <TabsTrigger
               value="pymes"
+              aria-label="Empresas"
               className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-otx-bordo rounded-lg"
             >
               <Building2 size={18} />
-              <span className="hidden sm:inline">Pymes</span>
+              <span className="hidden sm:inline">Empresas</span>
             </TabsTrigger>
 
             <TabsTrigger
               value="m365"
+              aria-label="Microsoft 365"
               className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-otx-bordo rounded-lg"
             >
               <Cloud size={18} />
-              <span className="hidden sm:inline">M365</span>
+              <span className="hidden sm:inline">Microsoft 365</span>
             </TabsTrigger>
           </TabsList>
 
@@ -324,7 +336,7 @@ const PlanesPymes = ({ onSelectPlan }) => {
         </div>
 
         <p className="text-otx-text/60 text-xs mt-4">
-          Las asistencias no utilizadas no se acumulan. Los planes pyme cubren
+          Las asistencias no utilizadas no se acumulan. Los planes de empresa cubren
           puestos de trabajo registrados. El mes equivale a 30 días desde la
           fecha de activación.
         </p>

@@ -43,13 +43,13 @@ export const services = [
   },
   {
     id: 6,
-    title: "Asesoramiento IT para Pymes",
+    title: "Asesoramiento IT para Empresas",
     description: "Ayudamos a pequeños negocios a ordenar sus equipos, software, correo, usuarios y necesidades técnicas básicas.",
     icon: "Lightbulb"
   },
   {
     id: 7,
-    title: "Microsoft 365 para Pymes",
+    title: "Microsoft 365 para Empresas",
     description: "Implementamos y gestionamos entornos Microsoft 365 para mejorar correo, usuarios, seguridad y colaboración.",
     icon: "Cloud"
   }
@@ -107,7 +107,7 @@ export const planesPymes = {
   planes: [
     {
       id: 1,
-      name: "Pyme Inicial",
+      name: "Empresa Inicial",
       price: "$120.000",
       period: "/mes",
       asistencias: "3 asistencias",
@@ -126,7 +126,7 @@ export const planesPymes = {
     },
     {
       id: 2,
-      name: "Pyme Operativo",
+      name: "Empresa Operativa",
       price: "$180.000",
       period: "/mes",
       asistencias: "5 asistencias",
@@ -145,13 +145,13 @@ export const planesPymes = {
     },
     {
       id: 3,
-      name: "Pyme Plus",
+      name: "Empresa Plus",
       price: "A cotizar",
       period: "",
       asistencias: "A medida",
       puestos: "Más de 6 puestos",
       description:
-        "Para pymes con más equipos, usuarios o necesidades técnicas más complejas.",
+        "Para empresas con más equipos, usuarios o necesidades técnicas más complejas.",
       features: [
         "Soporte remoto recurrente según alcance",
         "Más de 6 puestos de trabajo",
@@ -309,9 +309,9 @@ export const faqData = [
   },
   {
     id: 6,
-    question: "¿Cómo funcionan los planes para pymes?",
+    question: "¿Cómo funcionan los planes para empresas?",
     answer:
-      "Los planes pyme incluyen una cantidad mensual de asistencias remotas y una cantidad máxima de puestos de trabajo cubiertos. Los puestos se registran al contratar el plan, por ejemplo: PC Administración, Notebook Dueño o PC Caja."
+      "Los planes de empresa incluyen una cantidad mensual de asistencias remotas y una cantidad máxima de puestos de trabajo cubiertos. Los puestos se registran al contratar el plan, por ejemplo: PC Administración, Notebook Dueño o PC Caja."
   },
   {
     id: 7,
@@ -342,4 +342,4 @@ export const faqData = [
 export const condicionesGenerales =
   "Precios en ARS. Cada asistencia remota cubre un caso principal e incluye hasta 1 hora de trabajo técnico. El tiempo no utilizado no es acumulable ni transferible. Si el caso requiere más tiempo o queda fuera del alcance remoto, se informa y cotiza antes de continuar. No incluye licencias de software, repuestos, recuperación avanzada de datos, reparación física ni trabajos presenciales. Los planes mensuales no son acumulables y se cuentan por períodos de 30 días desde la activación.";
 
-export const whatsappMessage = `Hola, quiero consultar por soporte IT remoto de OTX Solutions.%0A%0AMi problema es: [DESCRIBIR BREVEMENTE]%0ATipo de equipo: [PC / Notebook / Mac]%0ASoy: [Persona / Profesional independiente / Pyme]%0A%0AGracias.`;
+export const whatsappMessage = `Hola, quiero consultar por soporte IT remoto de OTX Solutions.%0A%0AMi problema es: [DESCRIBIR BREVEMENTE]%0ATipo de equipo: [PC / Notebook / Mac]%0ASoy: [Persona / Profesional independiente / Empresa]%0A%0AGracias.`;
