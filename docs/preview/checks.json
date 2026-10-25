@@ -1,0 +1,137 @@
+{
+  "results": [
+    {
+      "name": "desktop",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 900,
+        "viewport": 900
+      },
+      "axeViolations": 0,
+      "errors": []
+    },
+    {
+      "name": "mobile",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 844,
+        "viewport": 844
+      },
+      "axeViolations": 0,
+      "errors": []
+    },
+    {
+      "name": "small-mobile",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 824.71875,
+        "viewport": 740
+      },
+      "axeViolations": 0,
+      "errors": []
+    },
+    {
+      "name": "tablet",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 1024,
+        "viewport": 1024
+      },
+      "axeViolations": 0,
+      "errors": []
+    },
+    {
+      "name": "landscape",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 705.015625,
+        "viewport": 390
+      },
+      "axeViolations": 0,
+      "errors": []
+    }
+  ],
+  "motion": "none",
+  "perf": {
+    "navigation": {
+      "name": "http://127.0.0.1:3100/",
+      "entryType": "navigation",
+      "startTime": 0,
+      "duration": 101.10000000009313,
+      "navigationId": 4241,
+      "initiatorType": "navigation",
+      "deliveryType": "",
+      "nextHopProtocol": "http/1.0",
+      "renderBlockingStatus": "non-blocking",
+      "contentType": "text/html",
+      "contentEncoding": "",
+      "workerStart": 0,
+      "workerRouterEvaluationStart": 0,
+      "workerCacheLookupStart": 0,
+      "workerMatchedSourceType": "",
+      "workerFinalSourceType": "",
+      "redirectStart": 0,
+      "redirectEnd": 0,
+      "fetchStart": 0.39999999990686774,
+      "domainLookupStart": 0.39999999990686774,
+      "domainLookupEnd": 0.39999999990686774,
+      "connectStart": 0.39999999990686774,
+      "secureConnectionStart": 0,
+      "connectEnd": 0.39999999990686774,
+      "requestStart": 3,
+      "responseStart": 7,
+      "firstInterimResponseStart": 0,
+      "finalResponseHeadersStart": 7,
+      "responseEnd": 7.5,
+      "transferSize": 3670,
+      "encodedBodySize": 3370,
+      "decodedBodySize": 3370,
+      "responseStatus": 200,
+      "serverTiming": [],
+      "unloadEventStart": 0,
+      "unloadEventEnd": 0,
+      "domInteractive": 55.60000000009313,
+      "domContentLoadedEventStart": 99,
+      "domContentLoadedEventEnd": 99.10000000009313,
+      "domComplete": 101.10000000009313,
+      "loadEventStart": 101.10000000009313,
+      "loadEventEnd": 101.10000000009313,
+      "type": "navigate",
+      "redirectCount": 0,
+      "activationStart": 0,
+      "criticalCHRestart": 0,
+      "notRestoredReasons": null,
+      "confidence": {
+        "randomizedTriggerRate": 0.4994798,
+        "value": "high"
+      }
+    },
+    "resources": [
+      {
+        "name": "http://127.0.0.1:3100/static/js/main.af1e2d7f.js",
+        "size": 486232,
+        "duration": 20.199999999953434
+      },
+      {
+        "name": "http://127.0.0.1:3100/static/css/main.11340256.css",
+        "size": 65458,
+        "duration": 16.5999999998603
+      },
+      {
+        "name": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap",
+        "size": 0,
+        "duration": 7.399999999906868
+      },
+      {
+        "name": "https://us-assets.i.posthog.com/static/array.js",
+        "size": 0,
+        "duration": 8.599999999860302
+      }
+    ]
+  }
+}

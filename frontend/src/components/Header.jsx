@@ -1,112 +1,68 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
-import { Button } from './ui/button';
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { companyInfo, whatsappMessage } from '../data/mock';
+import './PremiumIntro.css';
+
+const links = [
+  ['#servicios', 'Servicios'], ['#planes', 'Precios'],
+  ['#faq', 'FAQ'], ['#contacto', 'Contacto'], ['/ticket', 'Tickets'],
+];
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const navLinks = [
-    { href: '#servicios', label: 'Servicios' },
-    { href: '#planes', label: 'Planes' },
-    { href: '#como-funciona', label: 'Cómo Funciona' },
-    { href: '#faq', label: 'FAQ' },
-    { href: '#contacto', label: 'Contacto' }
-  ];
-
+  const [open, setOpen] = useState(false);
+  const toggle = useRef(null);
+  const header = useRef(null);
   const whatsappUrl = `https://wa.me/${companyInfo.whatsapp}?text=${whatsappMessage}`;
 
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (event) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+        toggle.current?.focus();
+      }
+    };
+    const onOutside = (event) => {
+      if (!header.current?.contains(event.target)) setOpen(false);
+    };
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const onResize = () => { if (desktop.matches) setOpen(false); };
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('pointerdown', onOutside);
+    desktop.addEventListener('change', onResize);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('pointerdown', onOutside);
+      desktop.removeEventListener('change', onResize);
+    };
+  }, [open]);
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-otx-dark/95 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 bg-otx-bordo rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
-              <span className="text-white font-bold text-lg">OTX</span>
-            </div>
-            <div className="hidden sm:block">
-              <span className="text-white font-semibold text-lg">OTX Solutions</span>
-              <p className="text-otx-gray-light text-xs -mt-1">Soporte IT Remoto</p>
-            </div>
-          </a>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-otx-gray-light hover:text-white transition-colors duration-200 text-sm font-medium"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center gap-4">
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-              <Button className="bg-otx-bordo hover:bg-otx-bordo-light text-white gap-2 transition-all duration-200 hover:shadow-lg hover:shadow-otx-bordo/30">
-                <Phone size={18} />
-                WhatsApp
-              </Button>
-            </a>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden text-white p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden bg-otx-dark/95 backdrop-blur-md border-t border-white/10 py-4">
-            <nav className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-otx-gray-light hover:text-white hover:bg-white/5 px-4 py-3 transition-colors duration-200"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
-              <div className="px-4 pt-4">
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="block">
-                  <Button className="w-full bg-otx-bordo hover:bg-otx-bordo-light text-white gap-2">
-                    <Phone size={18} />
-                    WhatsApp
-                  </Button>
-                </a>
-              </div>
-            </nav>
-          </div>
-        )}
+    <header className="otx-premium-header" ref={header}>
+      <a className="otx-skip" href="#intro-title">Saltar al contenido</a>
+      <div className="otx-header-inner">
+        <a className="otx-wordmark" href="/">
+          <span className="otx-monogram">otx<ArrowUpRight size={25} aria-hidden="true" /></span>
+          <span className="otx-wordmark-sub">SOLUTIONS<br /><span>Soporte IT remoto</span></span>
+        </a>
+        <nav className="otx-desktop-nav" aria-label="Navegación principal">
+          {links.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
+        </nav>
+        <a className="otx-header-cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+          Hablemos <ArrowUpRight size={16} aria-hidden="true" />
+          <span className="sr-only">por WhatsApp (abre otra pestaña)</span>
+        </a>
+        <button ref={toggle} type="button" className="otx-menu-toggle"
+          aria-label={open ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={open}
+          aria-controls="otx-mobile-nav" onClick={() => setOpen(!open)}>
+          {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+        </button>
       </div>
+      <nav id="otx-mobile-nav" className="otx-mobile-nav" aria-label="Navegación móvil" hidden={!open}>
+        {links.map(([href, label]) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}<ArrowUpRight size={18} aria-hidden="true" /></a>)}
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>Consultar por WhatsApp <ArrowUpRight size={18} aria-hidden="true" /></a>
+      </nav>
     </header>
   );
 };
-
 export default Header;

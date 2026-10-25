@@ -56,11 +56,11 @@ const WhyUs = () => {
               <div className="bg-otx-dark rounded-2xl p-8 shadow-2xl">
                 <div className="grid grid-cols-2 gap-8">
                   <div className="text-center">
-                    <p className="text-5xl font-bold text-otx-bordo mb-2">+10</p>
+                    <p className="text-3xl sm:text-5xl font-bold text-otx-bordo mb-2">+10</p>
                     <p className="text-otx-gray-light">Años de experiencia</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-5xl font-bold text-otx-bordo mb-2">+1.000</p>
+                    <p className="text-3xl sm:text-5xl font-bold text-otx-bordo mb-2">+1.000</p>
                     <p className="text-otx-gray-light">Casos resueltos</p>
                   </div>
                 </div>
@@ -87,7 +87,7 @@ const WhyUs = () => {
               </div>
 
               {/* Floating Badge */}
-              <div className="absolute -bottom-6 -right-6 bg-white rounded-xl p-4 shadow-xl border border-otx-gray">
+              <div className="absolute -bottom-6 right-0 sm:-right-6 bg-white rounded-xl p-4 shadow-xl border border-otx-gray">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
                     <CheckCircle className="text-green-600" size={24} />
