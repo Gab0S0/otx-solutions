@@ -1,0 +1,173 @@
+{
+  "states": [
+    {
+      "width": 320,
+      "height": 740,
+      "category": "particulares",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 320,
+      "height": 740,
+      "category": "pymes",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 320,
+      "height": 740,
+      "category": "m365",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 375,
+      "height": 667,
+      "category": "particulares",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 375,
+      "height": 667,
+      "category": "pymes",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 375,
+      "height": 667,
+      "category": "m365",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "category": "particulares",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "category": "pymes",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "category": "m365",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "category": "particulares",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "category": "pymes",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "category": "m365",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "category": "particulares",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "category": "pymes",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "category": "m365",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "category": "particulares",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "category": "pymes",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "category": "m365",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "category": "particulares",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "category": "pymes",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "category": "m365",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "category": "particulares",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "category": "pymes",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "category": "m365",
+      "axeViolations": 0,
+      "horizontalOverflow": false
+    }
+  ],
+  "keyboard": "Accordion Enter, category ArrowRight and plan radio ArrowDown passed in all viewports"
+}

@@ -1,0 +1,245 @@
+{
+  "paymentCases": 8,
+  "flows": [
+    {
+      "width": 1440,
+      "type": "plan",
+      "value": "Asistencia Remota - $20.000",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 1440,
+      "type": "plan",
+      "value": "Pack 5 Asistencias - $90.000",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 1440,
+      "type": "plan",
+      "value": "Empresa Inicial - $120.000/mes",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 1440,
+      "type": "plan",
+      "value": "Empresa Operativa - $180.000/mes",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 1440,
+      "type": "plan",
+      "value": "Empresa Plus - A cotizar",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 1440,
+      "type": "plan",
+      "value": "Microsoft 365 - Implementación Inicial - Desde $85.000",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 1440,
+      "type": "plan",
+      "value": "Microsoft 365 - Gestión Mensual - Desde $25.000/mes",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 1440,
+      "type": "plan",
+      "value": "Microsoft 365 - SharePoint/OneDrive Básico - Desde $45.000",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 1440,
+      "type": "service",
+      "value": "Soporte Técnico Remoto",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 1440,
+      "type": "service",
+      "value": "Optimización de PC",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 1440,
+      "type": "service",
+      "value": "Configuración de Software",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 1440,
+      "type": "service",
+      "value": "Backup y Recuperación Básica",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 1440,
+      "type": "service",
+      "value": "Soporte para Home Office",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 1440,
+      "type": "service",
+      "value": "Asesoramiento IT para Empresas",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 1440,
+      "type": "service",
+      "value": "Microsoft 365 para Empresas",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "plan",
+      "value": "Asistencia Remota - $20.000",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "plan",
+      "value": "Pack 5 Asistencias - $90.000",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "plan",
+      "value": "Empresa Inicial - $120.000/mes",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "plan",
+      "value": "Empresa Operativa - $180.000/mes",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "plan",
+      "value": "Empresa Plus - A cotizar",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "plan",
+      "value": "Microsoft 365 - Implementación Inicial - Desde $85.000",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "plan",
+      "value": "Microsoft 365 - Gestión Mensual - Desde $25.000/mes",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "plan",
+      "value": "Microsoft 365 - SharePoint/OneDrive Básico - Desde $45.000",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "service",
+      "value": "Soporte Técnico Remoto",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "service",
+      "value": "Optimización de PC",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "service",
+      "value": "Configuración de Software",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "service",
+      "value": "Backup y Recuperación Básica",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "service",
+      "value": "Soporte para Home Office",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "service",
+      "value": "Asesoramiento IT para Empresas",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    },
+    {
+      "width": 390,
+      "type": "service",
+      "value": "Microsoft 365 para Empresas",
+      "whatsapp": true,
+      "contact": true,
+      "ticket": true
+    }
+  ]
+}

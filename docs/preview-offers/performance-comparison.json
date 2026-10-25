@@ -1,0 +1,97 @@
+{
+  "method": "Three sequential alternating mobile Lighthouse runs per build; medians, cold browser runs, same machine and dependencies, local HTTP servers without production compression/cache. Baseline is archive of approved commit 76ebd57.",
+  "runs": [
+    {
+      "kind": "approved",
+      "run": 1,
+      "score": 74,
+      "accessibility": 92,
+      "metrics": {
+        "first-contentful-paint": 1055.2783,
+        "largest-contentful-paint": 4607.7783,
+        "total-blocking-time": 395,
+        "cumulative-layout-shift": 0
+      }
+    },
+    {
+      "kind": "offers",
+      "run": 1,
+      "score": 78,
+      "accessibility": 92,
+      "metrics": {
+        "first-contentful-paint": 1054.1807,
+        "largest-contentful-paint": 4561.6807,
+        "total-blocking-time": 300,
+        "cumulative-layout-shift": 0
+      }
+    },
+    {
+      "kind": "approved",
+      "run": 2,
+      "score": 76,
+      "accessibility": 92,
+      "metrics": {
+        "first-contentful-paint": 1055.8685,
+        "largest-contentful-paint": 4583.3685,
+        "total-blocking-time": 339.00000000000045,
+        "cumulative-layout-shift": 0
+      }
+    },
+    {
+      "kind": "offers",
+      "run": 2,
+      "score": 71,
+      "accessibility": 92,
+      "metrics": {
+        "first-contentful-paint": 1054.1453,
+        "largest-contentful-paint": 4739.1453,
+        "total-blocking-time": 486,
+        "cumulative-layout-shift": 0
+      }
+    },
+    {
+      "kind": "approved",
+      "run": 3,
+      "score": 69,
+      "accessibility": 92,
+      "metrics": {
+        "first-contentful-paint": 1053.4874,
+        "largest-contentful-paint": 4758.9874,
+        "total-blocking-time": 538,
+        "cumulative-layout-shift": 0
+      }
+    },
+    {
+      "kind": "offers",
+      "run": 3,
+      "score": 78,
+      "accessibility": 92,
+      "metrics": {
+        "first-contentful-paint": 1058.0167,
+        "largest-contentful-paint": 4546.5167,
+        "total-blocking-time": 294,
+        "cumulative-layout-shift": 0
+      }
+    }
+  ],
+  "medians": {
+    "approved": {
+      "performance": 74,
+      "metrics": {
+        "first-contentful-paint": 1055.2783,
+        "largest-contentful-paint": 4607.7783,
+        "total-blocking-time": 395,
+        "cumulative-layout-shift": 0
+      }
+    },
+    "offers": {
+      "performance": 78,
+      "metrics": {
+        "first-contentful-paint": 1054.1807,
+        "largest-contentful-paint": 4561.6807,
+        "total-blocking-time": 300,
+        "cumulative-layout-shift": 0
+      }
+    }
+  }
+}

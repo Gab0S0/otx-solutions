@@ -1,122 +1,68 @@
-import React from 'react';
-import { Monitor, Sparkles, Settings, HardDrive, Home, Lightbulb, Cloud } from 'lucide-react';
-import { services } from '../data/mock';
+import React, { useState } from 'react';
+import { ArrowUpRight, Plus, Minus } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { companyInfo, services } from '../data/mock';
+import { scrollToContact } from '../lib/offer-catalog';
+import './PremiumOffer.css';
 
-const iconMap = {
-  Monitor,
-  Sparkles,
-  Settings,
-  HardDrive,
-  Home,
-  Lightbulb,
-  Cloud
+const groups = [
+  { name: 'Personas', note: 'Para tu PC, notebook y herramientas de todos los días.', ids: [1, 2, 3, 4, 5] },
+  { name: 'Empresas', note: 'Para ordenar equipos, usuarios y necesidades de trabajo.', ids: [6] },
+  { name: 'Microsoft 365', note: 'Para implementar o gestionar correo y colaboración.', ids: [7] },
+];
+const hints = {
+  1: 'Problemas técnicos en tu equipo.', 2: 'Lentitud y configuración de Windows.',
+  3: 'Programas, drivers y correo.', 4: 'Respaldos y archivos accesibles.',
+  5: 'Herramientas para trabajar desde casa.', 6: 'Equipos, software, correo y usuarios.',
+  7: 'Correo, seguridad y herramientas colaborativas.',
 };
 
 const Services = () => {
-  const handleServiceClick = (serviceName) => {
-    // Dispatch event to prefill contact form
-    window.dispatchEvent(new CustomEvent('prefillContactForm', {
-      detail: {
-        servicio: serviceName,
-        asunto: `Consulta sobre: ${serviceName}`
-      }
-    }));
-
-    // Scroll to contact section
-    const contactSection = document.getElementById('contacto');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const [openId, setOpenId] = useState(null);
+  const prefill = (service) => window.dispatchEvent(new CustomEvent('prefillContactForm', {
+    detail: { servicio: service.title, asunto: `Consulta sobre: ${service.title}` },
+  }));
 
   return (
-    <section id="servicios" className="py-24 bg-otx-gray">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-otx-bordo font-semibold text-sm uppercase tracking-wider">Servicios</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-otx-text mt-3 mb-4">
-            ¿Qué podemos resolver?
-          </h2>
-          <p className="text-otx-text/70 text-lg">
-            Cubrimos todas las necesidades técnicas de particulares y empresas, 
-            siempre de forma remota, rápida y segura.
-          </p>
+    <section id="servicios" className="otx-offer offer-services" aria-labelledby="offer-services-title">
+      <div className="offer-container">
+        <div className="offer-section-heading">
+          <p className="offer-eyebrow">Servicios</p>
+          <h2 id="offer-services-title">¿Qué necesitás resolver?</h2>
+          <p>Elegí el tema. Revisamos el caso y coordinamos la asistencia remota.</p>
         </div>
-
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service) => {
-            const IconComponent = iconMap[service.icon];
-            const isLarge = service.id === 7; // M365 gets special treatment
-            
-            return (
-              <button
-                key={service.id}
-                onClick={() => handleServiceClick(service.title)}
-                className={`group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-transparent hover:border-otx-bordo/20 text-left w-full ${
-                  isLarge ? 'md:col-span-2 lg:col-span-1' : ''
-                }`}
-              >
-                {/* Icon */}
-                <div className="w-14 h-14 bg-otx-bordo/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-otx-bordo group-hover:scale-110 transition-all duration-300">
-                  {IconComponent && (
-                    <IconComponent className="text-otx-bordo group-hover:text-white transition-colors" size={28} />
-                  )}
-                </div>
-
-                {/* Content */}
-                <h3 className="text-xl font-semibold text-otx-text mb-3 group-hover:text-otx-bordo transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-otx-text/70 leading-relaxed">
-                  {service.description}
-                </p>
-
-                {/* CTA hint */}
-                <span className="inline-block mt-4 text-sm text-otx-bordo opacity-0 group-hover:opacity-100 transition-opacity">
-                  Click para consultar →
-                </span>
-
-                {/* Hover Indicator */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-otx-bordo rounded-b-2xl transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-              </button>
-            );
-          })}
-        </div>
-
-        {/* M365 CTA */}
-        <div className="mt-12 bg-gradient-to-r from-otx-dark to-otx-dark/90 rounded-2xl p-8 md:p-12">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-6">
-              <div className="w-16 h-16 bg-otx-bordo rounded-2xl flex items-center justify-center flex-shrink-0">
-                <Cloud className="text-white" size={32} />
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-2">Microsoft 365 para Empresas</h3>
-                <p className="text-otx-gray-light">
-                  Implementación, gestión mensual y configuración de SharePoint/OneDrive.
-                </p>
-              </div>
+        {groups.map(group => (
+          <div className="offer-service-group" key={group.name}>
+            <div className="offer-group-intro"><h3>{group.name}</h3><p>{group.note}</p></div>
+            <div className="offer-service-list">
+              {services.filter(service => group.ids.includes(service.id)).map(service => {
+                const open = openId === service.id;
+                const whatsapp = `https://wa.me/${companyInfo.whatsapp}?text=${encodeURIComponent(`Hola, quiero consultar por ${service.title}. Mi consulta es:`)}`;
+                return (
+                  <div className="offer-service" key={service.id}>
+                    <h4><button type="button" id={`service-trigger-${service.id}`} aria-expanded={open}
+                      aria-controls={`service-panel-${service.id}`} onClick={() => setOpenId(open ? null : service.id)}>
+                      <span><span className="offer-service-name">{service.title}</span><span className="offer-service-hint">{hints[service.id]}</span></span>
+                      {open ? <Minus size={19} aria-hidden="true" /> : <Plus size={19} aria-hidden="true" />}
+                    </button></h4>
+                    <div id={`service-panel-${service.id}`} className="offer-service-panel" role="region" aria-labelledby={`service-trigger-${service.id}`} hidden={!open}>
+                      {open && <>
+                      <p>{service.description}</p>
+                      <div className="offer-service-actions">
+                        <a className="offer-primary" href={whatsapp} target="_blank" rel="noopener noreferrer" onClick={() => prefill(service)}>Consultar por WhatsApp <ArrowUpRight size={17} aria-hidden="true" /><span className="sr-only">(abre otra pestaña)</span></a>
+                        <button className="offer-text-link" type="button" onClick={() => { prefill(service); scrollToContact(); }}>Continuar en Contacto</button>
+                        <Link className="offer-text-link" to={`/ticket?${new URLSearchParams({ servicio: service.title })}`}>Abrir ticket</Link>
+                      </div>
+                      </>}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-            <button 
-              onClick={() => {
-                // Scroll to M365 tab in pricing
-                const planesSection = document.getElementById('planes');
-                if (planesSection) {
-                  planesSection.scrollIntoView({ behavior: 'smooth' });
-                  window.dispatchEvent(new CustomEvent('otx:select-plan-category', { detail: 'm365' }));
-                }
-              }}
-              className="flex-shrink-0 bg-otx-bordo hover:bg-otx-bordo-light text-white font-medium px-8 py-3 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-otx-bordo/30"
-            >
-              Ver planes M365
-            </button>
           </div>
-        </div>
+        ))}
       </div>
     </section>
   );
 };
-
 export default Services;

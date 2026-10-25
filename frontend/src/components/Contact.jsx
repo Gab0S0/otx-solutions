@@ -1,3 +1,4 @@
+import { contactPlanOptions } from '../lib/offer-catalog';
 import React, { useState, useEffect } from 'react';
 import {
   Phone,
@@ -448,7 +449,7 @@ const Contact = () => {
                       </Select>
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2 min-w-0">
                       <Label htmlFor="plan">Plan interesado</Label>
                       <Select
                         value={formData.plan || '__empty__'}
@@ -456,30 +457,15 @@ const Contact = () => {
                           handleSelectChange('plan', value)
                         }
                       >
-                        <SelectTrigger className="bg-white border-otx-gray focus:border-otx-bordo">
+                        <SelectTrigger className="min-w-0 [&>span]:min-w-0 bg-white border-otx-gray focus:border-otx-bordo">
                           <SelectValue placeholder="Opcional" />
                         </SelectTrigger>
 
-                        <SelectContent>
+                        <SelectContent className="max-w-[calc(100vw-2rem)]">
                           <SelectItem value="__empty__">— Ninguno —</SelectItem>
-                          <SelectItem value="Asistencia Remota - $20.000">
-                            Asistencia Remota - $20.000
-                          </SelectItem>
-                          <SelectItem value="Pack 5 Asistencias - $90.000">
-                            Pack 5 Asistencias - $90.000
-                          </SelectItem>
-                          <SelectItem value="Empresa Inicial - $120.000/mes">
-                            Empresa Inicial - $120.000/mes
-                          </SelectItem>
-                          <SelectItem value="Empresa Operativa - $180.000/mes">
-                            Empresa Operativa - $180.000/mes
-                          </SelectItem>
-                          <SelectItem value="Empresa Plus - A cotizar">
-                            Empresa Plus - A cotizar
-                          </SelectItem>
-                          <SelectItem value="Microsoft 365 - Consultar">
-                            Microsoft 365 - Consultar
-                          </SelectItem>
+                          {contactPlanOptions.map(option => (
+                            <SelectItem className="whitespace-normal break-words" key={option} value={option}>{option}</SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
