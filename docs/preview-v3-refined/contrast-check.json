@@ -1,0 +1,86 @@
+[
+  {
+    "viewport": "desktop",
+    "selector": "h1 > span:first-child",
+    "minimumContrastOverEntireBounds": 20.16,
+    "required": 3
+  },
+  {
+    "viewport": "desktop",
+    "selector": "h1 > span:last-child",
+    "minimumContrastOverEntireBounds": 15.45,
+    "required": 3
+  },
+  {
+    "viewport": "desktop",
+    "selector": ".otx-intro-description",
+    "minimumContrastOverEntireBounds": 15.45,
+    "required": 4.5
+  },
+  {
+    "viewport": "desktop",
+    "selector": ".otx-starting-price",
+    "minimumContrastOverEntireBounds": 15.46,
+    "required": 4.5
+  },
+  {
+    "viewport": "desktop",
+    "selector": ".otx-pack-link > span",
+    "minimumContrastOverEntireBounds": 15.46,
+    "required": 4.5
+  },
+  {
+    "viewport": "desktop",
+    "selector": ".otx-pack-link > strong",
+    "minimumContrastOverEntireBounds": 20.17,
+    "required": 4.5
+  },
+  {
+    "viewport": "desktop",
+    "selector": ".otx-explore",
+    "minimumContrastOverEntireBounds": 11.49,
+    "required": 4.5
+  },
+  {
+    "viewport": "mobile",
+    "selector": "h1 > span:first-child",
+    "minimumContrastOverEntireBounds": 20.18,
+    "required": 3
+  },
+  {
+    "viewport": "mobile",
+    "selector": "h1 > span:last-child",
+    "minimumContrastOverEntireBounds": 15.46,
+    "required": 3
+  },
+  {
+    "viewport": "mobile",
+    "selector": ".otx-intro-description",
+    "minimumContrastOverEntireBounds": 15.46,
+    "required": 4.5
+  },
+  {
+    "viewport": "mobile",
+    "selector": ".otx-starting-price",
+    "minimumContrastOverEntireBounds": 15.46,
+    "required": 4.5
+  },
+  {
+    "viewport": "mobile",
+    "selector": ".otx-pack-link > span",
+    "minimumContrastOverEntireBounds": 6.43,
+    "required": 4.5
+  },
+  {
+    "viewport": "mobile",
+    "selector": ".otx-pack-link > strong",
+    "minimumContrastOverEntireBounds": 12.72,
+    "required": 4.5
+  },
+  {
+    "viewport": "mobile",
+    "selector": ".otx-explore",
+    "minimumContrastOverEntireBounds": 14.02,
+    "required": 4.5
+  }
+]

@@ -1,0 +1,97 @@
+{
+  "method": "Three sequential alternating mobile Lighthouse runs per build; medians, cold browser runs, same machine and dependencies, local HTTP servers without production compression/cache. Baseline is archive of commit 0e1b9f7.",
+  "runs": [
+    {
+      "kind": "V3",
+      "run": 1,
+      "score": 72,
+      "accessibility": 92,
+      "metrics": {
+        "first-contentful-paint": 1054.3489,
+        "largest-contentful-paint": 4691.3489,
+        "total-blocking-time": 459,
+        "cumulative-layout-shift": 0
+      }
+    },
+    {
+      "kind": "refined",
+      "run": 1,
+      "score": 76,
+      "accessibility": 92,
+      "metrics": {
+        "first-contentful-paint": 1052.6604,
+        "largest-contentful-paint": 4581.6604,
+        "total-blocking-time": 335,
+        "cumulative-layout-shift": 0
+      }
+    },
+    {
+      "kind": "V3",
+      "run": 2,
+      "score": 74,
+      "accessibility": 92,
+      "metrics": {
+        "first-contentful-paint": 1053.4503,
+        "largest-contentful-paint": 4610.9502999999995,
+        "total-blocking-time": 386.00000000000045,
+        "cumulative-layout-shift": 0
+      }
+    },
+    {
+      "kind": "refined",
+      "run": 2,
+      "score": 70,
+      "accessibility": 92,
+      "metrics": {
+        "first-contentful-paint": 1057.1105,
+        "largest-contentful-paint": 4684.6105,
+        "total-blocking-time": 509,
+        "cumulative-layout-shift": 0
+      }
+    },
+    {
+      "kind": "V3",
+      "run": 3,
+      "score": 76,
+      "accessibility": 92,
+      "metrics": {
+        "first-contentful-paint": 1052.9496,
+        "largest-contentful-paint": 4593.4496,
+        "total-blocking-time": 341,
+        "cumulative-layout-shift": 0
+      }
+    },
+    {
+      "kind": "refined",
+      "run": 3,
+      "score": 78,
+      "accessibility": 92,
+      "metrics": {
+        "first-contentful-paint": 1051.9489,
+        "largest-contentful-paint": 4553.9489,
+        "total-blocking-time": 294,
+        "cumulative-layout-shift": 0
+      }
+    }
+  ],
+  "medians": {
+    "V3": {
+      "performance": 74,
+      "metrics": {
+        "first-contentful-paint": 1053.4503,
+        "largest-contentful-paint": 4610.9502999999995,
+        "total-blocking-time": 386.00000000000045,
+        "cumulative-layout-shift": 0
+      }
+    },
+    "refined": {
+      "performance": 76,
+      "metrics": {
+        "first-contentful-paint": 1052.6604,
+        "largest-contentful-paint": 4581.6604,
+        "total-blocking-time": 335,
+        "cumulative-layout-shift": 0
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-/* V3: original matte-surface background, static responsive WebP, no animation. */
+/* V3 refinement: low-relief satin graphite, responsive WebP, no animation. */
 .otx-premium-header, .otx-premium-hero {
   --intro-bg: #04070C; --intro-ice: #CFE4F7; --intro-green: #8FE3C0;
   color: #fff; font-family: 'Inter', system-ui, sans-serif;
@@ -19,11 +19,11 @@
 .otx-skip { position: absolute; left: 20px; top: -100px; padding: 12px 18px; background: #8FE3C0; color: #04070C; z-index: 2; }
 .otx-skip:focus { top: 15px; }
 .otx-premium-hero { position: relative; isolation: isolate; background: var(--intro-bg); min-height: 100vh; min-height: 100svh; padding: 110px 6% 28px; display: flex; flex-direction: column; }
-.otx-cinema { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background-color: var(--intro-bg); background-image: linear-gradient(#04070CA6, #04070CA6), url('../assets/otx-surface-mobile.webp'); background-size: cover; background-position: left center; }
+.otx-cinema { contain: strict; position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background-color: var(--intro-bg); background-image: linear-gradient(#04070C4D, #04070C4D), url('../assets/otx-surface-mobile.webp'); background-size: cover; background-position: left center; }
 /* A restrained light falloff protects the header and prices without drawing a new shape. */
 .otx-cinema-floor { position: absolute; inset: 0; background: linear-gradient(180deg, #04070C66, transparent 32%, transparent 58%, #04070CB8); }
 @media (min-width: 768px) {
-  .otx-cinema { background-image: linear-gradient(#04070CA6, #04070CA6), url('../assets/otx-surface-desktop.webp'); background-position: center; }
+  .otx-cinema { background-image: linear-gradient(#04070C4D, #04070C4D), url('../assets/otx-surface-desktop.webp'); background-position: center; }
 }
 @media (min-width: 1150px) {
   .otx-cinema { background-image: linear-gradient(#04070C33, #04070C33), url('../assets/otx-surface-desktop.webp'); }
@@ -38,9 +38,9 @@
 .otx-starting-price { margin-top: 18px; color: #CFE4F7; font-size: 12px; line-height: 1.7; }
 .otx-starting-price strong { font-weight: 500; color: #fff; }
 .otx-intro-bottom { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 18px; padding-top: 24px; }
-.otx-pack-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font-size: 11px; color: #CFE4F7; }
-.otx-pack-link strong { color: #fff; font-weight: 500; font-size: 13px; }
-.otx-pack-link small { color: #CFE4F7; font-size: 9px; margin-left: 3px; font-weight: 400; }
+.otx-pack-link { display: inline-flex; align-items: center; gap: 14px; min-height: 44px; font-size: 12px; line-height: 1.6; color: #CFE4F7; }
+.otx-pack-link strong { color: #fff; font-weight: 500; font-size: 14px; }
+.otx-pack-link small { color: #CFE4F7; font-size: 10px; margin-left: 4px; font-weight: 400; }
 .otx-pack-link:hover strong { color: var(--intro-green); }
 .otx-explore { display: inline-flex; align-items: center; gap: 14px; min-height: 44px; color: var(--intro-ice); font-size: 11px; }
 @media (min-width: 768px) {
@@ -64,6 +64,10 @@
   .otx-intro-description { margin-top: 20px; }
   .otx-primary-link { margin-top: 24px; }
   .otx-intro-bottom { padding-top: 12px; gap: 8px; }
+}
+@media (max-width: 767px) {
+  .otx-starting-price { margin-top: 20px; font-size: 13px; }
+  .otx-intro-bottom { gap: 22px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

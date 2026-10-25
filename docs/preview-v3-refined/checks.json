@@ -1,0 +1,197 @@
+{
+  "results": [
+    {
+      "name": "desktop",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 900,
+        "viewport": 900
+      },
+      "axeViolations": 0,
+      "errors": []
+    },
+    {
+      "name": "mobile",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 844,
+        "viewport": 844
+      },
+      "axeViolations": 0,
+      "errors": []
+    },
+    {
+      "name": "small-mobile",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 740,
+        "viewport": 740
+      },
+      "axeViolations": 0,
+      "errors": []
+    },
+    {
+      "name": "tablet",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 1024,
+        "viewport": 1024
+      },
+      "axeViolations": 0,
+      "errors": []
+    },
+    {
+      "name": "landscape",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 579.90625,
+        "viewport": 390
+      },
+      "axeViolations": 0,
+      "errors": []
+    },
+    {
+      "name": "laptop",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 768,
+        "viewport": 768
+      },
+      "axeViolations": 0,
+      "errors": []
+    },
+    {
+      "name": "compact-laptop",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 720,
+        "viewport": 720
+      },
+      "axeViolations": 0,
+      "errors": []
+    },
+    {
+      "name": "iphone",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 667,
+        "viewport": 667
+      },
+      "axeViolations": 0,
+      "errors": []
+    },
+    {
+      "name": "wide",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 1080,
+        "viewport": 1080
+      },
+      "axeViolations": 0,
+      "errors": []
+    },
+    {
+      "name": "ultrawide",
+      "layout": {
+        "overflow": false,
+        "scroll": true,
+        "hero": 1440,
+        "viewport": 1440
+      },
+      "axeViolations": 0,
+      "errors": []
+    }
+  ],
+  "motion": "none",
+  "perf": {
+    "navigation": {
+      "name": "http://127.0.0.1:3100/",
+      "entryType": "navigation",
+      "startTime": 0,
+      "duration": 155.79999999981374,
+      "navigationId": 4776,
+      "initiatorType": "navigation",
+      "deliveryType": "",
+      "nextHopProtocol": "http/1.0",
+      "renderBlockingStatus": "non-blocking",
+      "contentType": "text/html",
+      "contentEncoding": "",
+      "workerStart": 0,
+      "workerRouterEvaluationStart": 0,
+      "workerCacheLookupStart": 0,
+      "workerMatchedSourceType": "",
+      "workerFinalSourceType": "",
+      "redirectStart": 0,
+      "redirectEnd": 0,
+      "fetchStart": 1.5,
+      "domainLookupStart": 1.5,
+      "domainLookupEnd": 1.5,
+      "connectStart": 1.5,
+      "secureConnectionStart": 0,
+      "connectEnd": 1.5,
+      "requestStart": 6.199999999254942,
+      "responseStart": 9.099999999627471,
+      "firstInterimResponseStart": 0,
+      "finalResponseHeadersStart": 9.099999999627471,
+      "responseEnd": 13.199999999254942,
+      "transferSize": 3985,
+      "encodedBodySize": 3685,
+      "decodedBodySize": 3685,
+      "responseStatus": 200,
+      "serverTiming": [],
+      "unloadEventStart": 0,
+      "unloadEventEnd": 0,
+      "domInteractive": 69.69999999925494,
+      "domContentLoadedEventStart": 151.69999999925494,
+      "domContentLoadedEventEnd": 151.79999999981374,
+      "domComplete": 155.69999999925494,
+      "loadEventStart": 155.79999999981374,
+      "loadEventEnd": 155.79999999981374,
+      "type": "navigate",
+      "redirectCount": 0,
+      "activationStart": 0,
+      "criticalCHRestart": 0,
+      "notRestoredReasons": null,
+      "confidence": {
+        "randomizedTriggerRate": 0.4994798,
+        "value": "low"
+      }
+    },
+    "resources": [
+      {
+        "name": "http://127.0.0.1:3100/fonts/inter-latin-wght-normal.woff2",
+        "size": 48556,
+        "duration": 22.899999999441206
+      },
+      {
+        "name": "http://127.0.0.1:3100/static/js/main.5456fa36.js",
+        "size": 483044,
+        "duration": 32.89999999944121
+      },
+      {
+        "name": "http://127.0.0.1:3100/static/css/main.69a653eb.css",
+        "size": 64066,
+        "duration": 26.5
+      },
+      {
+        "name": "https://us-assets.i.posthog.com/static/array.js",
+        "size": 0,
+        "duration": 7.2999999998137355
+      },
+      {
+        "name": "http://127.0.0.1:3100/static/media/otx-surface-mobile.d2e0be1b6c3fad0fc261.webp",
+        "size": 4458,
+        "duration": 4.599999999627471
+      }
+    ]
+  }
+}

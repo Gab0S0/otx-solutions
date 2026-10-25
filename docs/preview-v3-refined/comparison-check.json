@@ -1,0 +1,373 @@
+{
+  "viewports": [
+    [
+      320,
+      740
+    ],
+    [
+      375,
+      667
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      768,
+      1024
+    ],
+    [
+      844,
+      390
+    ],
+    [
+      1280,
+      720
+    ],
+    [
+      1366,
+      768
+    ],
+    [
+      1440,
+      900
+    ],
+    [
+      1920,
+      1080
+    ],
+    [
+      2560,
+      1440
+    ]
+  ],
+  "preservedBrandPaletteLinksAndCoreTypography": true,
+  "onlyCopyChange": "H1 comma removed",
+  "expectedPriceSpacingDeltas": [
+    {
+      "viewport": [
+        320,
+        740
+      ],
+      "selector": ".otx-intro-copy",
+      "delta": [
+        0,
+        3.859375,
+        0,
+        3.703125
+      ]
+    },
+    {
+      "viewport": [
+        320,
+        740
+      ],
+      "selector": "h1",
+      "delta": [
+        0,
+        3.859375,
+        0,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        320,
+        740
+      ],
+      "selector": ".otx-intro-description",
+      "delta": [
+        0,
+        3.859375,
+        0,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        320,
+        740
+      ],
+      "selector": ".otx-primary-link",
+      "delta": [
+        0,
+        3.859375,
+        0,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        320,
+        740
+      ],
+      "selector": ".otx-starting-price",
+      "delta": [
+        7.671875,
+        1.859375,
+        15.328125,
+        1.703125
+      ]
+    },
+    {
+      "viewport": [
+        320,
+        740
+      ],
+      "selector": ".otx-pack-link",
+      "delta": [
+        9.78125,
+        4,
+        19.5625,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        375,
+        667
+      ],
+      "selector": ".otx-intro-copy",
+      "delta": [
+        0,
+        8.859375,
+        0,
+        3.703125
+      ]
+    },
+    {
+      "viewport": [
+        375,
+        667
+      ],
+      "selector": "h1",
+      "delta": [
+        0,
+        8.859375,
+        0,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        375,
+        667
+      ],
+      "selector": ".otx-intro-description",
+      "delta": [
+        0,
+        8.859375,
+        0,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        375,
+        667
+      ],
+      "selector": ".otx-primary-link",
+      "delta": [
+        0,
+        8.859375,
+        0,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        375,
+        667
+      ],
+      "selector": ".otx-starting-price",
+      "delta": [
+        7.671875,
+        6.859375,
+        15.328125,
+        1.703125
+      ]
+    },
+    {
+      "viewport": [
+        375,
+        667
+      ],
+      "selector": ".otx-pack-link",
+      "delta": [
+        9.78125,
+        14,
+        19.5625,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "selector": ".otx-intro-copy",
+      "delta": [
+        0,
+        3.859375,
+        0,
+        3.703125
+      ]
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "selector": "h1",
+      "delta": [
+        0,
+        3.859375,
+        0,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "selector": ".otx-intro-description",
+      "delta": [
+        0,
+        3.859375,
+        0,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "selector": ".otx-primary-link",
+      "delta": [
+        0,
+        3.859375,
+        0,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "selector": ".otx-starting-price",
+      "delta": [
+        7.671875,
+        1.859375,
+        15.328125,
+        1.703125
+      ]
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "selector": ".otx-pack-link",
+      "delta": [
+        9.78125,
+        4,
+        19.5625,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        768,
+        1024
+      ],
+      "selector": ".otx-pack-link",
+      "delta": [
+        0,
+        0,
+        2.984375,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "selector": ".otx-pack-link",
+      "delta": [
+        0,
+        0,
+        2.984375,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        1280,
+        720
+      ],
+      "selector": ".otx-pack-link",
+      "delta": [
+        0,
+        0,
+        2.984375,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        1366,
+        768
+      ],
+      "selector": ".otx-pack-link",
+      "delta": [
+        0,
+        0,
+        2.984375,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "selector": ".otx-pack-link",
+      "delta": [
+        0,
+        0,
+        2.984375,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "selector": ".otx-pack-link",
+      "delta": [
+        0,
+        0,
+        2.984375,
+        0
+      ]
+    },
+    {
+      "viewport": [
+        2560,
+        1440
+      ],
+      "selector": ".otx-pack-link",
+      "delta": [
+        0,
+        0,
+        2.984375,
+        0
+      ]
+    }
+  ]
+}

@@ -10,7 +10,7 @@ const Hero = () => {
     <section className="otx-premium-hero" aria-labelledby="intro-title">
       <div className="otx-cinema" aria-hidden="true"><div className="otx-cinema-floor" /></div>
       <div className="otx-intro-copy">
-        <h1 id="intro-title" tabIndex={-1}><span>Tecnología,</span>{' '}<span>sin complicaciones.</span></h1>
+        <h1 id="intro-title" tabIndex={-1}><span>Tecnología</span>{' '}<span>sin complicaciones.</span></h1>
         <p className="otx-intro-description">Soporte e infraestructura para personas y empresas.</p>
         <a className="otx-primary-link" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
           Solicitar asistencia <ArrowUpRight size={19} aria-hidden="true" />
