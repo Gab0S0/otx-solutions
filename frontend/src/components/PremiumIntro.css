@@ -1,4 +1,4 @@
-/* V2: original architectural light, no imagery, video, blur filters or animation. */
+/* V3: original matte-surface background, static responsive WebP, no animation. */
 .otx-premium-header, .otx-premium-hero {
   --intro-bg: #04070C; --intro-ice: #CFE4F7; --intro-green: #8FE3C0;
   color: #fff; font-family: 'Inter', system-ui, sans-serif;
@@ -19,11 +19,15 @@
 .otx-skip { position: absolute; left: 20px; top: -100px; padding: 12px 18px; background: #8FE3C0; color: #04070C; z-index: 2; }
 .otx-skip:focus { top: 15px; }
 .otx-premium-hero { position: relative; isolation: isolate; background: var(--intro-bg); min-height: 100vh; min-height: 100svh; padding: 110px 6% 28px; display: flex; flex-direction: column; }
-.otx-cinema { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: linear-gradient(160deg, #04070C 38%, #080E16 72%, #04070C); }
-.otx-cinema::before, .otx-cinema::after { content: ''; position: absolute; height: 150%; width: 68%; top: -28%; transform: rotate(24deg); transform-origin: top left; }
-.otx-cinema::before { left: 66%; border-left: 1px solid #cfe4f721; background: linear-gradient(90deg, #cfe4f70c, #cfe4f702 32%, transparent 65%); }
-.otx-cinema::after { left: 90%; border-left: 1px solid #cfe4f70d; background: linear-gradient(90deg, #cfe4f707, transparent 56%); }
-.otx-cinema-floor { position: absolute; inset: 72% 0 0; background: linear-gradient(180deg, #cfe4f704, transparent 50%); border-top: 1px solid #cfe4f707; }
+.otx-cinema { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background-color: var(--intro-bg); background-image: linear-gradient(#04070CA6, #04070CA6), url('../assets/otx-surface-mobile.webp'); background-size: cover; background-position: left center; }
+/* A restrained light falloff protects the header and prices without drawing a new shape. */
+.otx-cinema-floor { position: absolute; inset: 0; background: linear-gradient(180deg, #04070C66, transparent 32%, transparent 58%, #04070CB8); }
+@media (min-width: 768px) {
+  .otx-cinema { background-image: linear-gradient(#04070CA6, #04070CA6), url('../assets/otx-surface-desktop.webp'); background-position: center; }
+}
+@media (min-width: 1150px) {
+  .otx-cinema { background-image: linear-gradient(#04070C33, #04070C33), url('../assets/otx-surface-desktop.webp'); }
+}
 .otx-intro-copy { position: relative; z-index: 1; width: 100%; max-width: 1200px; margin: auto; padding: 50px 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
 .otx-premium-hero h1 { font-size: clamp(36px, 9.5vw, 60px); font-weight: 500; line-height: 1.06; letter-spacing: -.06em; margin: 0; scroll-margin-top: 110px; }
 .otx-premium-hero h1 > span { display: block; }

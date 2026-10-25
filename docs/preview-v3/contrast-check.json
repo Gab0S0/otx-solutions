@@ -1,0 +1,86 @@
+[
+  {
+    "viewport": "desktop",
+    "selector": "h1 > span:first-child",
+    "minimumContrastOverEntireBounds": 20.09,
+    "required": 3
+  },
+  {
+    "viewport": "desktop",
+    "selector": "h1 > span:last-child",
+    "minimumContrastOverEntireBounds": 15.4,
+    "required": 3
+  },
+  {
+    "viewport": "desktop",
+    "selector": ".otx-intro-description",
+    "minimumContrastOverEntireBounds": 15.4,
+    "required": 4.5
+  },
+  {
+    "viewport": "desktop",
+    "selector": ".otx-starting-price",
+    "minimumContrastOverEntireBounds": 15.4,
+    "required": 4.5
+  },
+  {
+    "viewport": "desktop",
+    "selector": ".otx-pack-link > span",
+    "minimumContrastOverEntireBounds": 15.4,
+    "required": 4.5
+  },
+  {
+    "viewport": "desktop",
+    "selector": ".otx-pack-link > strong",
+    "minimumContrastOverEntireBounds": 20.09,
+    "required": 4.5
+  },
+  {
+    "viewport": "desktop",
+    "selector": ".otx-explore",
+    "minimumContrastOverEntireBounds": 9.59,
+    "required": 4.5
+  },
+  {
+    "viewport": "mobile",
+    "selector": "h1 > span:first-child",
+    "minimumContrastOverEntireBounds": 9.39,
+    "required": 3
+  },
+  {
+    "viewport": "mobile",
+    "selector": "h1 > span:last-child",
+    "minimumContrastOverEntireBounds": 6.16,
+    "required": 3
+  },
+  {
+    "viewport": "mobile",
+    "selector": ".otx-intro-description",
+    "minimumContrastOverEntireBounds": 6.91,
+    "required": 4.5
+  },
+  {
+    "viewport": "mobile",
+    "selector": ".otx-starting-price",
+    "minimumContrastOverEntireBounds": 7.53,
+    "required": 4.5
+  },
+  {
+    "viewport": "mobile",
+    "selector": ".otx-pack-link > span",
+    "minimumContrastOverEntireBounds": 12.37,
+    "required": 4.5
+  },
+  {
+    "viewport": "mobile",
+    "selector": ".otx-pack-link > strong",
+    "minimumContrastOverEntireBounds": 18.42,
+    "required": 4.5
+  },
+  {
+    "viewport": "mobile",
+    "selector": ".otx-explore",
+    "minimumContrastOverEntireBounds": 13.64,
+    "required": 4.5
+  }
+]
