@@ -1,0 +1,81 @@
+{
+  "responsiveResults": [
+    {
+      "viewport": "320x740",
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "overflowX": false,
+      "servicesCount": 7,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 12
+    },
+    {
+      "viewport": "375x667",
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "overflowX": false,
+      "servicesCount": 7,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 12
+    },
+    {
+      "viewport": "390x844",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "overflowX": false,
+      "servicesCount": 7,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 12
+    },
+    {
+      "viewport": "768x1024",
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "overflowX": false,
+      "servicesCount": 7,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 12
+    },
+    {
+      "viewport": "1280x720",
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "overflowX": false,
+      "servicesCount": 7,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 12
+    },
+    {
+      "viewport": "1440x900",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "overflowX": false,
+      "servicesCount": 7,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 12
+    },
+    {
+      "viewport": "1920x1080",
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "overflowX": false,
+      "servicesCount": 7,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 12
+    }
+  ],
+  "flowCheck": {
+    "prefilledAsunto": ""
+  },
+  "ticketCheck": {
+    "asunto": "Consulta sobre: Desarrollo de Páginas Web y Formularios",
+    "overflowDesktop": false
+  }
+}

@@ -1,17 +1,11 @@
 import { contactPlanOptions } from '../lib/offer-catalog';
 import React, { useState, useEffect } from 'react';
 import {
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
-  Send,
-  MessageSquare,
   AlertCircle,
   CheckCircle,
-  ArrowLeft
+  ArrowLeft,
+  ArrowUpRight
 } from 'lucide-react';
-import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
@@ -25,6 +19,7 @@ import {
 import { companyInfo, services } from '../data/mock';
 import { toast } from 'sonner';
 import axios from 'axios';
+import './PremiumSections.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -67,7 +62,7 @@ const Contact = () => {
     if (ticketId) {
       msg += `acabo de crear el ticket ${ticketId}.%0A%0A`;
     } else {
-      msg += 'quiero consultar por soporte IT remoto de OTX Solutions.%0A%0A';
+      msg += 'quiero realizar una consulta a OTX Solutions.%0A%0A';
     }
 
     if (formData.plan) {
@@ -78,9 +73,8 @@ const Contact = () => {
       msg += `Servicio: ${formData.servicio}%0A`;
     }
 
-    msg += `%0AMi problema es: [DESCRIBIR BREVEMENTE]%0A`;
-    msg += `Tipo de equipo: [PC / Notebook / Mac]%0A`;
-    msg += `Soy: [Persona / Profesional independiente / Empresa]%0A%0A`;
+    msg += `%0AMi consulta o necesidad: [DESCRIBIR BREVEMENTE]%0A`;
+    msg += `Soy: [Particular / Profesional independiente / Empresa]%0A%0A`;
     msg += `Gracias.`;
 
     return msg;
@@ -120,7 +114,7 @@ const Contact = () => {
         nombre: formData.nombre,
         email: formData.email,
         telefono: formData.telefono || null,
-        tipo: formData.tipo,
+        tipo: formData.tipo || 'particular',
         asunto: formData.asunto,
         mensaje: formData.mensaje,
         plan: formData.plan || null,
@@ -174,176 +168,95 @@ const Contact = () => {
   }));
 
   return (
-    <section id="contacto" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-otx-bordo font-semibold text-sm uppercase tracking-wider">
-            Contacto
-          </span>
+    <section id="contacto" className="otx-section" aria-labelledby="contact-title">
+      <div className="otx-section-container">
+        <div className="otx-contact-layout">
+          <div>
+            <p className="otx-eyebrow">Contacto</p>
+            <h2 id="contact-title">Coordinemos tu consulta.</h2>
+            <p className="otx-section-lead">
+              Escribinos por WhatsApp para una respuesta directa o dejá registrado un ticket con el detalle de lo que necesitás resolver o cotizar.
+            </p>
 
-          <h2 className="text-3xl sm:text-4xl font-bold text-otx-text mt-3 mb-4">
-            ¿Necesitás ayuda?
-          </h2>
-
-          <p className="text-otx-text/70 text-lg">
-            Contactanos por WhatsApp o abrí un ticket para contarnos el problema
-            y coordinar la asistencia.
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            {/* WhatsApp CTA */}
-            <div className="bg-otx-dark rounded-2xl p-8">
-              <div className="flex items-start gap-4">
-                <div className="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <MessageSquare className="text-white" size={28} />
-                </div>
-
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    WhatsApp
-                  </h3>
-
-                  <p className="text-otx-gray-light mb-4">
-                    La forma más directa de contactarnos. Contanos brevemente el
-                    problema y coordinamos la asistencia.
-                  </p>
-
-                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                    <Button className="bg-green-500 hover:bg-green-600 text-white gap-2 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/30">
-                      <Phone size={18} />
-                      Abrir WhatsApp
-                    </Button>
-                  </a>
-                </div>
-              </div>
+            <div className="otx-contact-direct">
+              <h3>Atención directa por WhatsApp</h3>
+              <p>
+                Ideal para coordinar asistencias remotas en el día, pedir presupuestos de equipos o consultar por desarrollos a medida.
+              </p>
+              <a
+                className="otx-btn-primary"
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Abrir WhatsApp <ArrowUpRight size={17} aria-hidden="true" />
+                <span className="sr-only">(abre otra pestaña)</span>
+              </a>
             </div>
 
-            {/* Contact Details */}
-            <div className="space-y-6">
-              <div className="flex items-start gap-4 group">
-                <div className="w-12 h-12 bg-otx-bordo/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-otx-bordo transition-colors">
-                  <Mail
-                    className="text-otx-bordo group-hover:text-white transition-colors"
-                    size={22}
-                  />
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-otx-text mb-1">Email</h4>
-                  <a
-                    href={`mailto:${companyInfo.email}`}
-                    className="text-otx-text/70 hover:text-otx-bordo transition-colors"
-                  >
-                    {companyInfo.email}
-                  </a>
-                </div>
+            <dl className="otx-contact-meta">
+              <div>
+                <dt>Correo electrónico</dt>
+                <dd>
+                  <a href={`mailto:${companyInfo.email}`}>{companyInfo.email}</a>
+                </dd>
               </div>
-
-              <div className="flex items-start gap-4 group">
-                <div className="w-12 h-12 bg-otx-bordo/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-otx-bordo transition-colors">
-                  <MapPin
-                    className="text-otx-bordo group-hover:text-white transition-colors"
-                    size={22}
-                  />
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-otx-text mb-1">
-                    Ubicación
-                  </h4>
-                  <p className="text-otx-text/70">{companyInfo.location}</p>
-                </div>
+              <div>
+                <dt>Ubicación</dt>
+                <dd>{companyInfo.location}</dd>
               </div>
-
-              <div className="flex items-start gap-4 group">
-                <div className="w-12 h-12 bg-otx-bordo/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-otx-bordo transition-colors">
-                  <Clock
-                    className="text-otx-bordo group-hover:text-white transition-colors"
-                    size={22}
-                  />
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-otx-text mb-1">
-                    Atención
-                  </h4>
-                  <p className="text-otx-text/60">
-                    Asistencia remota con coordinación previa
-                  </p>
-                  <p className="text-otx-text/50 text-sm">
-                    Las consultas se responden según disponibilidad.
-                  </p>
-                </div>
+              <div>
+                <dt>Modalidad de atención</dt>
+                <dd>Soporte remoto con coordinación previa · Evaluación de equipos y proyectos a medida</dd>
               </div>
-            </div>
+            </dl>
           </div>
 
-          {/* Ticket Form or Success */}
-          <div className="bg-otx-gray rounded-2xl p-8">
+          <div className="otx-form-shell">
             {ticketCreated ? (
-              <div className="text-center py-8">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <CheckCircle className="text-green-600" size={32} />
+              <div className="otx-ticket-success">
+                <span className="otx-ticket-badge">
+                  <CheckCircle size={16} aria-hidden="true" /> Solicitud registrada
+                </span>
+                <h3>Ticket creado correctamente</h3>
+                <div className="otx-ticket-id-box">
+                  <span>Número de ticket</span>
+                  <strong>{ticketCreated.id}</strong>
                 </div>
-
-                <h3 className="text-2xl font-bold text-otx-text mb-2">
-                  ¡Ticket creado!
-                </h3>
-
-                <div className="bg-white rounded-xl p-4 mb-6 inline-block">
-                  <p className="text-sm text-otx-text/70 mb-1">
-                    Tu número de ticket:
-                  </p>
-                  <p className="text-3xl font-bold text-otx-bordo">
-                    {ticketCreated.id}
-                  </p>
-                </div>
-
-                <p className="text-otx-text/70 mb-6">
-                  Gracias por contactarnos. Podés continuar la conversación por
-                  WhatsApp para coordinar la asistencia.
+                <p className="otx-form-subtitle">
+                  Recibimos tu consulta. Si querés agilizar la coordinación, podés continuar por WhatsApp indicando este número.
                 </p>
-
-                <div className="space-y-3">
+                <div className="otx-steps-actions">
                   <a
                     href={`https://wa.me/${companyInfo.whatsapp}?text=${generateWhatsAppMessage(ticketCreated.id)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block"
+                    className="otx-btn-primary"
                   >
-                    <Button className="w-full bg-green-500 hover:bg-green-600 text-white gap-2">
-                      <MessageSquare size={18} />
-                      Abrir WhatsApp
-                    </Button>
+                    Continuar por WhatsApp <ArrowUpRight size={17} aria-hidden="true" />
+                    <span className="sr-only">(abre otra pestaña)</span>
                   </a>
-
-                  <Button
-                    variant="outline"
+                  <button
+                    type="button"
                     onClick={resetForm}
-                    className="w-full gap-2"
+                    className="otx-btn-secondary"
                   >
-                    <ArrowLeft size={18} />
-                    Enviar otro ticket
-                  </Button>
+                    <ArrowLeft size={16} aria-hidden="true" />
+                    Enviar otra consulta
+                  </button>
                 </div>
               </div>
             ) : (
               <>
-                <h3 className="text-xl font-bold text-otx-text mb-6">
-                  Abrir un ticket
-                </h3>
+                <h3>Abrir un ticket o solicitar presupuesto</h3>
+                <p className="otx-form-subtitle">
+                  Completá los datos y te responderemos por correo o WhatsApp con los pasos a seguir.
+                </p>
 
                 {error && (
-                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-                    <AlertCircle
-                      className="text-red-500 flex-shrink-0 mt-0.5"
-                      size={20}
-                    />
-                    <p className="text-red-700 text-sm">{error}</p>
+                  <div className="otx-form-error" role="alert">
+                    <AlertCircle size={18} aria-hidden="true" />
+                    <span>{error}</span>
                   </div>
                 )}
 
@@ -360,9 +273,9 @@ const Contact = () => {
                     />
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="nombre">Nombre completo *</Label>
+                  <div className="otx-form-grid">
+                    <div className="otx-field">
+                      <Label htmlFor="nombre" className="otx-label">Nombre completo *</Label>
                       <Input
                         id="nombre"
                         name="nombre"
@@ -370,12 +283,12 @@ const Contact = () => {
                         onChange={handleChange}
                         placeholder="Juan Pérez"
                         required
-                        className="bg-white border-otx-gray focus:border-otx-bordo"
+                        className="otx-input"
                       />
                     </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email *</Label>
+                    <div className="otx-field">
+                      <Label htmlFor="email" className="otx-label">Email *</Label>
                       <Input
                         id="email"
                         name="email"
@@ -384,64 +297,62 @@ const Contact = () => {
                         onChange={handleChange}
                         placeholder="juan@email.com"
                         required
-                        className="bg-white border-otx-gray focus:border-otx-bordo"
+                        className="otx-input"
                       />
                     </div>
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="telefono">Teléfono</Label>
+                  <div className="otx-form-grid">
+                    <div className="otx-field">
+                      <Label htmlFor="telefono" className="otx-label">Teléfono / WhatsApp</Label>
                       <Input
                         id="telefono"
                         name="telefono"
                         value={formData.telefono}
                         onChange={handleChange}
                         placeholder="11 1234-5678"
-                        className="bg-white border-otx-gray focus:border-otx-bordo"
+                        className="otx-input"
                       />
                     </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="tipo">Tipo de cliente *</Label>
+                    <div className="otx-field">
+                      <Label htmlFor="tipo" className="otx-label">Tipo de cliente *</Label>
                       <Select
                         value={formData.tipo}
-                        onValueChange={(value) =>
-                          handleSelectChange('tipo', value)
-                        }
+                        onValueChange={(value) => handleSelectChange('tipo', value)}
                         required
                       >
-                        <SelectTrigger className="bg-white border-otx-gray focus:border-otx-bordo">
+                        <SelectTrigger id="tipo" aria-label="Tipo de cliente" className="otx-select-trigger">
                           <SelectValue placeholder="Seleccionar..." />
                         </SelectTrigger>
 
-                        <SelectContent>
-                          <SelectItem value="persona">
+                        <SelectContent className="otx-select-content">
+                          <SelectItem className="otx-select-item" value="particular">
                             Persona / Profesional independiente
                           </SelectItem>
-                          <SelectItem value="pyme">Empresa</SelectItem>
+                          <SelectItem className="otx-select-item" value="pyme">
+                            Empresa
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="servicio">Servicio</Label>
+                  <div className="otx-form-grid">
+                    <div className="otx-field">
+                      <Label htmlFor="servicio" className="otx-label">Servicio de interés</Label>
                       <Select
                         value={formData.servicio || '__empty__'}
-                        onValueChange={(value) =>
-                          handleSelectChange('servicio', value)
-                        }
+                        onValueChange={(value) => handleSelectChange('servicio', value)}
                       >
-                        <SelectTrigger className="bg-white border-otx-gray focus:border-otx-bordo">
+                        <SelectTrigger id="servicio" aria-label="Servicio de interés" className="otx-select-trigger min-w-0 [&>span]:min-w-0">
                           <SelectValue placeholder="Opcional" />
                         </SelectTrigger>
 
-                        <SelectContent>
-                          <SelectItem value="__empty__">— Ninguno —</SelectItem>
+                        <SelectContent className="otx-select-content">
+                          <SelectItem className="otx-select-item" value="__empty__">— Ninguno —</SelectItem>
                           {serviceOptions.map((option) => (
-                            <SelectItem key={option.value} value={option.value}>
+                            <SelectItem className="otx-select-item whitespace-normal break-words" key={option.value} value={option.value}>
                               {option.label}
                             </SelectItem>
                           ))}
@@ -449,78 +360,69 @@ const Contact = () => {
                       </Select>
                     </div>
 
-                    <div className="space-y-2 min-w-0">
-                      <Label htmlFor="plan">Plan interesado</Label>
+                    <div className="otx-field">
+                      <Label htmlFor="plan" className="otx-label">Plan interesado</Label>
                       <Select
                         value={formData.plan || '__empty__'}
-                        onValueChange={(value) =>
-                          handleSelectChange('plan', value)
-                        }
+                        onValueChange={(value) => handleSelectChange('plan', value)}
                       >
-                        <SelectTrigger className="min-w-0 [&>span]:min-w-0 bg-white border-otx-gray focus:border-otx-bordo">
+                        <SelectTrigger id="plan" aria-label="Plan interesado" className="otx-select-trigger min-w-0 [&>span]:min-w-0">
                           <SelectValue placeholder="Opcional" />
                         </SelectTrigger>
 
-                        <SelectContent className="max-w-[calc(100vw-2rem)]">
-                          <SelectItem value="__empty__">— Ninguno —</SelectItem>
-                          {contactPlanOptions.map(option => (
-                            <SelectItem className="whitespace-normal break-words" key={option} value={option}>{option}</SelectItem>
+                        <SelectContent className="otx-select-content">
+                          <SelectItem className="otx-select-item" value="__empty__">— Ninguno —</SelectItem>
+                          {contactPlanOptions.map((option) => (
+                            <SelectItem className="otx-select-item whitespace-normal break-words" key={option} value={option}>
+                              {option}
+                            </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="asunto">Asunto *</Label>
+                  <div className="otx-field">
+                    <Label htmlFor="asunto" className="otx-label">Asunto *</Label>
                     <Input
                       id="asunto"
                       name="asunto"
                       value={formData.asunto}
                       onChange={handleChange}
-                      placeholder="Problema con mi PC / Consulta sobre planes / etc."
+                      placeholder="Ej.: Soporte remoto / Presupuesto de notebook / Página web"
                       required
-                      className="bg-white border-otx-gray focus:border-otx-bordo"
+                      className="otx-input"
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="mensaje">Descripción del problema *</Label>
+                  <div className="otx-field">
+                    <Label htmlFor="mensaje" className="otx-label">Descripción de la consulta *</Label>
                     <Textarea
                       id="mensaje"
                       name="mensaje"
                       value={formData.mensaje}
                       onChange={handleChange}
-                      placeholder="Describí tu problema o consulta con el mayor detalle posible..."
+                      placeholder="Contanos brevemente el problema técnico, el equipo que buscás o el proyecto que querés desarrollar..."
                       required
                       minLength={10}
                       rows={5}
-                      className="bg-white border-otx-gray focus:border-otx-bordo resize-none"
+                      className="otx-textarea"
                     />
                   </div>
 
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-otx-bordo hover:bg-otx-bordo-light text-white gap-2 py-6 transition-all duration-300 hover:shadow-lg hover:shadow-otx-bordo/30"
-                  >
-                    {isSubmitting ? (
-                      <span className="flex items-center gap-2">
-                        <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Enviando...
-                      </span>
-                    ) : (
-                      <>
-                        <Send size={18} />
-                        Enviar ticket
-                      </>
-                    )}
-                  </Button>
-
-                  <p className="text-otx-text/50 text-xs text-center">
-                    Te responderemos según disponibilidad. Para coordinar más
-                    rápido, también podés contactarnos por WhatsApp.
-                  </p>
+                  <div className="otx-form-footer">
+                    <p className="otx-form-note">
+                      El alcance y cualquier costo se confirman antes de iniciar.
+                    </p>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="otx-btn-primary"
+                    >
+                      {isSubmitting ? 'Enviando...' : 'Enviar ticket'}
+                      <ArrowUpRight size={17} aria-hidden="true" />
+                    </button>
+                  </div>
                 </form>
               </>
             )}
