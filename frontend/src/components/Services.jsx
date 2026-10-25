@@ -105,11 +105,7 @@ const Services = () => {
                 const planesSection = document.getElementById('planes');
                 if (planesSection) {
                   planesSection.scrollIntoView({ behavior: 'smooth' });
-                  // Small delay to let scroll complete, then click M365 tab
-                  setTimeout(() => {
-                    const m365Tab = document.querySelector('[value="m365"]');
-                    if (m365Tab) m365Tab.click();
-                  }, 500);
+                  window.dispatchEvent(new CustomEvent('otx:select-plan-category', { detail: 'm365' }));
                 }
               }}
               className="flex-shrink-0 bg-otx-bordo hover:bg-otx-bordo-light text-white font-medium px-8 py-3 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-otx-bordo/30"

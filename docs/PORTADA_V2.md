@@ -26,7 +26,7 @@ Son capturas de Playwright de la compilación de producción, con la fuente carg
 - «OTXSolutions» se conserva en metadatos y nombre accesible de la marca.
 - Se utiliza «Empresas» en etiquetas comerciales; los identificadores internos `pymes` y el enum de API `pyme` se conservan por compatibilidad.
 - Etiquetas de Contacto corregidas de $50.000/$220.000 a $20.000/$90.000. Tickets corregido de $15.000/$65.000 a los mismos importes. Opciones empresariales alineadas con el catálogo vigente ($120.000/$180.000), sin cambiar sus valores; se retiró la opción mensual antigua que no figura en ese catálogo.
-- Pestañas de precios con nombres accesibles en móvil y un evento de selección explícito para la nueva navegación. Se mantienen las interacciones manuales de las pestañas.
+- Pestañas de precios con nombres accesibles en móvil y un evento de selección explícito para la nueva navegación. Se mantienen las interacciones manuales de las pestañas. El botón existente «Ver planes M365» también usa esa selección explícita: antes buscaba un atributo que no estaba presente en el DOM.
 - No se rediseñaron Servicios, Precios, FAQ, Contacto, Tickets ni Footer; solo se corrigieron etiquetas y la nomenclatura indicada. Se conserva la condición existente de Mercado Pago: requiere enlace válido configurado. No se agregó enlace de pago ni se enviaron tickets reales.
 - No se añadieron métricas, certificaciones, clientes ni testimonios.
 
@@ -56,7 +56,7 @@ Lighthouse móvil sobre la página completa, compilación local sin compresión/
 | TBT | 600 ms | 410 ms |
 | CLS | 0 | 0 |
 
-Mediciones puntuales de laboratorio, sujetas a variación; no son métricas reales de visitantes. Queda margen para optimizar el resto de la aplicación. Bundle final: unos 149,93 kB JS y 11,86 kB CSS con gzip, más la fuente local.
+Mediciones puntuales de laboratorio, sujetas a variación; no son métricas reales de visitantes. Queda margen para optimizar el resto de la aplicación. Bundle final: unos 149,90 kB JS y 11,86 kB CSS con gzip, más la fuente local.
 
 ## Límites y siguiente paso
 
