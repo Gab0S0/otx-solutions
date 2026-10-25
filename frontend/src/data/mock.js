@@ -6,8 +6,8 @@ export const companyInfo = {
   whatsapp: "5491124021747",
   email: "solutionsotx@gmail.com",
   location: "CABA, Buenos Aires, Argentina",
-  experience: "+10",
-  casesResolved: "+1.000"
+  experience: "4+",
+  casesResolved: ""
 };
 
 export const services = [
@@ -60,7 +60,7 @@ export const planesParticulares = {
     {
       id: 1,
       name: "Asistencia Remota",
-      price: "$50.000",
+      price: "$20.000",
       period: "",
       description:
         "Diagnóstico y resolución remota para un problema puntual en tu PC o notebook.",
@@ -72,12 +72,12 @@ export const planesParticulares = {
         "Windows, Office, correo, impresoras, programas y configuración general",
         "Recomendación final si requiere reparación física o trabajo avanzado"
       ],
-      popular: false
+      popular: true
     },
     {
       id: 2,
       name: "Pack 5 Asistencias",
-      price: "$220.000",
+      price: "$90.000",
       period: "",
       description:
         "Para quienes necesitan soporte recurrente sin pagar cada asistencia por separado.",
@@ -86,7 +86,7 @@ export const planesParticulares = {
         "Cada asistencia cubre 1 caso principal de hasta 1 hora",
         "Válido por 3 meses",
         "Ideal para personas, freelancers o profesionales independientes",
-        "Ahorrás $30.000 frente a contratarlas por separado"
+        "Ahorrás $10.000 frente a contratarlas por separado"
       ],
       popular: true
     }
@@ -239,14 +239,14 @@ export const howItWorks = [
 export const whyUs = [
   {
     id: 1,
-    title: "+10 Años de Experiencia",
+    title: "Experiencia profesional en IT",
     description: "Experiencia real en soporte IT, usuarios, equipos, redes y entornos de trabajo.",
     icon: "Award"
   },
   {
     id: 2,
-    title: "+1.000 Casos Resueltos",
-    description: "Resolución de incidencias técnicas para usuarios, profesionales y empresas.",
+    title: "Atención personalizada",
+    description: "Un diagnóstico claro y una propuesta de solución adaptada a tu necesidad.",
     icon: "CheckCircle"
   },
   {
