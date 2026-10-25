@@ -25,7 +25,7 @@ const Header = () => {
     const onOutside = (event) => {
       if (!header.current?.contains(event.target)) setOpen(false);
     };
-    const desktop = window.matchMedia('(min-width: 1024px)');
+    const desktop = window.matchMedia('(min-width: 1150px)');
     const onResize = () => { if (desktop.matches) setOpen(false); };
     document.addEventListener('keydown', onKey);
     document.addEventListener('pointerdown', onOutside);

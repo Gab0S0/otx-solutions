@@ -40,10 +40,10 @@ const Hero = () => {
   const whatsappUrl = `https://wa.me/${companyInfo.whatsapp}?text=${whatsappMessage}`;
   return (
     <section className="otx-premium-hero" aria-labelledby="intro-title">
-      <div className="otx-intro-topline"><span>TECNOLOGÍA, CON CLARIDAD.</span><span>BUENOS AIRES · SOPORTE REMOTO</span></div>
+      <ConnectionSculpture />
       <div className="otx-intro-grid">
         <div className="otx-intro-copy">
-          <p className="otx-eyebrow"><span aria-hidden="true" /> PARA PERSONAS Y PYMES</p>
+          <p className="otx-eyebrow"><span aria-hidden="true" /> SOPORTE REMOTO · PERSONAS Y PYMES</p>
           <h1 id="intro-title" tabIndex={-1}>Tu tecnología,<br />en buenas <em>manos.</em></h1>
           <p className="otx-intro-description">Menos trabas técnicas. Más espacio para lo tuyo. Te ayudamos con tu PC, correo y herramientas de trabajo, estés donde estés.</p>
           <div className="otx-intro-actions">
@@ -55,12 +55,11 @@ const Hero = () => {
           </div>
           <p className="otx-intro-note">Coordinamos el horario. Confirmamos el alcance antes de empezar.</p>
         </div>
-        <ConnectionSculpture />
       </div>
       <div className="otx-intro-bottom">
-        <a className="otx-price" href="#planes"><span>ASISTENCIA REMOTA</span><strong><small>Desde ARS</small> 20.000</strong><span>Un problema puntual, un primer paso.</span></a>
-        <a className="otx-price" href="#planes"><span>PACK DE 5 ASISTENCIAS</span><strong><small>ARS</small> 90.000</strong><span>Para seguir contando con soporte.</span></a>
-        <a className="otx-explore" href="#servicios"><span>Conocé cómo<br />podemos ayudarte</span><ArrowDown size={22} aria-hidden="true" /></a>
+        <a className="otx-price" href="#planes"><span>Soporte remoto</span><strong>Desde ARS 20.000</strong></a>
+        <a className="otx-price" href="#planes"><span>5 asistencias</span><strong>ARS 90.000</strong></a>
+        <a className="otx-explore" href="#servicios"><span>Ver servicios</span><ArrowDown size={22} aria-hidden="true" /></a>
       </div>
     </section>
   );
