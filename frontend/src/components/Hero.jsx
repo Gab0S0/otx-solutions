@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, FileText, Shield, Clock, Award } from 'lucide-react';
+import { Phone, FileText, Shield, Clock, CheckCircle2 } from 'lucide-react';
 import { Button } from './ui/button';
 import { companyInfo, whatsappMessage } from '../data/mock';
 
@@ -7,7 +7,7 @@ const Hero = () => {
   const whatsappUrl = `https://wa.me/${companyInfo.whatsapp}?text=${whatsappMessage}`;
 
   return (
-    <section className="relative min-h-screen flex items-center bg-otx-dark overflow-hidden">
+    <section className="relative min-h-[88vh] flex items-center bg-otx-dark overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div
@@ -22,7 +22,7 @@ const Hero = () => {
       {/* Gradient Overlay */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-otx-bordo/10 to-transparent" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-28">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <div className="space-y-8">
@@ -44,25 +44,16 @@ const Hero = () => {
   Atención clara, coordinada y profesional.
 </p>
 
-            {/* Stats */}
-            <div className="flex flex-wrap gap-6">
-              <div className="flex items-center gap-2">
-                <Award className="text-otx-bordo" size={24} />
-                <span className="text-white font-semibold">
-                  {companyInfo.experience} años
-                </span>
-                <span className="text-otx-gray-light">de experiencia</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Shield className="text-otx-bordo" size={24} />
-                <span className="text-white font-semibold">
-                  {companyInfo.casesResolved}
-                </span>
-                <span className="text-otx-gray-light">casos resueltos</span>
-              </div>
+            <div className="flex flex-wrap gap-3 text-sm text-otx-gray-light">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2"><CheckCircle2 size={16} className="text-emerald-400" /> Diagnóstico claro</span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2"><CheckCircle2 size={16} className="text-emerald-400" /> Sin costos sorpresa</span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2"><CheckCircle2 size={16} className="text-emerald-400" /> Atención coordinada</span>
             </div>
-
+            <div className="rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur-sm max-w-md">
+              <p className="text-sm text-otx-gray-light">Soporte remoto · 1 incidencia · hasta 1 hora</p>
+              <p className="text-4xl font-extrabold tracking-tight text-white mt-1">$20.000 <span className="text-sm font-normal text-otx-gray-light">ARS</span></p>
+              <p className="mt-2 text-sm text-otx-gray-light">Presupuesto y disponibilidad confirmados por WhatsApp antes de iniciar.</p>
+            </div>
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
@@ -71,18 +62,18 @@ const Hero = () => {
                   className="w-full sm:w-auto bg-otx-bordo hover:bg-otx-bordo-light text-white gap-2 text-lg px-8 py-6 transition-all duration-300 hover:shadow-xl hover:shadow-otx-bordo/30 hover:-translate-y-1"
                 >
                   <Phone size={22} />
-                  Contactanos por WhatsApp
+                  Consultar por WhatsApp
                 </Button>
               </a>
 
-              <a href="#contacto">
+              <a href="#planes">
                 <Button
                   size="lg"
                   variant="outline"
                   className="w-full sm:w-auto border-white/20 text-white hover:bg-white/10 gap-2 text-lg px-8 py-6 transition-all duration-300 hover:-translate-y-1"
                 >
                   <FileText size={22} />
-                  Abrir un ticket
+                  Ver opciones de contacto
                 </Button>
               </a>
             </div>
@@ -123,35 +114,14 @@ const Hero = () => {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-white/10">
-                  <div className="flex items-center justify-between">
-                    <span className="text-otx-gray-light text-sm">
-  Soporte remoto claro y coordinado
-</span>
-
-                    <div className="flex -space-x-2">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div
-                          key={i}
-                          className="w-8 h-8 bg-otx-bordo/30 border-2 border-otx-dark rounded-full flex items-center justify-center"
-                        >
-                          <span className="text-white text-xs font-medium">
-                            {String.fromCharCode(64 + i)}
-                          </span>
-                        </div>
-                      ))}
-
-                      <div className="w-8 h-8 bg-otx-bordo border-2 border-otx-dark rounded-full flex items-center justify-center">
-                        <span className="text-white text-xs">+99</span>
-                      </div>
-                    </div>
-                  </div>
+                <div className="pt-4 border-t border-white/10 text-sm text-otx-gray-light">
+                  Atención personalizada · Sin instalación de programas sin tu consentimiento
                 </div>
               </div>
 
               {/* Floating Badge */}
               <div className="absolute -top-4 -right-4 bg-green-500 text-white text-sm font-medium px-4 py-2 rounded-full shadow-lg">
-                Consultas abiertas
+                Consultas por WhatsApp
               </div>
             </div>
           </div>
