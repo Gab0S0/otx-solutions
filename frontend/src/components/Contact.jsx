@@ -1,17 +1,13 @@
 import { contactPlanOptions } from '../lib/offer-catalog';
 import React, { useState, useEffect } from 'react';
 import {
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
-  Send,
-  MessageSquare,
   AlertCircle,
   CheckCircle,
-  ArrowLeft
+  ArrowLeft,
+  ArrowUpRight,
+  ChevronDown
 } from 'lucide-react';
-import { Button } from './ui/button';
+import { Link } from 'react-router-dom';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
@@ -25,15 +21,22 @@ import {
 import { companyInfo, services } from '../data/mock';
 import { toast } from 'sonner';
 import axios from 'axios';
+import './PremiumSections.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
+const resolveClientType = (plan, servicio, currentTipo) => {
+  if (plan && /Empresa|Microsoft 365/i.test(plan)) return 'pyme';
+  if (servicio && /empresa|Microsoft 365|Optimización|Automatización/i.test(servicio)) return 'pyme';
+  return currentTipo || 'particular';
+};
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
     telefono: '',
-    tipo: '',
+    tipo: 'particular',
     asunto: '',
     mensaje: '',
     plan: '',
@@ -47,14 +50,19 @@ const Contact = () => {
 
   useEffect(() => {
     const handlePrefill = (event) => {
-      const { plan, servicio, asunto } = event.detail;
+      const { plan, servicio, asunto, tipo } = event.detail || {};
 
-      setFormData((prev) => ({
-        ...prev,
-        plan: plan || prev.plan,
-        servicio: servicio || prev.servicio,
-        asunto: asunto || prev.asunto
-      }));
+      setFormData((prev) => {
+        const nextPlan = plan !== undefined ? plan : prev.plan;
+        const nextServicio = servicio !== undefined ? servicio : prev.servicio;
+        return {
+          ...prev,
+          plan: nextPlan,
+          servicio: nextServicio,
+          asunto: asunto || (nextPlan ? `Interesado en: ${nextPlan}` : nextServicio ? `Consulta sobre: ${nextServicio}` : prev.asunto),
+          tipo: tipo || resolveClientType(nextPlan, nextServicio, prev.tipo)
+        };
+      });
     };
 
     window.addEventListener('prefillContactForm', handlePrefill);
@@ -67,47 +75,61 @@ const Contact = () => {
     if (ticketId) {
       msg += `acabo de crear el ticket ${ticketId}.%0A%0A`;
     } else {
-      msg += 'quiero consultar por soporte IT remoto de OTX Solutions.%0A%0A';
+      msg += 'quiero realizar una consulta a OTX Solutions.%0A%0A';
     }
 
     if (formData.plan) {
-      msg += `Plan interesado: ${formData.plan}%0A`;
+      msg += `Plan: ${formData.plan}%0A`;
     }
 
     if (formData.servicio) {
       msg += `Servicio: ${formData.servicio}%0A`;
     }
 
-    msg += `%0AMi problema es: [DESCRIBIR BREVEMENTE]%0A`;
-    msg += `Tipo de equipo: [PC / Notebook / Mac]%0A`;
-    msg += `Soy: [Persona / Profesional independiente / Empresa]%0A%0A`;
-    msg += `Gracias.`;
+    msg += `%0AMi consulta es: [DESCRIBIR BREVEMENTE]%0A%0AGracias.`;
 
     return msg;
   };
 
   const whatsappUrl = `https://wa.me/${companyInfo.whatsapp}?text=${generateWhatsAppMessage()}`;
 
+  const ticketLinkParams = new URLSearchParams();
+  if (formData.plan) ticketLinkParams.set('plan', formData.plan);
+  if (formData.servicio) ticketLinkParams.set('servicio', formData.servicio);
+  const ticketHref = ticketLinkParams.toString() ? `/ticket?${ticketLinkParams.toString()}` : '/ticket';
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData((prev) => ({
       ...prev,
       [name]: value
     }));
-
     setError(null);
   };
 
   const handleSelectChange = (name, value) => {
     const finalValue = value === '__empty__' ? '' : value;
+    setFormData((prev) => {
+      const next = { ...prev, [name]: finalValue };
+      if (name === 'plan' && finalValue) {
+        next.asunto = `Interesado en: ${finalValue}`;
+        next.tipo = resolveClientType(finalValue, next.servicio, next.tipo);
+      } else if (name === 'servicio' && finalValue) {
+        next.asunto = `Consulta sobre: ${finalValue}`;
+        next.tipo = resolveClientType(next.plan, finalValue, next.tipo);
+      }
+      return next;
+    });
+    setError(null);
+  };
 
+  const clearPrefill = () => {
     setFormData((prev) => ({
       ...prev,
-      [name]: finalValue
+      plan: '',
+      servicio: '',
+      asunto: ''
     }));
-
-    setError(null);
   };
 
   const handleSubmit = async (e) => {
@@ -115,13 +137,21 @@ const Contact = () => {
     setIsSubmitting(true);
     setError(null);
 
+    const resolvedAsunto =
+      (formData.asunto || '').trim() ||
+      (formData.plan ? `Interesado en: ${formData.plan}` : '') ||
+      (formData.servicio ? `Consulta sobre: ${formData.servicio}` : '') ||
+      `Consulta web: ${formData.mensaje.trim().slice(0, 60)}`;
+
+    const resolvedTipo = resolveClientType(formData.plan, formData.servicio, formData.tipo);
+
     try {
       const response = await axios.post(`${BACKEND_URL}/api/tickets`, {
         nombre: formData.nombre,
         email: formData.email,
         telefono: formData.telefono || null,
-        tipo: formData.tipo,
-        asunto: formData.asunto,
+        tipo: resolvedTipo,
+        asunto: resolvedAsunto.slice(0, 200),
         mensaje: formData.mensaje,
         plan: formData.plan || null,
         servicio: formData.servicio || null,
@@ -135,12 +165,12 @@ const Contact = () => {
           message: response.data.message
         });
 
-        toast.success('¡Ticket creado!');
+        toast.success('¡Consulta enviada!');
       }
     } catch (err) {
       const errorMessage =
         err.response?.data?.detail ||
-        'Error al enviar el ticket. Por favor intentá de nuevo o contactanos por WhatsApp.';
+        'Error al enviar la consulta. Por favor intentá de nuevo o escribinos por WhatsApp.';
 
       setError(errorMessage);
 
@@ -157,7 +187,7 @@ const Contact = () => {
       nombre: '',
       email: '',
       telefono: '',
-      tipo: '',
+      tipo: 'particular',
       asunto: '',
       mensaje: '',
       plan: '',
@@ -174,180 +204,108 @@ const Contact = () => {
   }));
 
   return (
-    <section id="contacto" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-otx-bordo font-semibold text-sm uppercase tracking-wider">
-            Contacto
-          </span>
+    <section id="contacto" className="otx-section" aria-labelledby="contact-title">
+      <div className="otx-section-container">
+        <div className="otx-contact-layout">
+          <div>
+            <p className="otx-eyebrow">Contacto</p>
+            <h2 id="contact-title">Hablemos.</h2>
+            <p className="otx-section-lead">
+              Escribinos por WhatsApp para resolver un problema en el día, coordinar una visita o pedir presupuesto sin compromiso.
+            </p>
 
-          <h2 className="text-3xl sm:text-4xl font-bold text-otx-text mt-3 mb-4">
-            ¿Necesitás ayuda?
-          </h2>
-
-          <p className="text-otx-text/70 text-lg">
-            Contactanos por WhatsApp o abrí un ticket para contarnos el problema
-            y coordinar la asistencia.
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            {/* WhatsApp CTA */}
-            <div className="bg-otx-dark rounded-2xl p-8">
-              <div className="flex items-start gap-4">
-                <div className="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <MessageSquare className="text-white" size={28} />
-                </div>
-
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    WhatsApp
-                  </h3>
-
-                  <p className="text-otx-gray-light mb-4">
-                    La forma más directa de contactarnos. Contanos brevemente el
-                    problema y coordinamos la asistencia.
-                  </p>
-
-                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                    <Button className="bg-green-500 hover:bg-green-600 text-white gap-2 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/30">
-                      <Phone size={18} />
-                      Abrir WhatsApp
-                    </Button>
-                  </a>
-                </div>
+            <div className="otx-contact-direct">
+              <div className="otx-contact-direct-actions">
+                <a
+                  className="otx-btn-primary"
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Escribir por WhatsApp <ArrowUpRight size={17} aria-hidden="true" />
+                  <span className="sr-only">(abre otra pestaña)</span>
+                </a>
+                <Link className="otx-inline-link" to={ticketHref}>
+                  Abrir ticket detallado
+                </Link>
               </div>
             </div>
 
-            {/* Contact Details */}
-            <div className="space-y-6">
-              <div className="flex items-start gap-4 group">
-                <div className="w-12 h-12 bg-otx-bordo/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-otx-bordo transition-colors">
-                  <Mail
-                    className="text-otx-bordo group-hover:text-white transition-colors"
-                    size={22}
-                  />
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-otx-text mb-1">Email</h4>
-                  <a
-                    href={`mailto:${companyInfo.email}`}
-                    className="text-otx-text/70 hover:text-otx-bordo transition-colors"
-                  >
-                    {companyInfo.email}
-                  </a>
-                </div>
+            <dl className="otx-contact-meta">
+              <div>
+                <dt>Email</dt>
+                <dd>
+                  <a href={`mailto:${companyInfo.email}`}>{companyInfo.email}</a>
+                </dd>
               </div>
-
-              <div className="flex items-start gap-4 group">
-                <div className="w-12 h-12 bg-otx-bordo/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-otx-bordo transition-colors">
-                  <MapPin
-                    className="text-otx-bordo group-hover:text-white transition-colors"
-                    size={22}
-                  />
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-otx-text mb-1">
-                    Ubicación
-                  </h4>
-                  <p className="text-otx-text/70">{companyInfo.location}</p>
-                </div>
+              <div>
+                <dt>Ubicación</dt>
+                <dd>{companyInfo.location}</dd>
               </div>
-
-              <div className="flex items-start gap-4 group">
-                <div className="w-12 h-12 bg-otx-bordo/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-otx-bordo transition-colors">
-                  <Clock
-                    className="text-otx-bordo group-hover:text-white transition-colors"
-                    size={22}
-                  />
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-otx-text mb-1">
-                    Atención
-                  </h4>
-                  <p className="text-otx-text/60">
-                    Asistencia remota con coordinación previa
-                  </p>
-                  <p className="text-otx-text/50 text-sm">
-                    Las consultas se responden según disponibilidad.
-                  </p>
-                </div>
-              </div>
-            </div>
+            </dl>
           </div>
 
-          {/* Ticket Form or Success */}
-          <div className="bg-otx-gray rounded-2xl p-8">
+          <div className="otx-form-shell">
             {ticketCreated ? (
-              <div className="text-center py-8">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <CheckCircle className="text-green-600" size={32} />
+              <div className="otx-ticket-success">
+                <span className="otx-ticket-badge">
+                  <CheckCircle size={16} aria-hidden="true" /> Solicitud registrada
+                </span>
+                <h3>Consulta recibida</h3>
+                <div className="otx-ticket-id-box">
+                  <span>Número de ticket</span>
+                  <strong>{ticketCreated.id}</strong>
                 </div>
-
-                <h3 className="text-2xl font-bold text-otx-text mb-2">
-                  ¡Ticket creado!
-                </h3>
-
-                <div className="bg-white rounded-xl p-4 mb-6 inline-block">
-                  <p className="text-sm text-otx-text/70 mb-1">
-                    Tu número de ticket:
-                  </p>
-                  <p className="text-3xl font-bold text-otx-bordo">
-                    {ticketCreated.id}
-                  </p>
-                </div>
-
-                <p className="text-otx-text/70 mb-6">
-                  Gracias por contactarnos. Podés continuar la conversación por
-                  WhatsApp para coordinar la asistencia.
+                <p className="otx-form-subtitle">
+                  Podés continuar por WhatsApp con este número para coordinar más rápido.
                 </p>
-
-                <div className="space-y-3">
+                <div className="otx-steps-actions">
                   <a
                     href={`https://wa.me/${companyInfo.whatsapp}?text=${generateWhatsAppMessage(ticketCreated.id)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block"
+                    className="otx-btn-primary"
                   >
-                    <Button className="w-full bg-green-500 hover:bg-green-600 text-white gap-2">
-                      <MessageSquare size={18} />
-                      Abrir WhatsApp
-                    </Button>
+                    Continuar por WhatsApp <ArrowUpRight size={17} aria-hidden="true" />
+                    <span className="sr-only">(abre otra pestaña)</span>
                   </a>
-
-                  <Button
-                    variant="outline"
+                  <button
+                    type="button"
                     onClick={resetForm}
-                    className="w-full gap-2"
+                    className="otx-btn-secondary"
                   >
-                    <ArrowLeft size={18} />
-                    Enviar otro ticket
-                  </Button>
+                    <ArrowLeft size={16} aria-hidden="true" />
+                    Nueva consulta
+                  </button>
                 </div>
               </div>
             ) : (
               <>
-                <h3 className="text-xl font-bold text-otx-text mb-6">
-                  Abrir un ticket
-                </h3>
+                <h3>Dejanos tu mensaje</h3>
+                <p className="otx-form-subtitle">
+                  Completá tus datos y te respondemos con el alcance o presupuesto.
+                </p>
 
-                {error && (
-                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-                    <AlertCircle
-                      className="text-red-500 flex-shrink-0 mt-0.5"
-                      size={20}
-                    />
-                    <p className="text-red-700 text-sm">{error}</p>
+                {(formData.plan || formData.servicio) && (
+                  <div className="otx-prefill-pill" role="status" aria-live="polite">
+                    <span>
+                      <strong>Seleccionado:</strong>
+                      {formData.plan || formData.servicio}
+                    </span>
+                    <button type="button" className="otx-prefill-clear" onClick={clearPrefill}>
+                      Quitar
+                    </button>
                   </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="space-y-5">
+                {error && (
+                  <div className="otx-form-error" role="alert">
+                    <AlertCircle size={18} aria-hidden="true" />
+                    <span>{error}</span>
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Honeypot */}
                   <div className="absolute -left-[9999px]" aria-hidden="true">
                     <Input
@@ -360,9 +318,9 @@ const Contact = () => {
                     />
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="nombre">Nombre completo *</Label>
+                  <div className="otx-form-grid">
+                    <div className="otx-field">
+                      <Label htmlFor="nombre" className="otx-label">Nombre *</Label>
                       <Input
                         id="nombre"
                         name="nombre"
@@ -370,12 +328,12 @@ const Contact = () => {
                         onChange={handleChange}
                         placeholder="Juan Pérez"
                         required
-                        className="bg-white border-otx-gray focus:border-otx-bordo"
+                        className="otx-input"
                       />
                     </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email *</Label>
+                    <div className="otx-field">
+                      <Label htmlFor="email" className="otx-label">Email *</Label>
                       <Input
                         id="email"
                         name="email"
@@ -384,143 +342,137 @@ const Contact = () => {
                         onChange={handleChange}
                         placeholder="juan@email.com"
                         required
-                        className="bg-white border-otx-gray focus:border-otx-bordo"
+                        className="otx-input"
                       />
                     </div>
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="telefono">Teléfono</Label>
+                  <div className="otx-form-grid">
+                    <div className="otx-field">
+                      <Label htmlFor="telefono" className="otx-label">Teléfono / WhatsApp</Label>
                       <Input
                         id="telefono"
                         name="telefono"
                         value={formData.telefono}
                         onChange={handleChange}
-                        placeholder="11 1234-5678"
-                        className="bg-white border-otx-gray focus:border-otx-bordo"
+                        placeholder="11 1234-5678 (opcional)"
+                        className="otx-input"
                       />
                     </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="tipo">Tipo de cliente *</Label>
-                      <Select
-                        value={formData.tipo}
-                        onValueChange={(value) =>
-                          handleSelectChange('tipo', value)
-                        }
-                        required
-                      >
-                        <SelectTrigger className="bg-white border-otx-gray focus:border-otx-bordo">
-                          <SelectValue placeholder="Seleccionar..." />
-                        </SelectTrigger>
-
-                        <SelectContent>
-                          <SelectItem value="persona">
-                            Persona / Profesional independiente
-                          </SelectItem>
-                          <SelectItem value="pyme">Empresa</SelectItem>
-                        </SelectContent>
-                      </Select>
+                    <div className="otx-field">
+                      <Label htmlFor="asunto" className="otx-label">Asunto</Label>
+                      <Input
+                        id="asunto"
+                        name="asunto"
+                        value={formData.asunto}
+                        onChange={handleChange}
+                        placeholder="Se completa automáticamente o escribilo"
+                        className="otx-input"
+                      />
                     </div>
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="servicio">Servicio</Label>
-                      <Select
-                        value={formData.servicio || '__empty__'}
-                        onValueChange={(value) =>
-                          handleSelectChange('servicio', value)
-                        }
-                      >
-                        <SelectTrigger className="bg-white border-otx-gray focus:border-otx-bordo">
-                          <SelectValue placeholder="Opcional" />
-                        </SelectTrigger>
-
-                        <SelectContent>
-                          <SelectItem value="__empty__">— Ninguno —</SelectItem>
-                          {serviceOptions.map((option) => (
-                            <SelectItem key={option.value} value={option.value}>
-                              {option.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2 min-w-0">
-                      <Label htmlFor="plan">Plan interesado</Label>
-                      <Select
-                        value={formData.plan || '__empty__'}
-                        onValueChange={(value) =>
-                          handleSelectChange('plan', value)
-                        }
-                      >
-                        <SelectTrigger className="min-w-0 [&>span]:min-w-0 bg-white border-otx-gray focus:border-otx-bordo">
-                          <SelectValue placeholder="Opcional" />
-                        </SelectTrigger>
-
-                        <SelectContent className="max-w-[calc(100vw-2rem)]">
-                          <SelectItem value="__empty__">— Ninguno —</SelectItem>
-                          {contactPlanOptions.map(option => (
-                            <SelectItem className="whitespace-normal break-words" key={option} value={option}>{option}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="asunto">Asunto *</Label>
-                    <Input
-                      id="asunto"
-                      name="asunto"
-                      value={formData.asunto}
-                      onChange={handleChange}
-                      placeholder="Problema con mi PC / Consulta sobre planes / etc."
-                      required
-                      className="bg-white border-otx-gray focus:border-otx-bordo"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="mensaje">Descripción del problema *</Label>
+                  <div className="otx-field">
+                    <Label htmlFor="mensaje" className="otx-label">¿En qué te ayudamos? *</Label>
                     <Textarea
                       id="mensaje"
                       name="mensaje"
                       value={formData.mensaje}
                       onChange={handleChange}
-                      placeholder="Describí tu problema o consulta con el mayor detalle posible..."
+                      placeholder="Contanos brevemente el problema, el equipo que buscás o tu proyecto..."
                       required
                       minLength={10}
-                      rows={5}
-                      className="bg-white border-otx-gray focus:border-otx-bordo resize-none"
+                      rows={4}
+                      className="otx-textarea"
                     />
                   </div>
 
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-otx-bordo hover:bg-otx-bordo-light text-white gap-2 py-6 transition-all duration-300 hover:shadow-lg hover:shadow-otx-bordo/30"
-                  >
-                    {isSubmitting ? (
-                      <span className="flex items-center gap-2">
-                        <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Enviando...
-                      </span>
-                    ) : (
-                      <>
-                        <Send size={18} />
-                        Enviar ticket
-                      </>
-                    )}
-                  </Button>
+                  <details className="otx-form-optional">
+                    <summary>
+                      Elegir servicio, plan o perfil (opcional) <ChevronDown size={15} aria-hidden="true" />
+                    </summary>
+                    <div className="otx-form-optional-body space-y-4">
+                      <div className="otx-form-grid">
+                        <div className="otx-field">
+                          <Label htmlFor="servicio" className="otx-label">Servicio</Label>
+                          <Select
+                            value={formData.servicio || '__empty__'}
+                            onValueChange={(value) => handleSelectChange('servicio', value)}
+                          >
+                            <SelectTrigger id="servicio" aria-label="Servicio" className="otx-select-trigger min-w-0">
+                              <SelectValue placeholder="Opcional" />
+                            </SelectTrigger>
 
-                  <p className="text-otx-text/50 text-xs text-center">
-                    Te responderemos según disponibilidad. Para coordinar más
-                    rápido, también podés contactarnos por WhatsApp.
-                  </p>
+                            <SelectContent className="otx-select-content">
+                              <SelectItem className="otx-select-item" value="__empty__">— Ninguno —</SelectItem>
+                              {serviceOptions.map((option) => (
+                                <SelectItem className="otx-select-item whitespace-normal break-words" key={option.value} value={option.value}>
+                                  {option.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div className="otx-field">
+                          <Label htmlFor="plan" className="otx-label">Plan</Label>
+                          <Select
+                            value={formData.plan || '__empty__'}
+                            onValueChange={(value) => handleSelectChange('plan', value)}
+                          >
+                            <SelectTrigger id="plan" aria-label="Plan" className="otx-select-trigger min-w-0">
+                              <SelectValue placeholder="Opcional" />
+                            </SelectTrigger>
+
+                            <SelectContent className="otx-select-content">
+                              <SelectItem className="otx-select-item" value="__empty__">— Ninguno —</SelectItem>
+                              {contactPlanOptions.map((option) => (
+                                <SelectItem className="otx-select-item whitespace-normal break-words" key={option} value={option}>
+                                  {option}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+
+                      <div className="otx-field">
+                        <Label htmlFor="tipo" className="otx-label">Perfil</Label>
+                        <Select
+                          value={formData.tipo}
+                          onValueChange={(value) => handleSelectChange('tipo', value)}
+                        >
+                          <SelectTrigger id="tipo" aria-label="Perfil" className="otx-select-trigger">
+                            <SelectValue placeholder="Seleccionar..." />
+                          </SelectTrigger>
+
+                          <SelectContent className="otx-select-content">
+                            <SelectItem className="otx-select-item" value="particular">
+                              Particular / Profesional
+                            </SelectItem>
+                            <SelectItem className="otx-select-item" value="pyme">
+                              Empresa
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  </details>
+
+                  <div className="otx-form-footer">
+                    <p className="otx-form-note">
+                      Confirmamos alcance antes de avanzar.
+                    </p>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="otx-btn-primary"
+                    >
+                      {isSubmitting ? 'Enviando...' : 'Enviar consulta'}
+                      <ArrowUpRight size={17} aria-hidden="true" />
+                    </button>
+                  </div>
                 </form>
               </>
             )}

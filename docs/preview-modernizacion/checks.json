@@ -1,0 +1,230 @@
+{
+  "responsiveResults": [
+    {
+      "viewport": "320x740",
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "overflowX": false,
+      "supportItemsCount": 9,
+      "capabilitiesCount": 6,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 7
+    },
+    {
+      "viewport": "375x667",
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "overflowX": false,
+      "supportItemsCount": 9,
+      "capabilitiesCount": 6,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 7
+    },
+    {
+      "viewport": "390x844",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "overflowX": false,
+      "supportItemsCount": 9,
+      "capabilitiesCount": 6,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 7
+    },
+    {
+      "viewport": "768x1024",
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "overflowX": false,
+      "supportItemsCount": 9,
+      "capabilitiesCount": 6,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 7
+    },
+    {
+      "viewport": "1280x720",
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "overflowX": false,
+      "supportItemsCount": 9,
+      "capabilitiesCount": 6,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 7
+    },
+    {
+      "viewport": "1440x900",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "overflowX": false,
+      "supportItemsCount": 9,
+      "capabilitiesCount": 6,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 7
+    },
+    {
+      "viewport": "1920x1080",
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "overflowX": false,
+      "supportItemsCount": 9,
+      "capabilitiesCount": 6,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 7
+    }
+  ],
+  "heightComparison": {
+    "services": {
+      "desktop": {
+        "before": 1478,
+        "after": 4197,
+        "diffPx": 2719,
+        "diffPct": "184%"
+      },
+      "mobile": {
+        "before": 2170,
+        "after": 6245,
+        "diffPx": 4075,
+        "diffPct": "188%"
+      }
+    },
+    "howItWorks": {
+      "desktop": {
+        "before": 667,
+        "after": 565,
+        "diffPx": -102,
+        "diffPct": "-15%"
+      },
+      "mobile": {
+        "before": 1221,
+        "after": 972,
+        "diffPx": -249,
+        "diffPct": "-20%"
+      }
+    },
+    "whyUs": {
+      "desktop": {
+        "before": 776,
+        "after": 658,
+        "diffPx": -118,
+        "diffPct": "-15%"
+      },
+      "mobile": {
+        "before": 1606,
+        "after": 1033,
+        "diffPx": -573,
+        "diffPct": "-36%"
+      }
+    },
+    "faq": {
+      "desktop": {
+        "before": 1220,
+        "after": 749,
+        "diffPx": -471,
+        "diffPct": "-39%"
+      },
+      "mobile": {
+        "before": 1870,
+        "after": 1222,
+        "diffPx": -648,
+        "diffPct": "-35%"
+      }
+    },
+    "contact": {
+      "desktop": {
+        "before": 970,
+        "after": 727,
+        "diffPx": -243,
+        "diffPct": "-25%"
+      },
+      "mobile": {
+        "before": 1992,
+        "after": 1298,
+        "diffPx": -694,
+        "diffPct": "-35%"
+      }
+    },
+    "footer": {
+      "desktop": {
+        "before": 471,
+        "after": 397,
+        "diffPx": -74,
+        "diffPct": "-16%"
+      },
+      "mobile": {
+        "before": 893,
+        "after": 541,
+        "diffPx": -352,
+        "diffPct": "-39%"
+      }
+    },
+    "ticket": {
+      "desktop": {
+        "before": 1129,
+        "after": 1082,
+        "diffPx": -47,
+        "diffPct": "-4%"
+      },
+      "mobile": {
+        "before": 1342,
+        "after": 1264,
+        "diffPx": -78,
+        "diffPct": "-6%"
+      }
+    }
+  },
+  "servicePrefillCheck": {
+    "prefilledAsunto": "Consulta sobre: Automatización de proceso",
+    "prefillPillText": "Seleccionado:Automatización de procesos e IA aplicada\nQuitar",
+    "activeElementId": "nombre"
+  },
+  "contactSubmitCheck": {
+    "ticketSuccessShown": true,
+    "ticketIdText": "OTX-26-0001"
+  },
+  "ticketPrefillCheck": {
+    "asunto": "Consulta sobre: Optimización de herramientas e integraciones",
+    "servicioText": "Optimización de herramientas e integraciones",
+    "ticketDotColor": "rgb(143, 227, 192)",
+    "overflowMobile": false
+  },
+  "ticketSubmitCheck": {
+    "ticketSuccessShown": true,
+    "ticketIdText": "OTX-26-0001"
+  },
+  "wordmarkCheck": {
+    "headerDotColor": "rgb(143, 227, 192)",
+    "footerDotColor": "rgb(143, 227, 192)"
+  },
+  "receivedPayloads": [
+    {
+      "nombre": "Martín Gómez",
+      "email": "martin@empresa.com.ar",
+      "telefono": null,
+      "tipo": "pyme",
+      "asunto": "Consulta sobre: Automatización de proceso",
+      "mensaje": "Queremos automatizar el registro de consultas por correo hacia nuestra planilla.",
+      "plan": null,
+      "servicio": "Automatización de procesos e IA aplicada",
+      "website": "",
+      "canal": "Landing"
+    },
+    {
+      "nombre": "Laura Díaz",
+      "email": "laura@estudio.com.ar",
+      "telefono": null,
+      "tipo": "pyme",
+      "asunto": "Consulta sobre: Optimización de herramientas e integraciones",
+      "mensaje": "Queremos desarrollar una página web con formulario de contacto.",
+      "plan": null,
+      "servicio": "Optimización de herramientas e integraciones",
+      "website": "",
+      "canal": "TicketWeb"
+    }
+  ]
+}
