@@ -1,59 +1,81 @@
-# Modernización Integral y Refinamiento de Experiencia — OTX Solutions
+# Modernización Integral, Claridad Comercial y Experiencia de Usuario — OTX Solutions
 
 Continuación sobre `main` (tras el merge del PR #1) en la rama `modernizacion-integral-2026-10`. Sin merge ni despliegue a producción.
 
-## 1. Síntesis del refinamiento final
+## 1. Síntesis de la etapa actual (Comunicación comercial y UX)
 
-Conservando intactos **Header**, **Hero**, el fondo premium y **Precios**, se aplicó un refinamiento de claridad editorial y reducción de fricción visual en escritorio y móvil:
+Conservando intactos **Header**, **Hero**, la estética grafito/hielo/verde y la estructura de **Precios**, se refinó toda la comunicación comercial para que cualquier persona —tenga o no conocimientos informáticos— comprenda en segundos qué problemas resolvemos, cómo trabajamos y cómo contratarnos:
 
-1. **Servicios (`Services.jsx`, `mock.js`)**:
-   - Se mantienen las 3 categorías y los 7 servicios con **Soporte Técnico Remoto** como servicio principal.
-   - Títulos concisos sin truncamientos: **Soporte Técnico Remoto**, **Seguridad y optimización**, **Microsoft 365**, **Asesoramiento y equipamiento**, **Armado y reparación**, **Web y formularios**, **Automatizaciones e IA**.
-   - Se eliminó la repetición textual entre la bajada general, la introducción de cada categoría y el subtítulo de cada fila. Los detalles completos (notebooks, PC gamer, oficinas completas, monitores, periféricos, reparaciones según evaluación y proyectos a medida) permanecen dentro del desplegable.
-2. **Cómo trabajamos (`HowItWorks.jsx`)**:
-   - Tres pasos directos (**01 Escribinos**, **02 Definimos el alcance**, **03 Resolvemos**) con un único CTA principal a WhatsApp y accesos secundarios discretos a Contacto y Tickets.
-3. **Por qué elegirnos (`WhyUs.jsx`)**:
-   - Una sola composición limpia con cuatro argumentos concretos y verificables.
-   - Se eliminó la duplicación entre el listado lateral y los pilares, así como la promesa no autorizada de revisión de 48 horas. Sin estadísticas ni tiempos inventados.
-4. **Preguntas frecuentes (`FAQ.jsx`)**:
-   - Siete preguntas clave enfocadas en soporte remoto y seguridad, alcance de 1 hora, extensiones/evaluación física, planes mensuales empresariales, asesoramiento/armado/reparación de hardware, proyectos web/IA a medida y Microsoft 365.
-   - Se retiraron preguntas no autorizadas o sobre recuperación de discos dañados.
-5. **Contacto (`Contact.jsx`)**:
-   - WhatsApp como canal protagonista en la columna principal.
-   - Formulario simplificado para celular (Nombre, Email, Teléfono opcional, Asunto autocompletable y Mensaje), con indicador visual cuando se llega desde un servicio o plan (`Seleccionado: ...`) y resolución automática de `tipo` y `asunto` respetando el contrato de FastAPI (`POST /api/tickets`).
-6. **Tickets (`TicketPage.jsx`)**:
-   - Encabezado móvil despejado (`otx.` a la izquierda, `WhatsApp` a la derecha, y `Volver al inicio` ubicado sobre la introducción del formulario).
-   - Selectores sin truncamientos (`white-space: normal`) y prellenado automático de `servicio`, `plan`, `tipo` y `asunto` desde parámetros URL.
-7. **Footer (`Footer.jsx`)**:
-   - Identidad unificada del wordmark `otx.` con su punto verde (`#8FE3C0`).
-   - Disposición en dos columnas en móvil para `Secciones` y `Contacto`, reduciendo su altura vertical en un **42%**.
+1. **Servicios en el idioma del cliente (`Services.jsx`, `mock.js`, `PremiumOffer.css`)**:
+   - Cada servicio incorpora un **ícono Lucide discreto** (`Monitor`, `ShieldCheck`, `GraduationCap`, `Laptop`, `Wrench`, `Building2`, `Globe`, `Sparkles`), un título breve y una explicación cotidiana de 1 a 2 frases con ejemplos reales.
+   - Se eliminó toda jerga técnica (`tenant`, `endpoint`, `MFA`, `deploy`, `infraestructura cloud`, `integraciones API`) de la vista principal; las especificaciones técnicas quedan exclusivamente dentro del panel desplegable de cada servicio.
+   - **Soporte técnico remoto y presencial** se mantiene como servicio principal con el identificador `Principal`.
+2. **Ampliación de servicios sin sobrecargar la página**:
+   - **Visitas técnicas a coordinar**: integradas dentro de *Soporte técnico remoto y presencial* y en *Preguntas frecuentes*, aclarando asistencia a domicilio u oficinas para equipos, impresoras, redes e instalaciones según evaluación y confirmando disponibilidad, zona, traslado y presupuesto antes de asistir.
+   - **Capacitación personalizada**: incorporada dentro de *Asistencia y aprendizaje* para enseñar a usar la computadora, Windows, Office, Excel, correo e inteligencia artificial a particulares, adultos mayores, profesionales y empresas, a ritmo propio y sin cursos cerrados.
+3. **Equipos y asesoramiento cercano**:
+   - Se explica de forma directa que ayudamos tanto a quien quiere elegir una notebook o armar una PC gamer según su presupuesto, como a quien necesita equipar una oficina completa o mejorar/reparar su computadora actual (SSD, memoria RAM, armado a medida y diagnóstico físico).
+4. **Soluciones para negocios orientadas a beneficios**:
+   - Presentadas bajo beneficios concretos (*Tu empresa organizada y segura*, *Páginas web y formularios comerciales*, *Inteligencia artificial y automatización*).
+   - En el desplegable técnico se detallan las capacidades en **Microsoft 365** (Outlook, Teams, OneDrive, SharePoint), **Microsoft Entra** (accesos y verificación MFA), **Defender**, **Intune**, **Claude** y **Microsoft Copilot**, aclarando que se cotizan como proyectos a medida sujetos a compatibilidad, licencias y alcance acordado.
+5. **Destaque sutil para "Pack 5 Asistencias" (`Pricing.jsx`, `PremiumOffer.css`)**:
+   - Sin alterar precios, vigencia ni condiciones, se incorporó un acento sutil en tono champagne (`#E5D3B3`) con el identificador **`Pack Ahorro · Ahorrás $10.000`** para diferenciarlo visualmente de la asistencia individual sin recurrir a brillos exagerados ni llamarlo "Premium".
+6. **Menos texto y mayor claridad en el resto de la página (`HowItWorks.jsx`, `WhyUs.jsx`, `FAQ.jsx`, `Contact.jsx`, `TicketPage.jsx`, `Footer.jsx`)**:
+   - Tres pasos simples en *Cómo trabajamos*, cuatro compromisos claros en *Por qué elegirnos* y siete preguntas frecuentes en lenguaje llano (incluyendo soporte remoto, alcance de $20.000, visitas a domicilio/oficina, clases personalizadas, compra/mejora de PC, planes mensuales y proyectos a medida).
 
 ---
 
-## 2. Métricas de reducción de altura por sección
+## 2. Evaluación comercial de Planes para Empresas (Informe consultivo — sin cambios aplicados en código)
 
-Comparación medida en Chromium entre la primera versión modernizada y el refinamiento final:
+Análisis de los planes actuales en `planesPymes` (**Empresa Inicial — $120.000/mes** y **Empresa Operativa — $180.000/mes**) tomando como referencia el valor de la **Asistencia Remota individual ($20.000)** y el **Pack 5 Asistencias ($90.000)**:
 
-| Sección | Escritorio Antes (`1440×900`) | Escritorio Después (`1440×900`) | Variación Escritorio | Móvil Antes (`390×844`) | Móvil Después (`390×844`) | Variación Móvil |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| **Servicios** *(con 1 fila abierta)* | 1478 px | **1451 px** | -27 px (**-2%**) | 2170 px | **1925 px** | -245 px (**-11%**) |
-| **Cómo trabajamos** | 667 px | **565 px** | -102 px (**-15%**) | 1221 px | **898 px** | -323 px (**-26%**) |
-| **Por qué elegirnos** | 776 px | **658 px** | -118 px (**-15%**) | 1606 px | **957 px** | -649 px (**-40%**) |
-| **Preguntas frecuentes** *(1 abierta)* | 1220 px | **749 px** | -471 px (**-39%**) | 1870 px | **1173 px** | -697 px (**-37%**) |
-| **Contacto** | 970 px | **727 px** | -243 px (**-25%**) | 1992 px | **1273 px** | -719 px (**-36%**) |
-| **Footer** | 471 px | **397 px** | -74 px (**-16%**) | 893 px | **518 px** | -375 px (**-42%**) |
-| **Tickets (`/ticket`)** | 1129 px | **1038 px** | -91 px (**-8%**) | 1342 px | **1247 px** | -95 px (**-7%**) |
-| **Total secciones landing (sin Hero/Precios)** | 5582 px | **4547 px** | **-1035 px (-19%)** | 9752 px | **6744 px** | **-3008 px (-31%)** |
+### 2.1. Diagnóstico de la estructura actual
 
-En móvil se redujo el desplazamiento vertical de estas secciones en **3.008 píxeles (-31%)** sin sacrificar tamaño tipográfico, contraste ni legibilidad.
+| Indicador | Asistencia Individual | Pack 5 Asistencias | Empresa Inicial ($120.000/mes) | Empresa Operativa ($180.000/mes) |
+| --- | --- | --- | --- | --- |
+| **Asistencias incluidas** | 1 asistencia | 5 asistencias (90 días) |Hasta 3 asistencias / mes | Hasta 5 asistencias / mes |
+| **Puestos cubiertos** | 1 equipo puntual | Libre / profesional | Hasta 3 puestos registrados | Hasta 6 puestos registrados |
+| **Valor implícito por asistencia** | $20.000 | $18.000 | **$40.000** | **$36.000** |
+| **Valor implícito por puesto cubierto** | — | — | **$40.000 / puesto** | **$30.000 / puesto** |
+| **Asistencia adicional** | $20.000 | $20.000 | **$40.000** | **$40.000** |
+
+### 2.2. Hallazgos clave para el cliente y para OTX Solutions
+
+1. **Fricción de precio percibido frente al Pack 5 Asistencias**:
+   - Un dueño de comercio o estudio pequeño que compara las pestañas *Personas* y *Empresas* nota rápidamente que **3 asistencias en Empresa Inicial cuestan $120.000/mes** ($40.000 c/u, no acumulables), mientras que **5 asistencias en el Pack Ahorro cuestan $90.000** ($18.000 c/u y duran 3 meses).
+   - Si en *Empresa Inicial* no se percibe con claridad qué valor continuo recibe el negocio más allá de las 3 intervenciones reactivas (por ejemplo, prioridad de atención en horario laboral, relevamiento inicial de los 3 puestos e impresoras/red compartida, o control preventivo mensual), el cliente pequeño tiende a comprar asistencias sueltas o el Pack de $90.000 en lugar de suscribirse al abono mensual.
+2. **Asimetría en el valor de la "Asistencia adicional con plan activo ($40.000)"**:
+   - Actualmente figura que una asistencia adicional para un cliente con abono activo cuesta **$40.000**, es decir, **el doble que una asistencia suelta de $20.000**. Para quien ya paga un abono mensual, que el adicional sea más caro que la tarifa pública general genera confusión comercial, salvo que se aclare expresamente que corresponde a una *intervención prioritaria empresarial* o se alinee con un valor preferencial para abonados.
+3. **Claridad de diferencias entre Empresa Inicial y Empresa Operativa**:
+   - **Empresa Operativa ($180.000/mes)** tiene una relación precio/cobertura mucho más atractiva que *Empresa Inicial*: por un **50% más de inversión** ($180.000 vs. $120.000), duplica los puestos cubiertos (**6 puestos vs. 3**) y suma un **67% más de asistencias** (**5 vs. 3**), además de incluir prioridad y revisión mensual.
+   - En cambio, *Empresa Inicial* queda muy cerca en precio pero sin incluir explícitamente prioridad ni revisión preventiva básica.
+4. **Sostenibilidad operativa para el prestador**:
+   - Con un tope claro de **1 hora por caso remoto**, puestos registrados de antemano y asistencias no acumulables, la carga máxima teórica es de **3 horas/mes en Inicial** y **5 horas/mes en Operativa**, lo cual es **altamente sostenible y rentable** siempre que se mantengan fuera del abono:
+     - Las **visitas presenciales** (cotizadas aparte según zona, traslado y disponibilidad).
+     - Las **implementaciones de infraestructura, seguridad, Microsoft 365, web o IA** (cotizadas como proyectos independientes).
+
+### 2.3. Propuestas concretas para evaluar (sin aplicar hasta tu autorización)
+
+- **Opción A — Fortalecer el valor percibido sin tocar precios ($120.000 / $180.000)**:
+  1. Sumar en **Empresa Inicial ($120.000/mes)** el beneficio de *"Prioridad de atención en horario comercial"* y *"Registro técnico de los 3 puestos e impresoras de red para resolver más rápido sin empezar de cero cada vez"*. Así se justifica por qué un negocio elige el abono mensual frente al Pack de particulares.
+  2. En **Empresa Operativa ($180.000/mes)**, destacar *"Chequeo preventivo mensual de rendimiento, actualizaciones y copias de seguridad en los 6 puestos"*, diferenciándolo como un plan proactivo (evita que el negocio se frene) y no solo reactivo.
+  3. Aclarar en extras que las **visitas técnicas presenciales** se coordinan como adicional con prioridad de agenda para clientes con plan activo.
+- **Opción B — Alinear el precio de la "Asistencia adicional con plan activo"**:
+  - Revisar el extra *"Asistencia adicional con plan activo: $40.000"* para que tenga sentido frente a la asistencia individual ($20.000), ya sea bonificándolo respecto de una tarifa corporativa de urgencia o ajustándolo a un valor preferencial de abonado (por ejemplo, **$18.000 – $20.000** por sesión remota extra de hasta 1 hora).
 
 ---
 
 ## 3. Comparación visual Antes vs. Después
 
-### Escritorio (`1440×900`)
+### Destaque "Pack Ahorro" en Precios (`1440×900` y `390×844`)
 
-| Sección | Antes del refinamiento | Después del refinamiento |
+| Escritorio (`1440×900`) | Móvil (`390×844`) |
+| --- | --- |
+| ![Precios Particulares Escritorio](preview-modernizacion/pricing-particulares-desktop.png) | ![Precios Particulares Móvil](preview-modernizacion/pricing-particulares-mobile.png) |
+
+### Secciones en Escritorio (`1440×900`)
+
+| Sección | Antes | Después |
 | --- | --- | --- |
 | **Servicios** | ![Antes Servicios escritorio](preview-modernizacion/before-services-desktop.png) | ![Después Servicios escritorio](preview-modernizacion/services-desktop.png) |
 | **Cómo trabajamos** | ![Antes Cómo trabajamos escritorio](preview-modernizacion/before-how-it-works-desktop.png) | ![Después Cómo trabajamos escritorio](preview-modernizacion/how-it-works-desktop.png) |
@@ -63,9 +85,9 @@ En móvil se redujo el desplazamiento vertical de estas secciones en **3.008 pí
 | **Tickets (`/ticket`)** | ![Antes Tickets escritorio](preview-modernizacion/before-ticket-desktop.png) | ![Después Tickets escritorio](preview-modernizacion/ticket-desktop.png) |
 | **Footer** | ![Antes Footer escritorio](preview-modernizacion/before-footer-desktop.png) | ![Después Footer escritorio](preview-modernizacion/footer-desktop.png) |
 
-### Móvil (`390×844`)
+### Secciones en Móvil (`390×844`)
 
-| Sección | Antes del refinamiento | Después del refinamiento |
+| Sección | Antes | Después |
 | --- | --- | --- |
 | **Servicios** | ![Antes Servicios móvil](preview-modernizacion/before-services-mobile.png) | ![Después Servicios móvil](preview-modernizacion/services-mobile.png) |
 | **Cómo trabajamos** | ![Antes Cómo trabajamos móvil](preview-modernizacion/before-how-it-works-mobile.png) | ![Después Cómo trabajamos móvil](preview-modernizacion/how-it-works-mobile.png) |
@@ -74,11 +96,3 @@ En móvil se redujo el desplazamiento vertical de estas secciones en **3.008 pí
 | **Contacto** | ![Antes Contacto móvil](preview-modernizacion/before-contact-mobile.png) | ![Después Contacto móvil](preview-modernizacion/contact-mobile.png) |
 | **Tickets (`/ticket`)** | ![Antes Tickets móvil](preview-modernizacion/before-ticket-mobile.png) | ![Después Tickets móvil](preview-modernizacion/ticket-mobile.png) |
 | **Footer** | ![Antes Footer móvil](preview-modernizacion/before-footer-mobile.png) | ![Después Footer móvil](preview-modernizacion/footer-mobile.png) |
-
----
-
-## 4. Validación funcional y de prellenado
-
-- **Diagnóstico de `prefilledAsunto`**: En la corrida previa el script de prueba ejecutaba `trigger.click()` y `btn.click()` dentro de un mismo tick síncrono antes de que React 18 montara el panel y aplicara `setFormData`. Al aguardar el ciclo de renderizado de React, `prefilledAsunto` registra correctamente `"Consulta sobre: Asesoramiento y equipamiento"`, muestra el indicador visual `Seleccionado: Asesoramiento y equipamiento` y enfoca el campo `#nombre`.
-- **Envío de tickets (`POST /api/tickets`)**: Comprobado tanto desde `#contacto` (`canal: "Landing"`) como desde `/ticket` (`canal: "TicketWeb"`), validando el esquema `TicketCreate` del backend FastAPI y mostrando la pantalla de confirmación con número de ticket ([checks.json](preview-modernizacion/checks.json)).
-- **Compilación**: `143,45 kB JS gzip` y `13,25 kB CSS gzip`, sin errores ni desbordamiento horizontal en 7 tamaños de pantalla (`320×740` a `1920×1080`).

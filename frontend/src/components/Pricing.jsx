@@ -39,7 +39,7 @@ const Pricing = () => {
       <div className="offer-container">
         <div className="offer-section-heading offer-price-heading">
           <div><p className="offer-eyebrow">Precios en ARS</p><h2 id="offer-pricing-title">Opciones y precios.</h2></div>
-          <p>Una asistencia puntual, soporte recurrente o un entorno Microsoft 365. El alcance se confirma antes de empezar.</p>
+          <p>Para resolver un problema puntual hoy, contar con soporte mensual en tu negocio o implementar Microsoft 365. Siempre confirmamos el alcance antes de empezar.</p>
         </div>
         <Tabs value={category} onValueChange={setCategory} className="offer-price-root">
           <TabsList className="offer-tabs" aria-label="Precios por categoría">
@@ -53,15 +53,28 @@ const Pricing = () => {
               <TabsContent value={item.value} key={item.value} className="offer-category-panel">
                 <div className="offer-plan-layout">
                   <fieldset className="offer-plan-options"><legend className="sr-only">Elegí una opción para {item.label}</legend>
-                    {item.plans.map(option => (
-                      <label className={`offer-plan-option ${option.id === plan.id ? 'is-selected' : ''}`} key={option.id}>
-                        <input type="radio" name={`offer-plan-${item.value}`} value={option.id} checked={option.id === plan.id}
-                          onChange={() => setSelection(previous => ({ ...previous, [item.value]: option.id }))} />
-                        <span className="offer-option-body"><span className="offer-option-name">{option.name}</span>
-                          <Price plan={option} from={item.value === 'particulares' && option.id === 1} />
-                          <span className="offer-option-description">{option.description}</span></span>
-                      </label>
-                    ))}
+                    {item.plans.map(option => {
+                      const isPackAhorro = item.value === 'particulares' && option.id === 2;
+                      return (
+                        <label
+                          className={`offer-plan-option ${option.id === plan.id ? 'is-selected' : ''} ${isPackAhorro ? 'is-pack-ahorro' : ''}`}
+                          key={option.id}
+                        >
+                          <input type="radio" name={`offer-plan-${item.value}`} value={option.id} checked={option.id === plan.id}
+                            onChange={() => setSelection(previous => ({ ...previous, [item.value]: option.id }))} />
+                          <span className="offer-option-body">
+                            <span className="offer-option-header">
+                              <span className="offer-option-name">{option.name}</span>
+                              {isPackAhorro && (
+                                <span className="offer-pack-badge">Pack Ahorro · Ahorrás $10.000</span>
+                              )}
+                            </span>
+                            <Price plan={option} from={item.value === 'particulares' && option.id === 1} />
+                            <span className="offer-option-description">{option.description}</span>
+                          </span>
+                        </label>
+                      );
+                    })}
                   </fieldset>
                   <div className="offer-plan-detail">
                     <p className="offer-eyebrow">Qué incluye</p>

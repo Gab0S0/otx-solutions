@@ -26,7 +26,7 @@ const normalizeServiceParam = (raw) => {
 
 const inferClientType = (plan, servicio) => {
   if (plan && /Empresa|Microsoft 365/i.test(plan)) return 'pyme';
-  if (servicio && /Microsoft 365/i.test(servicio)) return 'pyme';
+  if (servicio && /empresa|Microsoft 365/i.test(servicio)) return 'pyme';
   return 'particular';
 };
 
@@ -212,7 +212,7 @@ const TicketPage = () => {
               <p className="otx-eyebrow">Tickets</p>
               <h1>Abrir un ticket.</h1>
               <p className="otx-section-lead">
-                Registrá tu solicitud de soporte remoto, equipamiento o desarrollo a medida.
+                Contanos con tus palabras qué problema tenés, qué equipo buscás o qué proyecto querés cotizar.
               </p>
             </div>
 

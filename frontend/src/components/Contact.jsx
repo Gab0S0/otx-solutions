@@ -27,7 +27,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const resolveClientType = (plan, servicio, currentTipo) => {
   if (plan && /Empresa|Microsoft 365/i.test(plan)) return 'pyme';
-  if (servicio && /Microsoft 365/i.test(servicio)) return 'pyme';
+  if (servicio && /empresa|Microsoft 365/i.test(servicio)) return 'pyme';
   return currentTipo || 'particular';
 };
 
@@ -211,7 +211,7 @@ const Contact = () => {
             <p className="otx-eyebrow">Contacto</p>
             <h2 id="contact-title">Hablemos.</h2>
             <p className="otx-section-lead">
-              WhatsApp es la vía más rápida para coordinar una asistencia en el día o pedir presupuesto.
+              Escribinos por WhatsApp para resolver un problema en el día, coordinar una visita o pedir presupuesto sin compromiso.
             </p>
 
             <div className="otx-contact-direct">

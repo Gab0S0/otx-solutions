@@ -11,45 +11,59 @@ export const companyInfo = {
 export const services = [
   {
     id: 1,
-    title: "Soporte Técnico Remoto",
-    description: "Nos conectamos a tu equipo con tu autorización para diagnosticar y resolver incidentes en Windows, Office, correo, impresoras, conectividad y aplicaciones de uso diario.",
+    title: "Soporte técnico remoto y presencial",
+    hint: "¿Tu computadora está lenta, falla el correo, la impresora o algún programa? Te ayudamos a distancia o coordinamos una visita a domicilio u oficina.",
+    description: "Nos conectamos a tu equipo con tu autorización para resolver fallas de Windows, Office, correo, impresoras, Wi-Fi y programas de uso diario. Si el caso requiere presencia física —configuración de equipos, redes o instalaciones en el lugar—, coordinamos una visita técnica a domicilio u oficina confirmando previamente disponibilidad, zona, traslado y presupuesto.",
     icon: "Monitor"
   },
   {
     id: 2,
-    title: "Seguridad y optimización",
-    description: "Revisamos lentitud, arranque del sistema, programas innecesarios, actualizaciones, copias de seguridad básicas y protección preventiva para mantener tus equipos ágiles.",
-    icon: "Sparkles"
+    title: "Puesta a punto y protección",
+    hint: "¿Tarda en arrancar, salen carteles molestos o querés cuidar tus archivos? Dejamos tu equipo ágil, limpio y protegido.",
+    description: "Optimizamos el inicio de Windows, quitamos programas innecesarios, aplicamos actualizaciones importantes, configuramos copias de seguridad para tus archivos y reforzamos la protección preventiva frente a virus, estafas o accesos no deseados.",
+    icon: "ShieldCheck"
   },
   {
     id: 3,
-    title: "Asesoramiento y equipamiento",
-    description: "Seleccionamos notebooks, PC gamer, computadoras para oficinas completas, monitores y periféricos. Armamos presupuestos integrales según tu uso real e inversión.",
-    icon: "Lightbulb"
+    title: "Capacitación personalizada",
+    hint: "¿Querés usar mejor la computadora, Excel, el correo o herramientas de IA? Clases prácticas a tu ritmo, sin cursos cerrados.",
+    description: "Enseñamos exactamente lo que cada persona o equipo necesita aprender: uso cotidiano de Windows, Word, Excel, correo electrónico, videollamadas, organización de archivos y herramientas de IA. Orientado a particulares, adultos mayores, profesionales y empleados de empresas, en modalidad remota o presencial a coordinar.",
+    icon: "GraduationCap"
   },
   {
     id: 4,
-    title: "Armado y reparación",
-    description: "Ensamblado de equipos a medida, mejoras de almacenamiento o memoria (SSD y RAM) y reparación de hardware sujetos a evaluación y diagnóstico previo.",
-    icon: "Settings"
+    title: "Asesoramiento de compra y equipamiento",
+    hint: "¿No sabés qué notebook elegir, buscás una PC gamer para tu presupuesto o querés equipar una oficina? Te guiamos para comprar bien.",
+    description: "Escuchamos para qué vas a usar el equipo y cuánto querés invertir para recomendarte opciones concretas y convenientes: notebooks, PC gamer, computadoras de escritorio, monitores, impresoras, periféricos y presupuestos completos para oficinas.",
+    icon: "Laptop"
   },
   {
     id: 5,
-    title: "Microsoft 365",
-    description: "Implementamos y gestionamos cuentas corporativas, dominios, licencias, seguridad MFA y herramientas colaborativas en Outlook, Teams, OneDrive y SharePoint.",
-    icon: "Cloud"
+    title: "Mejoras, armado y reparación de PC",
+    hint: "¿Tu computadora actual quedó lenta o dejó de encender? Evaluamos si conviene mejorarla, armar una a medida o repararla.",
+    description: "Realizamos diagnóstico técnico, mejoras de velocidad y almacenamiento (discos sólidos SSD y memoria RAM), armado de equipos a medida e instalación o reparación de componentes sujetos a evaluación y presupuesto previo.",
+    icon: "Wrench"
   },
   {
     id: 6,
-    title: "Web y formularios",
-    description: "Diseñamos y desarrollamos páginas web profesionales, sitios comerciales y formularios optimizados para móvil con derivación a WhatsApp, correo o tickets.",
-    icon: "Globe"
+    title: "Tu empresa organizada y segura",
+    hint: "¿Querés correo con el nombre de tu negocio, archivos compartidos en orden y cuentas protegidas? Organizamos el trabajo de tu equipo.",
+    description: "Configuramos correos profesionales, carpetas compartidas con permisos por área, copias de seguridad y protección de cuentas y equipos de trabajo. A nivel técnico, implementamos y administramos Microsoft 365 (Outlook, Teams, OneDrive, SharePoint), control de accesos y verificación MFA con Microsoft Entra, protección con Defender y gestión de dispositivos con Intune, mediante proyectos a medida según compatibilidad, licencias y alcance acordado.",
+    icon: "Building2"
   },
   {
     id: 7,
-    title: "Automatizaciones e IA",
-    description: "Proyectos a medida para automatizar tareas operativas, integrar formularios con planillas o notificaciones e implementar asistentes con inteligencia artificial.",
-    icon: "Cpu"
+    title: "Páginas web y formularios comerciales",
+    hint: "¿Necesitás mostrar lo que hacés y recibir consultas claras en tu WhatsApp o correo? Creamos sitios rápidos y fáciles de usar.",
+    description: "Diseñamos y publicamos páginas web modernas, sitios de presentación comercial y formularios claros pensados para que tus clientes te escriban sin vueltas desde el teléfono o la computadora, derivando cada consulta a WhatsApp, correo o tickets.",
+    icon: "Globe"
+  },
+  {
+    id: 8,
+    title: "Inteligencia artificial y automatización",
+    hint: "¿Perdés tiempo en tareas repetitivas, planillas o respuestas frecuentes? Aplicamos IA y automatizaciones prácticas para ahorrar horas.",
+    description: "Desarrollamos proyectos a medida para automatizar tareas repetitivas, conectar formularios con planillas o avisos automáticos e incorporar asistentes y herramientas de IA (como Claude, Microsoft Copilot o flujos personalizados) adaptados a la forma de trabajar de tu negocio.",
+    icon: "Sparkles"
   }
 ];
 
@@ -219,86 +233,86 @@ export const planesM365 = [
 export const howItWorks = [
   {
     step: 1,
-    title: "Escribinos",
-    description: "Contanos por WhatsApp o formulario qué necesitás resolver o cotizar."
+    title: "Contanos qué necesitás",
+    description: "Escribinos por WhatsApp o formulario con tus propias palabras, sin necesidad de saber términos técnicos."
   },
   {
     step: 2,
-    title: "Definimos el alcance",
-    description: "Confirmamos diagnóstico, modalidad y presupuesto antes de empezar."
+    title: "Confirmamos cómo ayudarte",
+    description: "Te explicamos la solución en simple, si se resuelve a distancia o con una visita, y el precio antes de empezar."
   },
   {
     step: 3,
-    title: "Resolvemos",
-    description: "Nos conectamos con tu autorización o desarrollamos el proyecto acordado."
+    title: "Lo resolvemos",
+    description: "Nos conectamos con tu permiso, coordinamos la visita o ponemos en marcha el equipo o proyecto acordado."
   }
 ];
 
 export const whyUs = [
   {
     id: 1,
-    title: "Alcance confirmado antes de empezar",
-    description: "Informamos qué incluye cada asistencia o presupuesto de antemano. Si requiere más tiempo o evaluación adicional, se consulta antes de avanzar."
+    title: "Hablamos en tu idioma",
+    description: "Explicamos qué pasa y cómo solucionarlo de manera sencilla, sin palabras difíciles ni vueltas innecesarias."
   },
   {
     id: 2,
-    title: "Conexión remota autorizada",
-    description: "Intervenimos en pantalla únicamente con tu permiso para resolver problemas cotidianos sin trasladar tus equipos."
+    title: "Precio y alcance claros antes de empezar",
+    description: "Siempre sabés qué incluye cada asistencia o presupuesto de antemano. Nunca avanzamos con gastos extra sin consultarte."
   },
   {
     id: 3,
-    title: "Criterio real en equipamiento",
-    description: "Asesoramos en compra, armado y mejora de notebooks, PC gamer y puestos de oficina según el uso real."
+    title: "Asistencia en el acto o visita coordinada",
+    description: "Resolvemos la mayoría de los problemas en minutos por conexión remota segura y coordinamos visitas cuando hace falta estar ahí."
   },
   {
     id: 4,
-    title: "Soluciones web e IA a medida",
-    description: "Desarrollamos sitios comerciales, formularios y automatizaciones pensadas para simplificar tu trabajo diario."
+    title: "Recomendaciones honestas para comprar o mejorar",
+    description: "Te aconsejamos la notebook, PC gamer, mejora o herramienta para tu negocio que realmente sirve para tu uso y presupuesto."
   }
 ];
 
 export const faqData = [
   {
     id: 1,
-    question: "¿Cómo funciona el soporte remoto y es seguro?",
+    question: "¿Cómo me ayudan a distancia y qué tan seguro es?",
     answer:
-      "Coordinamos la sesión mediante AnyDesk o TeamViewer y nos conectamos únicamente con tu autorización. Ves todo el trabajo en pantalla y, al finalizar, el acceso se cierra."
+      "Usamos un programa seguro (AnyDesk o TeamViewer) y entramos únicamente cuando vos nos das permiso. Ves todo lo que hacemos en tu pantalla y, al terminar, la conexión se cierra por completo."
   },
   {
     id: 2,
-    question: "¿Qué incluye una asistencia remota y cuánto dura?",
+    question: "¿Qué incluye la Asistencia Remota de $20.000?",
     answer:
-      "Cubre el diagnóstico y la resolución de un caso principal dentro de hasta 1 hora de trabajo técnico remoto: Windows, Office, correo, impresoras, lentitud o configuración general."
+      "Cubre el diagnóstico y la solución de un problema puntual en hasta 1 hora de trabajo remoto: computadora lenta, correo, Office, impresoras, virus o configuración. Si requiere más tiempo o revisión física, te avisamos y cotizamos antes de seguir."
   },
   {
     id: 3,
-    question: "¿Qué pasa si el problema requiere más tiempo o evaluación física?",
+    question: "¿Hacen visitas técnicas a domicilio o a oficinas?",
     answer:
-      "Si el caso excede la hora o requiere intervención de hardware, te informamos el diagnóstico y cotizamos la extensión o reparación antes de continuar. Nunca aplicamos cargos sin aviso previo."
+      "Sí. Para instalar equipos, configurar impresoras o redes en el lugar, o revisar fallas físicas, coordinamos visitas a domicilio u oficina confirmando antes disponibilidad, zona, traslado y presupuesto."
   },
   {
     id: 4,
-    question: "¿Cómo funcionan los planes mensuales para empresas?",
+    question: "¿Cómo son las clases y capacitaciones personalizadas?",
     answer:
-      "Incluyen una cantidad mensual de asistencias remotas para puestos de trabajo registrados al contratar. Se cuentan por períodos de 30 días y las asistencias no utilizadas no se acumulan."
+      "Son encuentros prácticos adaptados a tu ritmo para aprender Windows, Office, Excel, correo o herramientas de inteligencia artificial. No vendemos cursos cerrados: enseñamos exactamente lo que vos o tu equipo necesitan, a distancia o presencial."
   },
   {
     id: 5,
-    question: "¿Cómo trabajan el asesoramiento, armado y reparación de equipos?",
+    question: "¿Me ayudan a elegir una notebook, armar una PC gamer o mejorar mi computadora?",
     answer:
-      "Armamos presupuestos completos para compra de notebooks, PC gamer, oficinas, monitores y periféricos. El ensamblado a medida, mejoras de SSD/RAM y reparaciones se realizan según evaluación previa."
+      "Sí. Nos contás para qué la vas a usar y tu presupuesto, y te recomendamos opciones concretas para comprar bien. También realizamos mejoras de velocidad (disco sólido SSD y memoria RAM), armado a medida y reparaciones según evaluación."
   },
   {
     id: 6,
-    question: "¿Cómo se cotizan las páginas web, formularios y automatizaciones con IA?",
+    question: "¿Cómo funcionan los planes mensuales para negocios y empresas?",
     answer:
-      "Se desarrollan como proyectos a medida. Relevamos tu necesidad, definimos el alcance concreto y entregamos un presupuesto cerrado antes de iniciar."
+      "Incluyen una cantidad mensual de asistencias remotas para los puestos registrados del negocio, con coordinación directa por WhatsApp. Se cuentan por períodos de 30 días y las asistencias no utilizadas no se acumulan."
   },
   {
     id: 7,
-    question: "¿Qué incluye el servicio de Microsoft 365?",
+    question: "¿Cómo se contratan las páginas web, mejoras para empresas o proyectos con IA?",
     answer:
-      "Abarca implementación inicial, dominio, alta de usuarios, seguridad MFA, Outlook, Teams, OneDrive y SharePoint básico. Las licencias de Microsoft se abonan por separado."
+      "Las páginas web, la organización de cuentas y seguridad empresarial (como Microsoft 365) y las automatizaciones con inteligencia artificial se presupuestan como proyectos a medida, independientes de los planes mensuales."
   }
 ];
 

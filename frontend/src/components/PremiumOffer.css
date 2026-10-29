@@ -1,5 +1,5 @@
 /* Scoped to Services and Pricing. Approved intro and other sections are untouched. */
-.otx-offer { --offer-ice: #CFE4F7; --offer-green: #8FE3C0; background: #04070C; color: #fff; padding: 96px 6%; }
+.otx-offer { --offer-ice: #CFE4F7; --offer-green: #8FE3C0; --offer-champagne: #E5D3B3; background: #04070C; color: #fff; padding: 96px 6%; }
 .otx-offer .offer-container { max-width: 1260px; margin: auto; }
 .otx-offer .offer-section-heading { max-width: 680px; margin-bottom: 52px; }
 .otx-offer .offer-eyebrow { color: var(--offer-green); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; line-height: 1.7; }
@@ -7,17 +7,23 @@
 .otx-offer .offer-section-heading > p:last-child { margin-top: 24px; font-size: 15px; line-height: 1.8; color: var(--offer-ice); }
 .otx-offer .offer-service-group { display: grid; grid-template-columns: .36fr .64fr; gap: 64px; border-top: 1px solid #cfe4f733; padding: 38px 0; }
 .otx-offer .offer-group-intro h3 { font-size: 28px; letter-spacing: -.025em; font-weight: 450; }
-.otx-offer .offer-group-intro > p { margin-top: 14px; max-width: 270px; color: var(--offer-ice); font-size: 14px; line-height: 1.8; }
+.otx-offer .offer-group-intro > p { margin-top: 14px; max-width: 280px; color: var(--offer-ice); font-size: 14px; line-height: 1.8; }
 .otx-offer .offer-service { border-bottom: 1px solid #cfe4f726; }
 .otx-offer .offer-service:last-child { border-bottom: 0; }
-.otx-offer .offer-service h4 > button { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 4px; min-height: 88px; text-align: left; }
+.otx-offer .offer-service h4 > button { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 4px; min-height: 84px; text-align: left; }
 .otx-offer .offer-service h4 > button > svg { flex-shrink: 0; color: var(--offer-ice); }
-.otx-offer .offer-service-name { display: block; font-size: 19px; line-height: 1.4; font-weight: 450; letter-spacing: -.025em; }
-.otx-offer .offer-service-hint { display: block; margin-top: 8px; font-size: 13px; line-height: 1.6; color: var(--offer-ice); }
+.otx-offer .offer-service-main { display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start; min-width: 0; }
+.otx-offer .offer-service-copy { display: block; min-width: 0; }
+.otx-offer .offer-service-title-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.otx-offer .offer-service-icon { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; margin-top: 1px; border-radius: 8px; background: rgba(207, 228, 247, 0.05); border: 1px solid rgba(207, 228, 247, 0.14); color: var(--offer-green); flex-shrink: 0; }
+.otx-offer .offer-service-name { display: inline; font-size: 19px; line-height: 1.35; font-weight: 450; letter-spacing: -.025em; }
+.otx-offer .offer-service-pill { display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 999px; font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--offer-green); border: 1px solid rgba(143, 227, 192, 0.3); background: rgba(143, 227, 192, 0.07); }
+.otx-offer .offer-service-hint { display: block; margin-top: 7px; font-size: 13.5px; line-height: 1.6; color: var(--offer-ice); max-width: 66ch; }
 .otx-offer .offer-service h4 > button:hover .offer-service-name { color: var(--offer-green); }
-.otx-offer .offer-service-panel { padding: 6px 4px 26px; }
+.otx-offer .offer-service h4 > button:hover .offer-service-icon { border-color: rgba(143, 227, 192, 0.45); background: rgba(143, 227, 192, 0.1); }
+.otx-offer .offer-service-panel { padding: 4px 4px 26px 46px; }
 .otx-offer .offer-service-panel[hidden] { display: none; }
-.otx-offer .offer-service-panel > p { font-size: 14px; line-height: 1.85; color: var(--offer-ice); }
+.otx-offer .offer-service-panel > p { font-size: 14px; line-height: 1.85; color: var(--offer-ice); max-width: 68ch; }
 .otx-offer .offer-service-actions, .otx-offer .offer-plan-actions { display: flex; flex-wrap: wrap; gap: 12px 22px; align-items: center; }
 .otx-offer .offer-service-actions { margin-top: 22px; }
 .otx-offer .offer-primary { display: inline-flex; align-items: center; justify-content: center; gap: 18px; min-height: 48px; padding: 14px 20px; background: var(--offer-green); color: #04070C; border-radius: 999px; font-size: 13px; font-weight: 600; }
@@ -27,7 +33,7 @@
 .otx-offer :is(a,button,input,summary,[role='tabpanel']):focus-visible { outline: 2px solid var(--offer-green); outline-offset: 4px; box-shadow: none; }
 .otx-offer.offer-pricing { border-top: 1px solid #cfe4f733; }
 .otx-offer .offer-price-heading { display: flex; align-items: end; justify-content: space-between; gap: 48px; max-width: none; }
-.otx-offer .offer-price-heading > p { max-width: 360px; }
+.otx-offer .offer-price-heading > p { max-width: 390px; }
 .otx-offer .offer-tabs { display: grid; grid-template-columns: 1fr 1fr 1.25fr; gap: 8px; height: auto; max-width: 600px; padding: 0; margin-bottom: 38px; background: none; border-radius: 0; border-bottom: 1px solid #cfe4f733; }
 .otx-offer .offer-tab { min-height: 56px; padding: 14px 10px; background: transparent; color: var(--offer-ice); font-size: 14px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; box-shadow: none; }
 .otx-offer .offer-tab[data-state='active'] { background: transparent; color: #fff; border-bottom-color: var(--offer-green); box-shadow: none; }
@@ -36,9 +42,13 @@
 .otx-offer .offer-plan-options { min-width: 0; margin: 0; padding: 0; }
 .otx-offer .offer-plan-option { display: flex; gap: 18px; padding: 26px 22px; border-bottom: 1px solid #cfe4f733; border-left: 2px solid transparent; cursor: pointer; }
 .otx-offer .offer-plan-option.is-selected { background: #cfe4f708; border-left-color: var(--offer-green); }
+.otx-offer .offer-plan-option.is-pack-ahorro { border-left-color: rgba(229, 211, 179, 0.5); background: rgba(229, 211, 179, 0.025); }
+.otx-offer .offer-plan-option.is-pack-ahorro.is-selected { border-left-color: var(--offer-champagne); background: rgba(229, 211, 179, 0.055); }
 .otx-offer .offer-plan-option input { width: 18px; height: 18px; margin-top: 5px; accent-color: var(--offer-green); flex-shrink: 0; }
-.otx-offer .offer-option-body { display: block; min-width: 0; }
-.otx-offer .offer-option-name { display: block; font-size: 16px; color: #fff; line-height: 1.5; }
+.otx-offer .offer-option-body { display: block; min-width: 0; width: 100%; }
+.otx-offer .offer-option-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; }
+.otx-offer .offer-option-name { display: inline-block; font-size: 16px; color: #fff; line-height: 1.5; }
+.otx-offer .offer-pack-badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 500; letter-spacing: .04em; color: var(--offer-champagne); border: 1px solid rgba(229, 211, 179, 0.38); background: rgba(229, 211, 179, 0.08); line-height: 1.4; }
 .otx-offer .offer-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-top: 10px; }
 .otx-offer .offer-price > small { color: var(--offer-ice); font-size: 10px; letter-spacing: .04em; }
 .otx-offer .offer-price > strong { color: #fff; font-size: clamp(30px,3.2vw,46px); font-weight: 400; letter-spacing: -.04em; line-height: 1.2; }
@@ -70,6 +80,8 @@
   .otx-offer .offer-group-intro h3 { font-size: 26px; }
   .otx-offer .offer-group-intro > p { max-width: 360px; }
   .otx-offer .offer-service-name { font-size: 17px; }
+  .otx-offer .offer-service-hint { padding-left: 0; margin-top: 8px; }
+  .otx-offer .offer-service-panel { padding-left: 4px; }
   .otx-offer .offer-service-actions { gap: 4px 24px; }
   .otx-offer .offer-service-actions > .offer-primary { width: 100%; }
   .otx-offer .offer-price-heading { display: block; }
