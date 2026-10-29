@@ -17,7 +17,7 @@ const HowItWorks = () => {
             <h2 id="how-it-works-title">Cómo trabajamos.</h2>
           </div>
           <p className="otx-section-lead">
-            Tres pasos simples para resolver tu problema sin vueltas.
+            Un proceso directo para soporte técnico, equipamiento o proyectos a medida.
           </p>
         </div>
 

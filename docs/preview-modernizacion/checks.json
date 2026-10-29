@@ -5,7 +5,8 @@
       "scrollWidth": 320,
       "clientWidth": 320,
       "overflowX": false,
-      "servicesCount": 8,
+      "supportItemsCount": 9,
+      "capabilitiesCount": 6,
       "stepsCount": 3,
       "pillarsCount": 4,
       "faqCount": 7
@@ -15,7 +16,8 @@
       "scrollWidth": 375,
       "clientWidth": 375,
       "overflowX": false,
-      "servicesCount": 8,
+      "supportItemsCount": 9,
+      "capabilitiesCount": 6,
       "stepsCount": 3,
       "pillarsCount": 4,
       "faqCount": 7
@@ -25,7 +27,8 @@
       "scrollWidth": 390,
       "clientWidth": 390,
       "overflowX": false,
-      "servicesCount": 8,
+      "supportItemsCount": 9,
+      "capabilitiesCount": 6,
       "stepsCount": 3,
       "pillarsCount": 4,
       "faqCount": 7
@@ -35,7 +38,8 @@
       "scrollWidth": 768,
       "clientWidth": 768,
       "overflowX": false,
-      "servicesCount": 8,
+      "supportItemsCount": 9,
+      "capabilitiesCount": 6,
       "stepsCount": 3,
       "pillarsCount": 4,
       "faqCount": 7
@@ -45,7 +49,8 @@
       "scrollWidth": 1280,
       "clientWidth": 1280,
       "overflowX": false,
-      "servicesCount": 8,
+      "supportItemsCount": 9,
+      "capabilitiesCount": 6,
       "stepsCount": 3,
       "pillarsCount": 4,
       "faqCount": 7
@@ -55,7 +60,8 @@
       "scrollWidth": 1440,
       "clientWidth": 1440,
       "overflowX": false,
-      "servicesCount": 8,
+      "supportItemsCount": 9,
+      "capabilitiesCount": 6,
       "stepsCount": 3,
       "pillarsCount": 4,
       "faqCount": 7
@@ -65,7 +71,8 @@
       "scrollWidth": 1920,
       "clientWidth": 1920,
       "overflowX": false,
-      "servicesCount": 8,
+      "supportItemsCount": 9,
+      "capabilitiesCount": 6,
       "stepsCount": 3,
       "pillarsCount": 4,
       "faqCount": 7
@@ -75,23 +82,23 @@
     "services": {
       "desktop": {
         "before": 1478,
-        "after": 2045,
-        "diffPx": 567,
-        "diffPct": "38%"
+        "after": 4197,
+        "diffPx": 2719,
+        "diffPct": "184%"
       },
       "mobile": {
         "before": 2170,
-        "after": 3103,
-        "diffPx": 933,
-        "diffPct": "43%"
+        "after": 6245,
+        "diffPx": 4075,
+        "diffPct": "188%"
       }
     },
     "howItWorks": {
       "desktop": {
         "before": 667,
-        "after": 589,
-        "diffPx": -78,
-        "diffPct": "-12%"
+        "after": 565,
+        "diffPx": -102,
+        "diffPct": "-15%"
       },
       "mobile": {
         "before": 1221,
@@ -109,22 +116,22 @@
       },
       "mobile": {
         "before": 1606,
-        "after": 1057,
-        "diffPx": -549,
-        "diffPct": "-34%"
+        "after": 1033,
+        "diffPx": -573,
+        "diffPct": "-36%"
       }
     },
     "faq": {
       "desktop": {
         "before": 1220,
-        "after": 723,
-        "diffPx": -497,
-        "diffPct": "-41%"
+        "after": 749,
+        "diffPx": -471,
+        "diffPct": "-39%"
       },
       "mobile": {
         "before": 1870,
-        "after": 1221,
-        "diffPx": -649,
+        "after": 1222,
+        "diffPx": -648,
         "diffPct": "-35%"
       }
     },
@@ -151,29 +158,29 @@
       },
       "mobile": {
         "before": 893,
-        "after": 518,
-        "diffPx": -375,
-        "diffPct": "-42%"
+        "after": 541,
+        "diffPx": -352,
+        "diffPct": "-39%"
       }
     },
     "ticket": {
       "desktop": {
         "before": 1129,
-        "after": 1065,
-        "diffPx": -64,
-        "diffPct": "-6%"
+        "after": 1082,
+        "diffPx": -47,
+        "diffPct": "-4%"
       },
       "mobile": {
         "before": 1342,
-        "after": 1247,
-        "diffPx": -95,
-        "diffPct": "-7%"
+        "after": 1264,
+        "diffPx": -78,
+        "diffPct": "-6%"
       }
     }
   },
   "servicePrefillCheck": {
-    "prefilledAsunto": "Consulta sobre: Tu empresa organizada y segura",
-    "prefillPillText": "Seleccionado:Tu empresa organizada y segura\nQuitar",
+    "prefilledAsunto": "Consulta sobre: Automatización de proceso",
+    "prefillPillText": "Seleccionado:Automatización de procesos e IA aplicada\nQuitar",
     "activeElementId": "nombre"
   },
   "contactSubmitCheck": {
@@ -181,8 +188,8 @@
     "ticketIdText": "OTX-26-0001"
   },
   "ticketPrefillCheck": {
-    "asunto": "Consulta sobre: Capacitación personalizada",
-    "servicioText": "Capacitación personalizada",
+    "asunto": "Consulta sobre: Optimización de herramientas e integraciones",
+    "servicioText": "Optimización de herramientas e integraciones",
     "ticketDotColor": "rgb(143, 227, 192)",
     "overflowMobile": false
   },
@@ -200,10 +207,10 @@
       "email": "martin@empresa.com.ar",
       "telefono": null,
       "tipo": "pyme",
-      "asunto": "Consulta sobre: Tu empresa organizada y segura",
-      "mensaje": "Queremos organizar el correo corporativo y las carpetas compartidas de la oficina.",
+      "asunto": "Consulta sobre: Automatización de proceso",
+      "mensaje": "Queremos automatizar el registro de consultas por correo hacia nuestra planilla.",
       "plan": null,
-      "servicio": "Tu empresa organizada y segura",
+      "servicio": "Automatización de procesos e IA aplicada",
       "website": "",
       "canal": "Landing"
     },
@@ -211,11 +218,11 @@
       "nombre": "Laura Díaz",
       "email": "laura@estudio.com.ar",
       "telefono": null,
-      "tipo": "particular",
-      "asunto": "Consulta sobre: Capacitación personalizada",
+      "tipo": "pyme",
+      "asunto": "Consulta sobre: Optimización de herramientas e integraciones",
       "mensaje": "Queremos desarrollar una página web con formulario de contacto.",
       "plan": null,
-      "servicio": "Capacitación personalizada",
+      "servicio": "Optimización de herramientas e integraciones",
       "website": "",
       "canal": "TicketWeb"
     }

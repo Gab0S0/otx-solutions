@@ -9,9 +9,9 @@ const WhyUs = () => {
         <div className="otx-why-layout">
           <div>
             <p className="otx-eyebrow">Por qué elegirnos</p>
-            <h2 id="why-us-title">Sin tecnicismos ni sorpresas.</h2>
+            <h2 id="why-us-title">Criterio técnico y alcance claro.</h2>
             <p className="otx-section-lead">
-              Te acompañamos con explicaciones simples, precios claros y soluciones que funcionan en el día a día.
+              Entendemos el problema antes de proponer herramientas, equipos o desarrollos.
             </p>
           </div>
 

@@ -26,7 +26,7 @@ const normalizeServiceParam = (raw) => {
 
 const inferClientType = (plan, servicio) => {
   if (plan && /Empresa|Microsoft 365/i.test(plan)) return 'pyme';
-  if (servicio && /empresa|Microsoft 365/i.test(servicio)) return 'pyme';
+  if (servicio && /empresa|Microsoft 365|Optimización|Automatización/i.test(servicio)) return 'pyme';
   return 'particular';
 };
 

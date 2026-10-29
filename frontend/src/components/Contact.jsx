@@ -27,7 +27,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const resolveClientType = (plan, servicio, currentTipo) => {
   if (plan && /Empresa|Microsoft 365/i.test(plan)) return 'pyme';
-  if (servicio && /empresa|Microsoft 365/i.test(servicio)) return 'pyme';
+  if (servicio && /empresa|Microsoft 365|Optimización|Automatización/i.test(servicio)) return 'pyme';
   return currentTipo || 'particular';
 };
 

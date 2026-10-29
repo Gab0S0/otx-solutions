@@ -25,7 +25,7 @@ const Footer = () => {
             otx<span>.</span>
           </a>
           <p>
-            Soporte técnico remoto y presencial, capacitación, equipos y soluciones para personas y empresas.
+            Soporte técnico, continuidad operativa, optimización de herramientas y proyectos a medida para personas y empresas.
           </p>
         </div>
 

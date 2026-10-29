@@ -16,7 +16,7 @@ const FAQ = () => {
             <p className="otx-eyebrow">Preguntas frecuentes</p>
             <h2 id="faq-title">Dudas habituales.</h2>
             <p className="otx-section-lead">
-              Respuestas claras sobre asistencia a distancia, visitas, clases, equipos y soluciones para negocios.
+              Respuestas concretas sobre soporte remoto, visitas, equipamiento, abonos y proyectos de optimización.
             </p>
             <div className="otx-faq-aside-actions">
               <a className="otx-btn-primary" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
