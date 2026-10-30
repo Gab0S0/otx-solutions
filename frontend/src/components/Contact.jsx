@@ -146,6 +146,10 @@ const Contact = () => {
     const resolvedTipo = resolveClientType(formData.plan, formData.servicio, formData.tipo);
 
     try {
+      if (!BACKEND_URL) {
+        throw new Error('Backend no configurado');
+      }
+
       const response = await axios.post(`${BACKEND_URL}/api/tickets`, {
         nombre: formData.nombre,
         email: formData.email,
@@ -159,22 +163,24 @@ const Contact = () => {
         canal: 'Landing'
       });
 
-      if (response.data.success) {
+      if (response.data?.success && typeof response.data?.ticket_id === 'string' && response.data.ticket_id.trim()) {
         setTicketCreated({
-          id: response.data.ticket_id,
+          id: response.data.ticket_id.trim(),
           message: response.data.message
         });
 
-        toast.success('¡Consulta enviada!');
+        toast.success('Solicitud registrada');
+      } else {
+        throw new Error('Respuesta inválida del servidor');
       }
     } catch (err) {
       const errorMessage =
         err.response?.data?.detail ||
-        'Error al enviar la consulta. Por favor intentá de nuevo o escribinos por WhatsApp.';
+        'No pudimos registrar la solicitud en este momento. Podés escribirnos directamente por WhatsApp o correo electrónico.';
 
       setError(errorMessage);
 
-      toast.error('Error al enviar', {
+      toast.error('No se pudo enviar', {
         description: errorMessage
       });
     } finally {
@@ -211,7 +217,7 @@ const Contact = () => {
             <p className="otx-eyebrow">Contacto</p>
             <h2 id="contact-title">Hablemos.</h2>
             <p className="otx-section-lead">
-              Escribinos por WhatsApp para resolver un problema en el día, coordinar una visita o pedir presupuesto sin compromiso.
+              Coordinamos asistencias remotas, visitas técnicas según disponibilidad y presupuestos a medida por WhatsApp o mediante este formulario.
             </p>
 
             <div className="otx-contact-direct">
@@ -326,7 +332,7 @@ const Contact = () => {
                         name="nombre"
                         value={formData.nombre}
                         onChange={handleChange}
-                        placeholder="Juan Pérez"
+                        placeholder="Tu nombre"
                         required
                         className="otx-input"
                       />
@@ -340,7 +346,7 @@ const Contact = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="juan@email.com"
+                        placeholder="Correo electrónico"
                         required
                         className="otx-input"
                       />
@@ -355,7 +361,7 @@ const Contact = () => {
                         name="telefono"
                         value={formData.telefono}
                         onChange={handleChange}
-                        placeholder="11 1234-5678 (opcional)"
+                        placeholder="Teléfono o WhatsApp (opcional)"
                         className="otx-input"
                       />
                     </div>
@@ -367,7 +373,7 @@ const Contact = () => {
                         name="asunto"
                         value={formData.asunto}
                         onChange={handleChange}
-                        placeholder="Se completa automáticamente o escribilo"
+                        placeholder="Motivo de la consulta (opcional)"
                         className="otx-input"
                       />
                     </div>
@@ -380,7 +386,7 @@ const Contact = () => {
                       name="mensaje"
                       value={formData.mensaje}
                       onChange={handleChange}
-                      placeholder="Contanos brevemente el problema, el equipo que buscás o tu proyecto..."
+                      placeholder="Contanos qué necesitás"
                       required
                       minLength={10}
                       rows={4}

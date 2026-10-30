@@ -12,57 +12,57 @@ export const services = [
   {
     id: 1,
     title: "Soporte técnico remoto y visitas coordinadas",
-    hint: "Resolución en el día para equipos personales y de oficina, a distancia o en el lugar.",
-    description: "Atendemos fallas de Windows, Office, correo, impresoras, conectividad y programas de uso diario mediante conexión remota autorizada o visitas técnicas coordinadas a domicilio u oficina, confirmando alcance y presupuesto antes de intervenir.",
+    hint: "Asistencia remota y visitas presenciales coordinadas según disponibilidad para particulares y empresas.",
+    description: "Diagnosticamos y resolvemos incidentes en Windows, Office, correo, impresoras, redes y programas de uso diario mediante conexión remota autorizada o visitas técnicas coordinadas a domicilio u oficina, confirmando alcance y presupuesto antes de intervenir.",
     icon: "Monitor"
   },
   {
     id: 2,
     title: "Mantenimiento, seguridad y respaldo",
-    hint: "Equipos ágiles, cuentas protegidas y copias de seguridad configuradas con criterio.",
-    description: "Optimizamos el rendimiento de Windows, aplicamos actualizaciones críticas, configuramos copias de seguridad y reforzamos la protección de cuentas y dispositivos de trabajo.",
+    hint: "Optimización del sistema, protección de cuentas y copias de seguridad preventivas.",
+    description: "Mejoramos el rendimiento e inicio de Windows, aplicamos actualizaciones críticas, configuramos copias de seguridad y reforzamos la seguridad de cuentas y equipos de trabajo.",
     icon: "ShieldCheck"
   },
   {
     id: 3,
-    title: "Asesoramiento, armado y equipamiento",
-    hint: "Selección de notebooks, PC gamer, puestos de oficina, mejoras y reparaciones.",
-    description: "Recomendamos qué comprar según uso real y presupuesto. Realizamos armado a medida, ampliación de discos SSD y memoria RAM, equipamiento de oficinas completas y reparaciones sujetas a evaluación previa.",
+    title: "Equipamiento, armado y oficinas",
+    hint: "Selección de notebooks y PC gamer, armado a medida, mejoras de hardware y puestos de oficina.",
+    description: "Asesoramos en la compra de notebooks, PC gamer, monitores y periféricos según uso real y presupuesto. Realizamos armado de equipos a medida, ampliaciones de SSD y memoria RAM, equipamiento de oficinas y reparaciones sujetas a evaluación previa.",
     icon: "Laptop"
   },
   {
     id: 4,
-    title: "Capacitación personalizada",
-    hint: "Clases prácticas de Windows, Excel, correo e herramientas digitales a medida.",
-    description: "Formación práctica individual o para equipos en Windows, Office, Excel, correo electrónico y herramientas de inteligencia artificial, en modalidad remota o presencial a coordinar.",
+    title: "Asesoramiento tecnológico y productividad",
+    hint: "Selección y configuración de herramientas, organización de información y aprendizaje aplicado.",
+    description: "Recomendamos, configuramos e integramos las herramientas adecuadas para cada actividad, mejoramos métodos de trabajo y estudio, organizamos información y acompañamos en el uso práctico de aplicaciones (Windows, Excel, correo e IA) cuando sea necesario.",
     icon: "GraduationCap"
   },
   {
     id: 5,
-    title: "Microsoft 365 y organización empresarial",
-    hint: "Correo corporativo, archivos compartidos, permisos por área y seguridad.",
-    description: "Implementamos y administramos entornos Microsoft 365 (Outlook, Teams, OneDrive, SharePoint), control de accesos y verificación MFA con Microsoft Entra, protección con Defender y administración con Intune según licencias y alcance acordado.",
+    title: "Microsoft 365 y soluciones empresariales",
+    hint: "Correo corporativo, archivos compartidos, permisos por área y administración de seguridad.",
+    description: "Implementamos y gestionamos entornos Microsoft 365 (Outlook, Teams, OneDrive, SharePoint), control de accesos y verificación MFA con Microsoft Entra, protección con Defender y administración con Intune según licencias y alcance acordado.",
     icon: "Building2"
   },
   {
     id: 6,
-    title: "Optimización de herramientas e integraciones",
-    hint: "Análisis de aplicaciones de trabajo, conexión entre sistemas y orden operativo.",
-    description: "Relevamos qué herramientas utiliza tu equipo, recomendamos alternativas concretas, las configuramos y conectamos formularios, correo, planillas y notificaciones para evitar carga manual duplicada.",
+    title: "Optimización de procesos e integraciones",
+    hint: "Análisis de herramientas de trabajo y conexión entre formularios, correo y planillas.",
+    description: "Relevamos qué aplicaciones utiliza tu equipo, recomendamos alternativas concretas, las configuramos e integramos para evitar tareas duplicadas y ordenar el flujo de información.",
     icon: "Wrench"
   },
   {
     id: 7,
-    title: "Automatización de procesos e IA aplicada",
-    hint: "Flujos automáticos y asistentes de inteligencia artificial sobre procesos reales.",
-    description: "Evaluamos la viabilidad técnica y operativa de cada proceso para automatizar tareas repetitivas, registrar y clasificar información e integrar asistentes de IA (como Claude o Microsoft Copilot) cuando aportan eficiencia real.",
+    title: "Automatizaciones e inteligencia artificial",
+    hint: "Flujos automáticos y asistentes de IA mediante proyectos a medida según viabilidad.",
+    description: "Evaluamos cada proceso para automatizar registros, clasificaciones y avisos repetitivos, e integramos asistentes y herramientas de inteligencia artificial (como Claude o Microsoft Copilot) adaptados a la operatoria real de tu negocio.",
     icon: "Sparkles"
   },
   {
     id: 8,
-    title: "Sitios web y formularios comerciales",
-    hint: "Presencia profesional rápida y recepción ordenada de consultas en WhatsApp o correo.",
-    description: "Diseñamos y desarrollamos páginas web modernas y formularios comerciales pensados para convertir visitas en consultas claras y ordenadas desde cualquier dispositivo.",
+    title: "Desarrollo web y formularios comerciales",
+    hint: "Páginas web profesionales y formularios conectados con tus canales de atención.",
+    description: "Diseñamos y desarrollamos sitios web modernos, rápidos y claros en escritorio y móvil, con formularios integrados a WhatsApp, correo electrónico o tickets.",
     icon: "Globe"
   }
 ];
@@ -233,41 +233,41 @@ export const planesM365 = [
 export const howItWorks = [
   {
     step: 1,
-    title: "Diagnóstico y relevamiento",
-    description: "Relevamos el incidente técnico o la forma en que trabaja tu equipo antes de sugerir herramientas o cambios."
+    title: "Relevamiento del caso",
+    description: "Analizamos el incidente técnico, el equipamiento requerido o el proceso de trabajo que buscás mejorar."
   },
   {
     step: 2,
-    title: "Alcance y presupuesto cerrados",
-    description: "Definimos modalidad (remota, presencial o proyecto a medida) y confirmamos el costo antes de intervenir."
+    title: "Alcance y presupuesto previos",
+    description: "Definimos la modalidad (remota, visita coordinada o proyecto a medida) y confirmamos el costo antes de avanzar."
   },
   {
     step: 3,
-    title: "Ejecución y puesta en marcha",
-    description: "Resolvemos la asistencia en pantalla, realizamos la visita coordinada o entregamos la solución configurada."
+    title: "Ejecución ordenada",
+    description: "Intervenimos con tu autorización remota, asistimos en el lugar según disponibilidad o implementamos el proyecto acordado."
   }
 ];
 
 export const whyUs = [
   {
     id: 1,
-    title: "Criterio antes que moda tecnológica",
-    description: "No recomendamos licencias, equipos ni automatizaciones innecesarias: elegimos la solución según el problema real."
+    title: "Primero el problema, después la herramienta",
+    description: "No vendemos tecnología por moda: evaluamos cómo trabajás para recomendar únicamente lo que aporta eficiencia real."
   },
   {
     id: 2,
-    title: "Alcance confirmado de antemano",
-    description: "Cada asistencia, abono o proyecto comienza con un alcance y un presupuesto explícitos, sin cargos imprevistos."
+    title: "Alcance y costos confirmados de antemano",
+    description: "Sabés qué incluye cada asistencia, abono o proyecto antes de empezar. Cualquier extensión o tarea adicional se consulta primero."
   },
   {
     id: 3,
-    title: "Continuidad remota y presencial",
-    description: "Resolvemos en el día mediante conexión remota autorizada y coordinamos visitas técnicas cuando el caso requiere presencia."
+    title: "Asistencia remota y visitas coordinadas",
+    description: "Resolvemos problemas de software y configuración a distancia con tu permiso, y coordinamos visitas técnicas según disponibilidad y zona."
   },
   {
     id: 4,
-    title: "De soporte puntual a procesos integrados",
-    description: "Acompañamos tanto la urgencia técnica cotidiana como la organización de herramientas, Microsoft 365 y automatizaciones."
+    title: "Continuidad técnica y mejora de procesos",
+    description: "Un mismo criterio profesional para mantener tus equipos operativos, organizar Microsoft 365 o automatizar tareas repetitivas."
   }
 ];
 
@@ -276,43 +276,43 @@ export const faqData = [
     id: 1,
     question: "¿Cómo funciona la asistencia remota y qué seguridad tiene?",
     answer:
-      "Nos conectamos mediante AnyDesk o TeamViewer únicamente con tu autorización explícita. Ves cada acción en pantalla en tiempo real y, al finalizar la sesión, el acceso queda cerrado."
+      "Coordinamos la conexión mediante AnyDesk o TeamViewer y accedemos únicamente con tu autorización. Ves todo el procedimiento en pantalla y, al finalizar la sesión, el vínculo se cierra."
   },
   {
     id: 2,
-    question: "¿Qué cubre la Asistencia Remota de $20.000?",
+    question: "¿Qué incluye la Asistencia Remota de $20.000?",
     answer:
-      "Cubre el diagnóstico y la resolución de un caso principal dentro de hasta 1 hora de trabajo técnico remoto (Windows, Office, correo, impresoras, rendimiento o configuración). Si requiere una extensión o intervención física, se informa y cotiza antes de continuar."
+      "Incluye el diagnóstico y la resolución de un caso principal con hasta 1 hora de trabajo técnico remoto (Windows, Office, correo, impresoras, rendimiento o configuración). Si requiere más tiempo o revisión física, se informa y cotiza antes de continuar."
   },
   {
     id: 3,
-    question: "¿Cuándo conviene una visita técnica presencial y cómo se coordina?",
+    question: "¿Cómo se coordinan las visitas técnicas presenciales?",
     answer:
-      "Cuando hay que instalar equipos, configurar redes o impresoras en el lugar, o evaluar fallas físicas. Se coordina previamente confirmando disponibilidad, zona, traslado y presupuesto."
+      "Cuando el caso requiere instalar equipos, configurar redes o impresoras en el lugar, o evaluar hardware, coordinamos una visita a domicilio u oficina confirmando previamente disponibilidad, zona, traslado y presupuesto."
   },
   {
     id: 4,
-    question: "¿Qué diferencia hay entre los abonos empresariales y los proyectos a medida?",
+    question: "¿En qué consiste el asesoramiento tecnológico y de productividad?",
     answer:
-      "Los abonos mensuales cubren el soporte continuo de los puestos de trabajo registrados (por períodos de 30 días, sin acumulación). Las implementaciones de Microsoft 365, sitios web, integraciones o automatizaciones se cotizan por separado con alcance definido."
+      "Analizamos qué herramientas utilizás para trabajar o estudiar, recomendamos alternativas, las configuramos, organizamos la información y enseñamos el uso práctico de las aplicaciones (como Excel, Windows, correo o IA) según tu necesidad."
   },
   {
     id: 5,
-    question: "¿Cómo evalúan si un proceso se puede automatizar?",
+    question: "¿Cómo evalúan las automatizaciones e integraciones con IA?",
     answer:
-      "Analizamos primero qué herramientas utiliza tu equipo, cómo circula la información y si el volumen o la repetición justifican automatizar. El impacto en tiempos depende de cada proceso y de la compatibilidad entre aplicaciones."
+      "Relevamos el proceso actual para verificar su viabilidad técnica y operativa. El ahorro de tiempo depende de cada flujo de trabajo; por eso definimos un alcance concreto y un presupuesto cerrado antes de desarrollar."
   },
   {
     id: 6,
-    question: "¿Cómo trabajan el asesoramiento de compra, armado y mejora de equipos?",
+    question: "¿Cómo trabajan la selección de equipos, el armado y las reparaciones?",
     answer:
-      "Definimos el equipamiento según el uso real y el presupuesto disponible: notebooks, PC gamer, puestos de oficina, monitores y periféricos. El armado a medida, las ampliaciones de SSD/RAM y las reparaciones se realizan bajo evaluación previa."
+      "Elaboramos presupuestos según tu uso real para notebooks, PC gamer, oficinas completas, monitores y periféricos. El armado a medida, las mejoras de SSD/RAM y las reparaciones se realizan bajo evaluación previa."
   },
   {
     id: 7,
-    question: "¿En qué consiste la capacitación personalizada?",
+    question: "¿Qué diferencia hay entre los abonos empresariales y los proyectos a medida?",
     answer:
-      "Son sesiones prácticas adaptadas a las herramientas concretas que necesita usar una persona o un equipo (Windows, Excel, correo, organización de archivos o inteligencia artificial), sin cursos prearmados, de forma remota o presencial."
+      "Los abonos mensuales cubren asistencias remotas para los puestos registrados del negocio (por períodos de 30 días, no acumulables). Las implementaciones de Microsoft 365, páginas web o automatizaciones se cotizan como proyectos independientes."
   }
 ];
 

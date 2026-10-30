@@ -119,6 +119,10 @@ const TicketPage = () => {
       `Ticket web: ${formData.mensaje.trim().slice(0, 60)}`;
 
     try {
+      if (!BACKEND_URL) {
+        throw new Error('Backend no configurado');
+      }
+
       const response = await axios.post(`${BACKEND_URL}/api/tickets`, {
         nombre: formData.nombre,
         email: formData.email,
@@ -132,17 +136,21 @@ const TicketPage = () => {
         canal: 'TicketWeb'
       });
 
-      if (response.data.success) {
+      if (response.data?.success && typeof response.data?.ticket_id === 'string' && response.data.ticket_id.trim()) {
         setTicketCreated({
-          id: response.data.ticket_id,
+          id: response.data.ticket_id.trim(),
           message: response.data.message
         });
-        toast.success('¡Ticket creado!');
+        toast.success('Solicitud registrada');
+      } else {
+        throw new Error('Respuesta inválida del servidor');
       }
     } catch (err) {
-      const errorMessage = err.response?.data?.detail || 'Error al enviar el ticket.';
+      const errorMessage =
+        err.response?.data?.detail ||
+        'No pudimos registrar el ticket en este momento. Podés escribirnos directamente por WhatsApp.';
       setError(errorMessage);
-      toast.error('Error', { description: errorMessage });
+      toast.error('No se pudo enviar', { description: errorMessage });
     } finally {
       setIsSubmitting(false);
     }
@@ -245,7 +253,7 @@ const TicketPage = () => {
                       name="nombre"
                       value={formData.nombre}
                       onChange={handleChange}
-                      placeholder="Juan Pérez"
+                      placeholder="Tu nombre"
                       required
                       className="otx-input"
                     />
@@ -258,7 +266,7 @@ const TicketPage = () => {
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="juan@email.com"
+                      placeholder="Correo electrónico"
                       required
                       className="otx-input"
                     />
@@ -273,7 +281,7 @@ const TicketPage = () => {
                       name="telefono"
                       value={formData.telefono}
                       onChange={handleChange}
-                      placeholder="11 1234-5678"
+                      placeholder="Teléfono o WhatsApp (opcional)"
                       className="otx-input"
                     />
                   </div>
@@ -329,7 +337,7 @@ const TicketPage = () => {
                     name="asunto"
                     value={formData.asunto}
                     onChange={handleChange}
-                    placeholder="Soporte remoto / Presupuesto / Proyecto web o IA"
+                    placeholder="Motivo de la solicitud"
                     required
                     className="otx-input"
                   />
@@ -342,7 +350,7 @@ const TicketPage = () => {
                     name="mensaje"
                     value={formData.mensaje}
                     onChange={handleChange}
-                    placeholder="Describí tu problema o consulta..."
+                    placeholder="Contanos qué necesitás"
                     required
                     minLength={10}
                     rows={4}

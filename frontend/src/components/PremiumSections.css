@@ -3,16 +3,45 @@
 .otx-footer,
 .otx-ticket-page {
   --sec-bg: #04070C;
-  --sec-surface: #080D16;
+  --sec-surface: #080E18;
   --sec-ice: #CFE4F7;
   --sec-green: #8FE3C0;
   --intro-green: #8FE3C0;
-  --sec-line: #cfe4f733;
-  --sec-line-subtle: #cfe4f726;
+  --sec-line: rgba(207, 228, 247, 0.14);
+  --sec-line-subtle: rgba(207, 228, 247, 0.09);
   background: var(--sec-bg);
   color: #fff;
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+#como-funciona {
+  background:
+    radial-gradient(65% 50% at 85% 0%, rgba(207, 228, 247, 0.045), transparent 70%),
+    linear-gradient(180deg, #050911 0%, #04070C 100%);
+}
+
+#por-que-elegirnos {
+  background:
+    radial-gradient(65% 50% at 12% 20%, rgba(143, 227, 192, 0.035), transparent 70%),
+    linear-gradient(180deg, #04070C 0%, #070C14 100%);
+}
+
+#faq {
+  background: linear-gradient(180deg, #070C14 0%, #050910 100%);
+}
+
+#contacto {
+  background:
+    radial-gradient(70% 55% at 20% 10%, rgba(143, 227, 192, 0.05), transparent 70%),
+    radial-gradient(60% 50% at 85% 90%, rgba(207, 228, 247, 0.045), transparent 70%),
+    linear-gradient(180deg, #050910 0%, #04070C 100%);
+}
+
+.otx-ticket-page {
+  background:
+    radial-gradient(75% 45% at 50% 0%, rgba(207, 228, 247, 0.06), transparent 70%),
+    linear-gradient(180deg, #060B13 0%, #04070C 100%);
 }
 
 .otx-footer .otx-wordmark > span,
