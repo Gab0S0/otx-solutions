@@ -105,7 +105,21 @@ export const buildMailtoUrl = (emailAddress, formData = {}) => {
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export const validateTicketFormData = (formData = {}, { requireSubject = false, canal = 'TicketWeb' } = {}) => {
+export const TURNSTILE_DEV_TEST_SITE_KEY = '1x00000000000000000000AA';
+
+export const getTicketsApiBaseUrl = (env = process.env) =>
+  ((env?.REACT_APP_TICKETS_API_URL || env?.REACT_APP_BACKEND_URL || '').trim().replace(/\/+$/, ''));
+
+export const getTurnstileSiteKey = (env = process.env) => {
+  const configured = (env?.REACT_APP_TURNSTILE_SITE_KEY || '').trim();
+  if (configured) return configured;
+  return env?.NODE_ENV !== 'production' ? TURNSTILE_DEV_TEST_SITE_KEY : '';
+};
+
+export const validateTicketFormData = (
+  formData = {},
+  { requireSubject = false, requireTurnstile = false, canal = 'TicketWeb' } = {}
+) => {
   const nombre = (formData.nombre || '').trim();
   const email = (formData.email || '').trim();
   const telefono = (formData.telefono || '').trim();
@@ -113,6 +127,7 @@ export const validateTicketFormData = (formData = {}, { requireSubject = false, 
   const servicio = (formData.servicio || '').trim();
   const rawAsunto = (formData.asunto || '').trim();
   const mensaje = (formData.mensaje || '').trim();
+  const turnstileToken = (formData.turnstileToken || '').trim();
 
   if (nombre.length < 2) {
     return { valid: false, error: 'Por favor ingresá tu nombre (mínimo 2 caracteres).' };
@@ -135,6 +150,13 @@ export const validateTicketFormData = (formData = {}, { requireSubject = false, 
     return { valid: false, error: 'Por favor describí tu consulta con al menos 10 caracteres.' };
   }
 
+  if (requireTurnstile && !turnstileToken) {
+    return {
+      valid: false,
+      error: 'Por favor completá la verificación de seguridad antes de enviar.',
+    };
+  }
+
   const resolvedTipo = resolveClientType(plan, servicio, formData.tipo);
 
   return {
@@ -150,6 +172,7 @@ export const validateTicketFormData = (formData = {}, { requireSubject = false, 
       servicio: servicio ? servicio.slice(0, 150) : null,
       website: formData.website || '',
       canal,
+      turnstileToken: turnstileToken || undefined,
     },
   };
 };
