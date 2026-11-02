@@ -24,13 +24,28 @@ export interface D1PreparedStatement {
 
 export interface D1DatabaseLike {
   prepare(query: string): D1PreparedStatement;
+  batch?<T = unknown>(statements: D1PreparedStatement[]): Promise<D1Result<T>[]>;
 }
+
+export interface ExecutionContextLike {
+  waitUntil(promise: Promise<unknown>): void;
+  passThroughOnException?(): void;
+}
+
+export interface ScheduledControllerLike {
+  scheduledTime?: number;
+  cron?: string;
+}
+
+export type DeployEnvironment = 'development' | 'test' | 'staging' | 'production';
 
 export interface Env {
   DB: D1DatabaseLike;
   ENVIRONMENT?: string;
   ALLOWED_ORIGINS?: string;
   TURNSTILE_SECRET_KEY?: string;
+  TURNSTILE_ALLOWED_HOSTNAMES?: string;
+  TURNSTILE_EXPECTED_ACTION?: string;
   IP_HASH_SALT?: string;
   RESEND_API_KEY?: string;
   NOTIFICATION_FROM_EMAIL?: string;
@@ -87,4 +102,11 @@ export interface TicketApiResponse {
   detail?: string;
   turnstile_reset?: boolean;
   duplicate?: boolean;
+}
+
+export interface HealthCheckResponse {
+  ok: boolean;
+  service: 'otx-tickets-api';
+  worker: 'up';
+  database?: 'up' | 'down';
 }

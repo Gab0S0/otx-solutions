@@ -6,16 +6,45 @@ import type {
 } from './types.ts';
 import { generatePublicTicketNumber } from './security.ts';
 
-const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 60 segundos
-const RATE_LIMIT_MAX_REQUESTS = 3; // Máximo 3 tickets por minuto por IP
-const DEDUP_WINDOW_MS = 10 * 60 * 1000; // 10 minutos para idempotencia de doble envío
+export const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 60 segundos
+export const RATE_LIMIT_MAX_REQUESTS = 3; // Máximo 3 solicitudes por minuto por IP
+export const DEDUP_WINDOW_MS = 10 * 60 * 1000; // 10 minutos para idempotencia de reintentos
+export const MAX_NOTIFICATION_ATTEMPTS = 5; // Máximo de intentos de envío de correo por ticket
+export const STALE_PENDING_NOTIFICATION_MS = 2 * 60 * 1000; // 2 minutos para recuperar waitUntil interrumpidos
 
 export interface RateLimitCheckResult {
   allowed: boolean;
 }
 
 /**
- * Verifica el límite de solicitudes por hash de IP usando consultas SQL parametrizadas en D1.
+ * Comprueba la conectividad real de Cloudflare D1 y que la tabla `tickets` exista.
+ * Nunca expone detalles internos de SQL ni credenciales.
+ */
+export async function checkDatabaseHealth(db: D1DatabaseLike | undefined): Promise<boolean> {
+  if (!db || typeof db.prepare !== 'function') {
+    return false;
+  }
+
+  try {
+    const row = await db
+      .prepare(
+        "SELECT COUNT(*) AS table_ok FROM sqlite_master WHERE type = 'table' AND name = ?1"
+      )
+      .bind('tickets')
+      .first<{ table_ok: number }>();
+
+    return Number(row?.table_ok ?? 0) === 1;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Controla el límite de solicitudes por hash de IP en D1 de forma atómica.
+ * En lugar de depender de un SELECT seguido de un INSERT separado, utiliza una única
+ * sentencia condicional `INSERT INTO ... SELECT ... WHERE (SELECT COUNT(*) ...) < ?5`
+ * (y `db.batch` transaccional cuando está disponible en D1), garantizando que bajo
+ * concurrencia SQLite evalúe el conteo e inserte dentro de la misma transacción de escritura.
  */
 export async function checkAndRecordRateLimit(
   db: D1DatabaseLike,
@@ -23,39 +52,48 @@ export async function checkAndRecordRateLimit(
   nowMs: number = Date.now()
 ): Promise<RateLimitCheckResult> {
   const windowStart = nowMs - RATE_LIMIT_WINDOW_MS;
+  const cleanupThreshold = nowMs - DEDUP_WINDOW_MS;
 
-  // Limpiar registros antiguos (> 10 min) de esa IP para mantener liviana la tabla
-  await db
+  const cleanupStmt = db
     .prepare('DELETE FROM ticket_rate_limits WHERE ip_hash = ?1 AND requested_at < ?2')
-    .bind(ipHash, nowMs - DEDUP_WINDOW_MS)
-    .run();
+    .bind(ipHash, cleanupThreshold);
 
-  const countRow = await db
+  const conditionalInsertStmt = db
     .prepare(
-      'SELECT COUNT(*) AS count FROM ticket_rate_limits WHERE ip_hash = ?1 AND requested_at >= ?2'
+      `INSERT INTO ticket_rate_limits (ip_hash, requested_at)
+       SELECT ?1, ?2
+       WHERE (
+         SELECT COUNT(*)
+         FROM ticket_rate_limits
+         WHERE ip_hash = ?3 AND requested_at >= ?4
+       ) < ?5`
     )
-    .bind(ipHash, windowStart)
-    .first<{ count: number }>();
+    .bind(ipHash, nowMs, ipHash, windowStart, RATE_LIMIT_MAX_REQUESTS);
 
-  const currentCount = Number(countRow?.count ?? 0);
-  if (currentCount >= RATE_LIMIT_MAX_REQUESTS) {
-    return { allowed: false };
+  if (typeof db.batch === 'function') {
+    const batchResults = await db.batch([cleanupStmt, conditionalInsertStmt]);
+    const insertRes = batchResults[1];
+    const changes = Number(insertRes?.meta?.changes ?? 0);
+    return { allowed: Boolean(insertRes?.success) && changes === 1 };
   }
 
-  await db
-    .prepare('INSERT INTO ticket_rate_limits (ip_hash, requested_at) VALUES (?1, ?2)')
-    .bind(ipHash, nowMs)
-    .run();
+  await cleanupStmt.run();
+  const insertRes = await conditionalInsertStmt.run();
+  const changes = Number(insertRes?.meta?.changes ?? 0);
 
-  return { allowed: true };
+  return { allowed: Boolean(insertRes?.success) && changes === 1 };
 }
 
 /**
- * Busca si el mismo envío (fingerprint) ya fue registrado recientemente (idempotencia).
+ * Busca si el mismo envío (fingerprint + ip_hash) ya fue registrado recientemente.
+ * IMPORTANTE: Solo debe invocarse DESPUÉS de haber superado la validación de Turnstile
+ * y el control de rate-limit, y exige coincidencia tanto de `submission_fingerprint`
+ * como de `client_ip_hash` para impedir exposición de identificadores entre usuarios.
  */
 export async function findRecentDuplicateTicket(
   db: D1DatabaseLike,
   fingerprint: string,
+  ipHash: string,
   nowMs: number = Date.now()
 ): Promise<{ id: string; ticket_number: string; created_at: string } | null> {
   const minCreatedIso = new Date(nowMs - DEDUP_WINDOW_MS).toISOString();
@@ -64,11 +102,13 @@ export async function findRecentDuplicateTicket(
     .prepare(
       `SELECT id, ticket_number, created_at
        FROM tickets
-       WHERE submission_fingerprint = ?1 AND created_at >= ?2
+       WHERE submission_fingerprint = ?1
+         AND client_ip_hash = ?2
+         AND created_at >= ?3
        ORDER BY created_at DESC
        LIMIT 1`
     )
-    .bind(fingerprint, minCreatedIso)
+    .bind(fingerprint, ipHash, minCreatedIso)
     .first<{ id: string; ticket_number: string; created_at: string }>();
 
   return existing || null;
@@ -83,10 +123,15 @@ export async function createTicketInD1(
   input: ValidatedTicketInput,
   fingerprint: string,
   ipHash: string,
-  now: Date = new Date()
+  now: Date = new Date(),
+  initialNotificationStatus: NotificationStatus = 'PENDING'
 ): Promise<TicketRecord> {
   const isoNow = now.toISOString();
   const maxAttempts = 3;
+  const initialLastError =
+    initialNotificationStatus === 'SKIPPED_UNCONFIGURED'
+      ? 'RESEND_API_KEY not configured'
+      : null;
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     const id = crypto.randomUUID();
@@ -118,7 +163,7 @@ export async function createTicketInD1(
             client_ip_hash
           ) VALUES (
             ?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12,
-            'Nuevo', 'Normal', ?13, 'PENDING', 0, NULL, ?14, ?15
+            'Nuevo', 'Normal', ?13, ?14, 0, ?15, ?16, ?17
           )`
         )
         .bind(
@@ -135,6 +180,8 @@ export async function createTicketInD1(
           input.asunto,
           input.mensaje,
           input.canal,
+          initialNotificationStatus,
+          initialLastError,
           fingerprint,
           ipHash
         )
@@ -161,9 +208,9 @@ export async function createTicketInD1(
         status: 'Nuevo',
         priority: 'Normal',
         channel: input.canal,
-        notification_status: 'PENDING',
+        notification_status: initialNotificationStatus,
         notification_attempts: 0,
-        notification_last_error: null,
+        notification_last_error: initialLastError,
         submission_fingerprint: fingerprint,
         client_ip_hash: ipHash,
       };
@@ -202,4 +249,55 @@ export async function updateTicketNotificationStatus(
     )
     .bind(status, attempts, lastError ? lastError.slice(0, 500) : null, now.toISOString(), ticketId)
     .run();
+}
+
+/**
+ * Obtiene los tickets cuya notificación por correo quedó en estado `FAILED`
+ * o `PENDING` estancado (por ejemplo si un `ctx.waitUntil` previo se interrumpió),
+ * permitiendo su recuperación verificable mediante tarea programada (Cron) o proceso de reintento.
+ */
+export async function findRetryableNotificationTickets(
+  db: D1DatabaseLike,
+  nowMs: number = Date.now(),
+  limit: number = 10
+): Promise<TicketRecord[]> {
+  const staleThresholdIso = new Date(nowMs - STALE_PENDING_NOTIFICATION_MS).toISOString();
+  const safeLimit = Math.max(1, Math.min(50, Math.floor(limit)));
+
+  const res = await db
+    .prepare(
+      `SELECT
+         id,
+         ticket_number,
+         created_at,
+         updated_at,
+         client_name,
+         client_email,
+         client_phone,
+         client_type,
+         service_name,
+         plan_name,
+         subject,
+         description,
+         status,
+         priority,
+         channel,
+         notification_status,
+         notification_attempts,
+         notification_last_error,
+         submission_fingerprint,
+         client_ip_hash
+       FROM tickets
+       WHERE (
+         notification_status = 'FAILED'
+         OR (notification_status = 'PENDING' AND updated_at <= ?1)
+       )
+       AND notification_attempts < ?2
+       ORDER BY created_at ASC
+       LIMIT ?3`
+    )
+    .bind(staleThresholdIso, MAX_NOTIFICATION_ATTEMPTS, safeLimit)
+    .all<TicketRecord>();
+
+  return Array.isArray(res?.results) ? res.results : [];
 }

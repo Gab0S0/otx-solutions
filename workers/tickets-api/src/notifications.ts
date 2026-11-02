@@ -1,6 +1,9 @@
 import type { Env, NotificationStatus, TicketRecord } from './types.ts';
 import type { FetchLike } from './turnstile.ts';
-import { updateTicketNotificationStatus } from './repository.ts';
+import {
+  findRetryableNotificationTickets,
+  updateTicketNotificationStatus,
+} from './repository.ts';
 
 const RESEND_API_URL = 'https://api.resend.com/emails';
 
@@ -16,6 +19,17 @@ export function escapeHtml(unsafe: string | null | undefined): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+/**
+ * Sanea cualquier mensaje de error del proveedor antes de guardarlo en `notification_last_error`
+ * para no almacenar claves API ni datos personales.
+ */
+function sanitizeNotificationError(rawError: string): string {
+  return rawError
+    .replace(/re_[A-Za-z0-9_]+/g, '[REDACTED_KEY]')
+    .replace(/Bearer\s+[A-Za-z0-9._-]+/gi, 'Bearer [REDACTED]')
+    .slice(0, 240);
 }
 
 export function buildNotificationEmailHtml(ticket: TicketRecord): string {
@@ -74,18 +88,29 @@ export interface NotificationResult {
   error?: string;
 }
 
+export interface NotificationRecoverySummary {
+  processed: number;
+  sent: number;
+  failed: number;
+  skipped: number;
+}
+
 /**
  * Envía la notificación por correo mediante Resend y registra el estado en D1.
  * El registro del ticket en D1 es 100% independiente del éxito de esta función.
- * Usa `Idempotency-Key: ticket-notify-${ticket.id}` para evitar correos duplicados en reintentos.
+ * Usa `Idempotency-Key: ticket-notify-${ticket.id}-attempt-${attempts}` o clave por ticket
+ * para evitar correos duplicados en reintentos de red.
  */
 export async function dispatchTicketNotification(
   ticket: TicketRecord,
   env: Env,
-  fetchImpl: FetchLike = fetch
+  fetchImpl: FetchLike = fetch,
+  now: Date = new Date()
 ): Promise<NotificationResult> {
   const apiKey = (env.RESEND_API_KEY || '').trim();
-  const fromEmail = (env.NOTIFICATION_FROM_EMAIL || 'OTX Solutions <notificaciones@otxsolutions.com.ar>').trim();
+  const fromEmail = (
+    env.NOTIFICATION_FROM_EMAIL || 'OTX Solutions <notificaciones@otxsolutions.com.ar>'
+  ).trim();
   const toEmail = (env.NOTIFICATION_TO_EMAIL || 'solutionsotx@gmail.com').trim();
 
   if (!apiKey) {
@@ -94,13 +119,14 @@ export async function dispatchTicketNotification(
         env.DB,
         ticket.id,
         'SKIPPED_UNCONFIGURED',
-        0,
-        'RESEND_API_KEY not configured'
+        ticket.notification_attempts,
+        'RESEND_API_KEY not configured',
+        now
       );
     } catch {
       // No interrumpir flujo principal si falla la actualización de estado secundario
     }
-    return { status: 'SKIPPED_UNCONFIGURED', attempts: 0 };
+    return { status: 'SKIPPED_UNCONFIGURED', attempts: ticket.notification_attempts };
   }
 
   const attempts = ticket.notification_attempts + 1;
@@ -125,9 +151,9 @@ export async function dispatchTicketNotification(
 
     if (!response.ok) {
       const errBody = await response.text();
-      const errMsg = `Resend HTTP ${response.status}: ${errBody.slice(0, 240)}`;
+      const errMsg = sanitizeNotificationError(`Resend HTTP ${response.status}: ${errBody}`);
       try {
-        await updateTicketNotificationStatus(env.DB, ticket.id, 'FAILED', attempts, errMsg);
+        await updateTicketNotificationStatus(env.DB, ticket.id, 'FAILED', attempts, errMsg, now);
       } catch {
         // Ignorar error secundario
       }
@@ -135,18 +161,60 @@ export async function dispatchTicketNotification(
     }
 
     try {
-      await updateTicketNotificationStatus(env.DB, ticket.id, 'SENT', attempts, null);
+      await updateTicketNotificationStatus(env.DB, ticket.id, 'SENT', attempts, null, now);
     } catch {
       // Ignorar error secundario
     }
     return { status: 'SENT', attempts };
   } catch (err) {
-    const errMsg = err instanceof Error ? err.message : String(err);
+    const rawMsg = err instanceof Error ? err.message : String(err);
+    const errMsg = sanitizeNotificationError(rawMsg);
     try {
-      await updateTicketNotificationStatus(env.DB, ticket.id, 'FAILED', attempts, errMsg);
+      await updateTicketNotificationStatus(env.DB, ticket.id, 'FAILED', attempts, errMsg, now);
     } catch {
       // Ignorar error secundario
     }
     return { status: 'FAILED', attempts, error: errMsg };
   }
+}
+
+/**
+ * Estrategia verificable de recuperación para notificaciones fallidas (`FAILED`)
+ * o estancadas (`PENDING` tras un `ctx.waitUntil` interrumpido).
+ * Se invoca desde el handler `scheduled` (Cron Trigger de Cloudflare Workers)
+ * y puede probarse directamente sobre D1.
+ */
+export async function retryPendingOrFailedNotifications(
+  env: Env,
+  fetchImpl: FetchLike = fetch,
+  now: Date = new Date(),
+  batchSize: number = 10
+): Promise<NotificationRecoverySummary> {
+  if (!env.DB || typeof env.DB.prepare !== 'function') {
+    return { processed: 0, sent: 0, failed: 0, skipped: 0 };
+  }
+
+  const apiKey = (env.RESEND_API_KEY || '').trim();
+  if (!apiKey) {
+    return { processed: 0, sent: 0, failed: 0, skipped: 0 };
+  }
+
+  const candidates = await findRetryableNotificationTickets(env.DB, now.getTime(), batchSize);
+  let sent = 0;
+  let failed = 0;
+  let skipped = 0;
+
+  for (const ticket of candidates) {
+    const outcome = await dispatchTicketNotification(ticket, env, fetchImpl, now);
+    if (outcome.status === 'SENT') sent++;
+    else if (outcome.status === 'FAILED') failed++;
+    else skipped++;
+  }
+
+  return {
+    processed: candidates.length,
+    sent,
+    failed,
+    skipped,
+  };
 }

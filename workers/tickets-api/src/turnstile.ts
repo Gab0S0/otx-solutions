@@ -1,10 +1,20 @@
 import type { Env } from './types.ts';
+import { isDevOrTestEnv, resolveEnvironment } from './security.ts';
 
 const SITEVERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
-// Clave secreta oficial de prueba de Cloudflare Turnstile (solo permitida en development/test)
+// Claves secretas oficiales de prueba de Cloudflare Turnstile (SOLO permitidas en development/test)
 export const TURNSTILE_TEST_SECRET_PASS = '1x0000000000000000000000000000000AA';
 export const TURNSTILE_TEST_SECRET_FAIL = '2x0000000000000000000000000000000AA';
+
+export const EXPECTED_TURNSTILE_ACTION = 'ticket_submit';
+
+const DEFAULT_HOSTNAMES_BY_ENV: Record<string, string[]> = {
+  development: ['localhost', '127.0.0.1'],
+  test: ['localhost', '127.0.0.1'],
+  staging: ['staging.otxsolutions.com.ar', '*.otx-solutions.pages.dev'],
+  production: ['otxsolutions.com.ar', 'www.otxsolutions.com.ar'],
+};
 
 export interface TurnstileSiteverifyResponse {
   success: boolean;
@@ -24,6 +34,56 @@ export interface TurnstileVerifyOutcome {
 
 export type FetchLike = typeof fetch;
 
+/**
+ * Obtiene la lista de hostnames permitidos para Siteverify según el entorno
+ * (development/test, staging o production), manteniendo separación estricta.
+ */
+export function getAllowedTurnstileHostnames(env: Env): string[] {
+  const configured = (env.TURNSTILE_ALLOWED_HOSTNAMES || '')
+    .split(',')
+    .map((h) => h.trim().toLowerCase())
+    .filter(Boolean);
+
+  if (configured.length > 0) {
+    return configured;
+  }
+
+  const mode = resolveEnvironment(env);
+  return DEFAULT_HOSTNAMES_BY_ENV[mode] || DEFAULT_HOSTNAMES_BY_ENV.production;
+}
+
+/**
+ * Valida que el hostname devuelto por Cloudflare Turnstile Siteverify coincida
+ * con la lista permitida para el entorno actual.
+ */
+export function isTurnstileHostnameAllowed(
+  hostname: string | undefined | null,
+  env: Env
+): boolean {
+  const normalized = (hostname || '').trim().toLowerCase();
+  if (!normalized) {
+    return false;
+  }
+
+  const allowedPatterns = getAllowedTurnstileHostnames(env);
+  for (const pattern of allowedPatterns) {
+    if (pattern === normalized) {
+      return true;
+    }
+    if (pattern.startsWith('*.')) {
+      const suffix = pattern.slice(1); // ej. ".otx-solutions.pages.dev"
+      if (normalized.endsWith(suffix) && normalized.length > suffix.length) {
+        const subLabel = normalized.slice(0, normalized.length - suffix.length);
+        if (/^[a-z0-9-]+$/i.test(subLabel)) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
 export async function verifyTurnstileToken(
   token: string,
   remoteIp: string | null,
@@ -41,9 +101,7 @@ export async function verifyTurnstileToken(
   }
 
   const secretKey = (env.TURNSTILE_SECRET_KEY || '').trim();
-  const isDevOrTest =
-    (env.ENVIRONMENT || '').toLowerCase() === 'development' ||
-    (env.ENVIRONMENT || '').toLowerCase() === 'test';
+  const isDevOrTest = isDevOrTestEnv(env);
 
   if (!secretKey) {
     return {
@@ -55,14 +113,17 @@ export async function verifyTurnstileToken(
     };
   }
 
-  // En producción, rechazar el uso accidental de la clave dummy de prueba de Cloudflare
-  if (!isDevOrTest && secretKey === TURNSTILE_TEST_SECRET_PASS) {
+  // En staging y production, rechazar el uso accidental de las claves dummy de prueba de Cloudflare
+  if (
+    !isDevOrTest &&
+    (secretKey === TURNSTILE_TEST_SECRET_PASS || secretKey === TURNSTILE_TEST_SECRET_FAIL)
+  ) {
     return {
       ok: false,
       resetRequired: false,
       errorMessage:
-        'Configuración de seguridad inválida en producción. Por favor contactanos por WhatsApp.',
-      errorCodes: ['invalid-test-secret-in-production'],
+        'Configuración de seguridad inválida para este entorno. Por favor contactanos por WhatsApp.',
+      errorCodes: ['invalid-test-secret-in-non-dev'],
     };
   }
 
@@ -105,6 +166,30 @@ export async function verifyTurnstileToken(
           ? 'La verificación de seguridad venció o ya fue utilizada. Por favor volvé a marcar la casilla e intentá de nuevo.'
           : 'No se pudo verificar el desafío antibots. Por favor reintentá o escribinos por WhatsApp.',
         errorCodes,
+      };
+    }
+
+    // Validar que el hostname devuelto por Siteverify pertenezca al entorno actual
+    if (!isTurnstileHostnameAllowed(payload.hostname, env)) {
+      return {
+        ok: false,
+        resetRequired: true,
+        errorMessage:
+          'No se pudo validar el origen del desafío de seguridad. Por favor recargá la página o escribinos por WhatsApp.',
+        errorCodes: [payload.hostname ? 'invalid-hostname' : 'missing-hostname'],
+      };
+    }
+
+    // Validar que la acción del widget coincida exactamente con la esperada (ticket_submit)
+    const expectedAction = (env.TURNSTILE_EXPECTED_ACTION || EXPECTED_TURNSTILE_ACTION).trim();
+    const actualAction = (payload.action || '').trim();
+    if (actualAction !== expectedAction) {
+      return {
+        ok: false,
+        resetRequired: true,
+        errorMessage:
+          'No se pudo validar la acción de seguridad del formulario. Por favor reintentá o continuá por WhatsApp.',
+        errorCodes: [actualAction ? 'invalid-action' : 'missing-action'],
       };
     }
 

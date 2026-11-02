@@ -5,6 +5,8 @@ compatibility_date = "2026-10-01"
 [vars]
 ENVIRONMENT = "production"
 ALLOWED_ORIGINS = "https://otxsolutions.com.ar,https://www.otxsolutions.com.ar"
+TURNSTILE_ALLOWED_HOSTNAMES = "otxsolutions.com.ar,www.otxsolutions.com.ar"
+TURNSTILE_EXPECTED_ACTION = "ticket_submit"
 NOTIFICATION_FROM_EMAIL = "OTX Solutions <notificaciones@otxsolutions.com.ar>"
 NOTIFICATION_TO_EMAIL = "solutionsotx@gmail.com"
 
@@ -15,7 +17,28 @@ database_name = "otx-tickets-db"
 database_id = "00000000-0000-0000-0000-000000000000"
 migrations_dir = "migrations"
 
-# Secretos privados (NO guardar en este archivo; cargar con `wrangler secret put`):
-# - TURNSTILE_SECRET_KEY
-# - RESEND_API_KEY (opcional hasta configurar el dominio en Resend)
-# - IP_HASH_SALT (opcional, sal criptográfica para el hash de IP)
+# Entorno Staging aislado (Cloudflare Pages Preview / Staging)
+[env.staging]
+name = "otx-tickets-api-staging"
+[env.staging.vars]
+ENVIRONMENT = "staging"
+ALLOWED_ORIGINS = "https://staging.otxsolutions.com.ar,https://*.otx-solutions.pages.dev"
+TURNSTILE_ALLOWED_HOSTNAMES = "staging.otxsolutions.com.ar,*.otx-solutions.pages.dev"
+TURNSTILE_EXPECTED_ACTION = "ticket_submit"
+NOTIFICATION_FROM_EMAIL = "OTX Solutions Staging <notificaciones@otxsolutions.com.ar>"
+NOTIFICATION_TO_EMAIL = "solutionsotx@gmail.com"
+
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "otx-tickets-db-staging"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+# Tarea programada (Cron Trigger) para recuperar notificaciones en estado FAILED o PENDING estancado
+[triggers]
+crons = ["*/10 * * * *"]
+
+# Secretos obligatorios en staging/production (cargar con `wrangler secret put`):
+# - TURNSTILE_SECRET_KEY (obligatorio)
+# - IP_HASH_SALT (obligatorio en staging y production; mínimo 16 caracteres aleatorios)
+# - RESEND_API_KEY (opcional hasta activar el dominio remitente en Resend)

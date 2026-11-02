@@ -7,9 +7,11 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
     "db:migrate:local": "wrangler d1 migrations apply otx-tickets-db --local",
     "db:migrate:remote": "wrangler d1 migrations apply otx-tickets-db --remote",
-    "test": "node --experimental-strip-types tests/tickets-worker.test.ts"
+    "test": "node --experimental-strip-types tests/tickets-worker.test.ts",
+    "test:d1-local": "node --experimental-strip-types tests/wrangler-d1-integration.test.ts"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250214.0",
