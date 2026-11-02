@@ -18,17 +18,17 @@
 #como-funciona {
   background:
     radial-gradient(65% 50% at 85% 0%, rgba(207, 228, 247, 0.045), transparent 70%),
-    linear-gradient(180deg, #050911 0%, #04070C 100%);
+    linear-gradient(180deg, #04070C 0%, #060B13 100%);
 }
 
 #por-que-elegirnos {
   background:
     radial-gradient(65% 50% at 12% 20%, rgba(143, 227, 192, 0.035), transparent 70%),
-    linear-gradient(180deg, #04070C 0%, #070C14 100%);
+    linear-gradient(180deg, #060B13 0%, #08101C 100%);
 }
 
 #faq {
-  background: linear-gradient(180deg, #070C14 0%, #050910 100%);
+  background: linear-gradient(180deg, #08101C 0%, #050910 100%);
 }
 
 #contacto {
@@ -50,11 +50,25 @@
 }
 
 .otx-section {
+  position: relative;
+  isolation: isolate;
   padding: 84px 6%;
   border-top: 1px solid var(--sec-line);
 }
 
+.otx-section::after {
+  content: "";
+  position: absolute;
+  inset: 0 6%;
+  z-index: 0;
+  pointer-events: none;
+  border-left: 1px solid rgba(207, 228, 247, 0.045);
+  border-right: 1px solid rgba(207, 228, 247, 0.045);
+}
+
 .otx-section-container {
+  position: relative;
+  z-index: 1;
   max-width: 1260px;
   margin: 0 auto;
 }
@@ -613,6 +627,25 @@
   color: #fecaca;
   font-size: 13px;
   line-height: 1.55;
+}
+
+.otx-form-error > svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.otx-form-error-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.otx-form-error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  align-items: center;
 }
 
 .otx-form-footer {

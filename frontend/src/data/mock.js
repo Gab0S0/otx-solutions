@@ -84,7 +84,7 @@ export const planesParticulares = {
         "Windows, Office, correo, impresoras, programas y configuración general",
         "Recomendación final si requiere reparación física o trabajo avanzado"
       ],
-      popular: true
+      popular: false
     },
     {
       id: 2,
@@ -100,7 +100,7 @@ export const planesParticulares = {
         "Ideal para personas, freelancers o profesionales independientes",
         "Ahorrás $10.000 frente a contratarlas por separado"
       ],
-      popular: true
+      popular: false
     }
   ],
   extras: [
@@ -153,7 +153,7 @@ export const planesPymes = {
         "Soporte sobre Windows, Office, correo, impresoras, aplicaciones y configuración",
         "Recomendaciones de mejora para evitar problemas recurrentes"
       ],
-      popular: true
+      popular: false
     },
     {
       id: 3,
@@ -319,4 +319,6 @@ export const faqData = [
 export const condicionesGenerales =
   "Precios en ARS. Cada asistencia remota cubre un caso principal e incluye hasta 1 hora de trabajo técnico. El tiempo no utilizado no es acumulable ni transferible. Si el caso requiere más tiempo o queda fuera del alcance remoto, se informa y cotiza antes de continuar. No incluye licencias de software, repuestos, recuperación avanzada de datos, reparación física ni trabajos presenciales. Los planes mensuales no son acumulables y se cuentan por períodos de 30 días desde la activación.";
 
-export const whatsappMessage = `Hola, quiero consultar a OTX Solutions.%0A%0ANecesito ayuda con: [Soporte remoto / Equipamiento / Web o IA]%0ADetalle breve: [DESCRIBIR CONSULTA]%0A%0AGracias.`;
+export const whatsappMessage = encodeURIComponent(
+  "Hola, quiero realizar una consulta a OTX Solutions.\n\nGracias."
+);

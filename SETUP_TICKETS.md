@@ -48,16 +48,20 @@ La URL se verá así:
 https://script.google.com/macros/s/AKfycbx.../exec
 ```
 
-### Paso 4: Configurar el Backend
+### Paso 4: Configurar el Backend y el Frontend
 
-1. Editar el archivo `/app/backend/.env`:
-   ```
+1. En el entorno del backend (`backend/.env` o variables del servidor donde corra FastAPI), configurar:
+   ```env
    GOOGLE_APPS_SCRIPT_URL=https://script.google.com/macros/s/AKfycbx.../exec
+   CORS_ORIGINS=https://otxsolutions.com.ar,https://www.otxsolutions.com.ar
    ```
-2. Reiniciar el backend:
-   ```bash
-   sudo supervisorctl restart backend
+   *(Nota: `MONGO_URL` y `DB_NAME` en `backend/server.py` son opcionales y solo se utilizan para las rutas heredadas `/api/status`; el circuito `/api/tickets` persiste directamente en Google Sheets mediante `GOOGLE_APPS_SCRIPT_URL`).*
+2. En el entorno del frontend (Vercel / `frontend/.env`), configurar la URL pública del backend FastAPI:
+   ```env
+   REACT_APP_BACKEND_URL=https://api.otxsolutions.com.ar
    ```
+   *(Opcional: `REACT_APP_MERCADOPAGO_PAYMENT_LINK` si se desea habilitar el enlace de pago HTTPS de Mercado Pago en Asistencia Remota).*
+3. Reiniciar el backend después de actualizar las variables de entorno.
 
 ### Paso 5: Probar el Sistema
 
@@ -109,14 +113,16 @@ El sistema incluye:
 - Verificar que el Apps Script tenga permisos de Gmail
 - Revisar la carpeta de spam
 
-### Error "Error de configuración del servidor"
-- La variable `GOOGLE_APPS_SCRIPT_URL` está vacía o no configurada
-- Reiniciar backend después de modificar `.env`
+### Error "El servicio de registro de tickets no está disponible" (HTTP 503) o "No recibimos un número de ticket válido" (HTTP 502)
+- La variable `GOOGLE_APPS_SCRIPT_URL` está vacía/no configurada en el backend, o el Web App de Google Apps Script no devolvió `{ "success": true, "ticketId": "OTX-..." }`.
+- El backend y el frontend rechazan explícitamente respuestas sin `ticketId` real (incluyendo `"N/A"`, `"BLOCKED"`, `null` o respuestas HTML) y ofrecen continuar por WhatsApp o correo electrónico conservando los datos que el cliente ya escribió.
 
 ---
 
 ## Archivos del Sistema
 
-- `/app/backend/routers/tickets.py` - Endpoint de tickets
-- `/app/backend/google_apps_script.js` - Script para Google (copiar a Apps Script)
-- `/app/frontend/src/components/Contact.jsx` - Formulario de contacto
+- `backend/routers/tickets.py` - Endpoint `POST /api/tickets` (validación, rate-limit y reenvío a Google Apps Script)
+- `backend/google_apps_script.js` - Script para Google Sheets + `MailApp.sendEmail` (copiar a Apps Script)
+- `frontend/src/lib/offer-catalog.js` - Validación compartida (`isValidTicketId`, `validateTicketFormData`, `buildWhatsAppUrl`, `buildMailtoUrl`)
+- `frontend/src/components/Contact.jsx` - Formulario de contacto en la portada (`canal: "Landing"`)
+- `frontend/src/components/TicketPage.jsx` - Página dedicada `/ticket` (`canal: "TicketWeb"`)

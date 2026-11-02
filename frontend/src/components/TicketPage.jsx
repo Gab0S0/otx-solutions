@@ -1,5 +1,14 @@
-import { contactPlanOptions } from '../lib/offer-catalog';
-import React, { useState, useEffect } from 'react';
+import {
+  contactPlanOptions,
+  normalizeServiceParam,
+  normalizePlanParam,
+  resolveClientType,
+  isValidTicketId,
+  buildWhatsAppUrl,
+  buildMailtoUrl,
+  validateTicketFormData,
+} from '../lib/offer-catalog';
+import React, { useState, useEffect, useRef } from 'react';
 import { AlertCircle, CheckCircle, ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -12,22 +21,20 @@ import { Link } from 'react-router-dom';
 import './PremiumIntro.css';
 import './PremiumSections.css';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = (process.env.REACT_APP_BACKEND_URL || '').trim();
 
-const normalizeServiceParam = (raw) => {
-  if (!raw) return '';
-  const exact = services.find((s) => s.title.toLowerCase() === raw.toLowerCase());
-  if (exact) return exact.title;
-  const partial = services.find(
-    (s) => raw.toLowerCase().includes(s.title.toLowerCase()) || s.title.toLowerCase().includes(raw.toLowerCase())
-  );
-  return partial ? partial.title : raw;
-};
-
-const inferClientType = (plan, servicio) => {
-  if (plan && /Empresa|Microsoft 365/i.test(plan)) return 'pyme';
-  if (servicio && /empresa|Microsoft 365|Optimización|Automatización/i.test(servicio)) return 'pyme';
-  return 'particular';
+const resolveErrorDetail = (err, fallbackMessage) => {
+  if (err?.code === 'ECONNABORTED' || /timeout/i.test(err?.message || '')) {
+    return 'El servidor tardó demasiado en responder. Tus datos siguen cargados: podés intentar de nuevo o continuar directamente por WhatsApp.';
+  }
+  const detail = err?.response?.data?.detail;
+  if (typeof detail === 'string' && detail.trim()) {
+    return detail.trim();
+  }
+  if (Array.isArray(detail) && detail.length > 0) {
+    return 'Revisá los campos completados (nombre, correo electrónico válido, asunto y descripción de al menos 10 caracteres).';
+  }
+  return fallbackMessage;
 };
 
 const TicketPage = () => {
@@ -43,47 +50,31 @@ const TicketPage = () => {
     website: '' // Honeypot
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const submittingRef = useRef(false);
   const [error, setError] = useState(null);
   const [ticketCreated, setTicketCreated] = useState(null);
 
-  // Check URL params for prefill
+  // Check URL params for prefill and scroll to top on mount
   useEffect(() => {
+    window.scrollTo(0, 0);
     const params = new URLSearchParams(window.location.search);
-    const plan = params.get('plan') || '';
+    const rawPlan = params.get('plan') || '';
     const rawServicio = params.get('servicio') || '';
+    const plan = normalizePlanParam(rawPlan);
     const servicio = normalizeServiceParam(rawServicio);
     if (plan || servicio) {
       setFormData(prev => ({
         ...prev,
         plan,
         servicio,
-        tipo: inferClientType(plan, servicio),
+        tipo: resolveClientType(plan, servicio, prev.tipo),
         asunto: plan ? `Interesado en: ${plan}` : servicio ? `Consulta sobre: ${servicio}` : ''
       }));
     }
   }, []);
 
-  const generateWhatsAppMessage = (ticketId = null) => {
-    let msg = `Hola, `;
-    if (ticketId) {
-      msg += `acabo de crear el ticket ${ticketId}.%0A%0A`;
-    } else {
-      msg += `quiero realizar una consulta a OTX Solutions.%0A%0A`;
-    }
-    if (formData.plan) {
-      msg += `Plan: ${formData.plan}%0A`;
-    }
-    if (formData.servicio) {
-      msg += `Servicio: ${formData.servicio}%0A`;
-    }
-    if (formData.asunto && !ticketId) {
-      msg += `Asunto: ${formData.asunto}%0A`;
-    }
-    msg += `%0A¡Gracias!`;
-    return msg;
-  };
-
-  const whatsappUrl = `https://wa.me/${companyInfo.whatsapp}?text=${generateWhatsAppMessage()}`;
+  const whatsappUrl = buildWhatsAppUrl(companyInfo.whatsapp, formData);
+  const mailtoUrl = buildMailtoUrl(companyInfo.email, formData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -97,10 +88,10 @@ const TicketPage = () => {
       const next = { ...prev, [name]: finalValue };
       if (name === 'plan' && finalValue) {
         next.asunto = `Interesado en: ${finalValue}`;
-        next.tipo = inferClientType(finalValue, next.servicio);
+        next.tipo = resolveClientType(finalValue, next.servicio, next.tipo);
       } else if (name === 'servicio' && finalValue) {
         next.asunto = `Consulta sobre: ${finalValue}`;
-        next.tipo = inferClientType(next.plan, finalValue);
+        next.tipo = resolveClientType(next.plan, finalValue, next.tipo);
       }
       return next;
     });
@@ -109,49 +100,58 @@ const TicketPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (submittingRef.current || isSubmitting) return;
+
+    const validation = validateTicketFormData(formData, {
+      requireSubject: true,
+      canal: 'TicketWeb',
+    });
+
+    if (!validation.valid) {
+      setError(validation.error);
+      toast.error('Revisá los datos del formulario', {
+        description: validation.error,
+      });
+      return;
+    }
+
+    submittingRef.current = true;
     setIsSubmitting(true);
     setError(null);
-
-    const resolvedAsunto =
-      (formData.asunto || '').trim() ||
-      (formData.plan ? `Interesado en: ${formData.plan}` : '') ||
-      (formData.servicio ? `Consulta sobre: ${formData.servicio}` : '') ||
-      `Ticket web: ${formData.mensaje.trim().slice(0, 60)}`;
 
     try {
       if (!BACKEND_URL) {
         throw new Error('Backend no configurado');
       }
 
-      const response = await axios.post(`${BACKEND_URL}/api/tickets`, {
-        nombre: formData.nombre,
-        email: formData.email,
-        telefono: formData.telefono || null,
-        tipo: formData.tipo || 'particular',
-        asunto: resolvedAsunto.slice(0, 200),
-        mensaje: formData.mensaje,
-        plan: formData.plan || null,
-        servicio: formData.servicio || null,
-        website: formData.website,
-        canal: 'TicketWeb'
+      const response = await axios.post(`${BACKEND_URL}/api/tickets`, validation.payload, {
+        timeout: 15000,
       });
 
-      if (response.data?.success && typeof response.data?.ticket_id === 'string' && response.data.ticket_id.trim()) {
+      const returnedId = response.data?.ticket_id;
+      if (
+        response.status >= 200 &&
+        response.status < 300 &&
+        response.data?.success === true &&
+        isValidTicketId(returnedId)
+      ) {
         setTicketCreated({
-          id: response.data.ticket_id.trim(),
+          id: returnedId.trim(),
           message: response.data.message
         });
         toast.success('Solicitud registrada');
       } else {
-        throw new Error('Respuesta inválida del servidor');
+        throw new Error('Respuesta sin confirmación válida de ticket');
       }
     } catch (err) {
-      const errorMessage =
-        err.response?.data?.detail ||
-        'No pudimos registrar el ticket en este momento. Podés escribirnos directamente por WhatsApp.';
+      const errorMessage = resolveErrorDetail(
+        err,
+        'No pudimos registrar el ticket automáticamente en este momento. Tus datos siguen cargados: podés continuar ahora mismo por WhatsApp o correo electrónico.'
+      );
       setError(errorMessage);
       toast.error('No se pudo enviar', { description: errorMessage });
     } finally {
+      submittingRef.current = false;
       setIsSubmitting(false);
     }
   };
@@ -199,7 +199,7 @@ const TicketPage = () => {
               </p>
               <div className="otx-steps-actions">
                 <a
-                  href={`https://wa.me/${companyInfo.whatsapp}?text=${generateWhatsAppMessage(ticketCreated.id)}`}
+                  href={buildWhatsAppUrl(companyInfo.whatsapp, formData, ticketCreated.id)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="otx-btn-primary"
@@ -228,7 +228,22 @@ const TicketPage = () => {
               {error && (
                 <div className="otx-form-error" role="alert">
                   <AlertCircle size={18} aria-hidden="true" />
-                  <span>{error}</span>
+                  <div className="otx-form-error-content">
+                    <span>{error}</span>
+                    <div className="otx-form-error-actions">
+                      <a
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="otx-inline-link"
+                      >
+                        Continuar por WhatsApp con mis datos <ArrowUpRight size={14} aria-hidden="true" />
+                      </a>
+                      <a href={mailtoUrl} className="otx-inline-link">
+                        Enviar por correo electrónico
+                      </a>
+                    </div>
+                  </div>
                 </div>
               )}
 

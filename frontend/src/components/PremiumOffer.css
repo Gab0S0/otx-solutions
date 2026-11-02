@@ -19,29 +19,30 @@
   padding: 0;
 }
 
-/* Subtle architectural satin graphite continuity from the Hero */
+/* Stepped architectural graphite planes for Services (without repeating Hero texture) */
 .otx-offer.offer-services {
   background-image:
-    radial-gradient(75% 42% at 16% 4%, rgba(207, 228, 247, 0.06), transparent 70%),
-    radial-gradient(60% 38% at 88% 48%, rgba(143, 227, 192, 0.04), transparent 72%),
-    linear-gradient(180deg, #04070C 0%, #060B13 48%, #04070C 100%);
+    radial-gradient(70% 40% at 14% 4%, rgba(207, 228, 247, 0.055), transparent 70%),
+    linear-gradient(180deg, #04070C 0%, #060B13 50%, #04070C 100%);
+}
+
+.otx-offer.offer-services::after {
+  content: "";
+  position: absolute;
+  inset: 0 6%;
+  z-index: 0;
+  pointer-events: none;
+  border-left: 1px solid rgba(207, 228, 247, 0.045);
+  border-right: 1px solid rgba(207, 228, 247, 0.045);
 }
 
 .otx-offer .otx-ambient-texture {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.18;
-  background-image:
-    linear-gradient(180deg, #04070C 0%, transparent 18%, transparent 82%, #04070C 100%),
-    url('../assets/otx-surface-desktop.webp');
-  background-size: 100% 100%, cover;
-  background-position: center;
-  mix-blend-mode: screen;
+  display: none;
 }
 
 .otx-offer .offer-container {
+  position: relative;
+  z-index: 1;
   max-width: 1280px;
   margin: 0 auto;
 }
@@ -506,122 +507,146 @@
   border-color: var(--offer-green);
 }
 
-/* ---------- 4 · Precios sin redundancia ---------- */
+/* ---------- 4 · Precios (Propuesta A: Transición Estratégica + Comparación Directa) ---------- */
 .otx-offer.offer-pricing {
-  padding: 96px 6% 88px;
-  border-top: 1px solid var(--offer-line);
+  position: relative;
+  isolation: isolate;
+  padding: 92px 6% 96px;
+  border-top: 1px solid rgba(207, 228, 247, 0.20);
+  border-bottom: 1px solid rgba(207, 228, 247, 0.16);
   background:
-    radial-gradient(65% 45% at 15% 0%, rgba(229, 211, 179, 0.04), transparent 70%),
-    linear-gradient(180deg, #04070C 0%, #070C14 100%);
+    radial-gradient(54% 46% at 18% 14%, rgba(207, 228, 247, 0.055) 0%, transparent 72%),
+    linear-gradient(180deg, #060B13 0%, #08101C 46%, #04070C 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Pliegue de grafito del Hero utilizado estratégicamente en la transición hacia Precios */
+.otx-offer.offer-pricing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(180deg, #060B13 0%, rgba(7, 13, 23, 0.42) 48%, rgba(4, 7, 12, 0.78) 100%),
+    url('../assets/otx-surface-desktop.webp');
+  background-size: cover;
+  background-position: right bottom;
+  opacity: 0.74;
+}
+
+.otx-offer.offer-pricing::after {
+  content: "";
+  position: absolute;
+  inset: 0 6%;
+  z-index: 0;
+  pointer-events: none;
+  border-left: 1px solid rgba(207, 228, 247, 0.05);
+  border-right: 1px solid rgba(207, 228, 247, 0.05);
 }
 
 .otx-offer .offer-price-heading {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 48px;
-  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  align-items: end;
+  margin-bottom: 34px;
 }
 
 .otx-offer .offer-price-heading h2 {
-  margin: 14px 0 0;
-  font-size: clamp(34px, 4vw, 56px);
+  margin: 12px 0 0;
+  font-size: clamp(36px, 4.2vw, 54px);
   font-weight: 450;
-  line-height: 1.08;
-  letter-spacing: -0.045em;
+  line-height: 1.05;
+  letter-spacing: -0.048em;
+}
+
+.otx-offer .offer-price-heading h2 span {
+  color: var(--offer-ice);
 }
 
 .otx-offer .offer-price-heading > p {
   margin: 0;
-  max-width: 420px;
-  font-size: 14.5px;
-  line-height: 1.68;
+  max-width: 46ch;
+  justify-self: end;
+  font-size: 15px;
+  line-height: 1.62;
   color: var(--offer-ice-2);
 }
 
-/* 3 Architectural Mode Tabs (Unifies transition + category tabs) */
-.otx-offer .offer-mode-tabs {
+/* Segmented Navigation Bar for the 3 Modalities */
+.otx-offer .offer-segmented-nav {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   height: auto;
   width: 100%;
-  padding: 0;
-  margin-bottom: 40px;
-  background: none;
-  border: 0;
+  padding: 5px;
+  margin-bottom: 30px;
+  background: rgba(4, 7, 12, 0.82);
+  border: 1px solid rgba(207, 228, 247, 0.17);
+  border-radius: 0;
 }
 
-.otx-offer .offer-mode-tab {
+.otx-offer .offer-seg-tab {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  text-align: left;
-  min-height: 112px;
-  padding: 20px 22px;
-  background: rgba(9, 16, 27, 0.72);
-  color: var(--offer-ice-2);
-  border: 1px solid var(--offer-line);
-  border-top: 2px solid transparent;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 52px;
+  padding: 14px 20px;
+  border: 1px solid transparent;
   border-radius: 0;
+  background: transparent;
+  color: var(--offer-ice-2);
   box-shadow: none;
   white-space: normal;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  text-align: left;
+  transition: border-color 0.18s ease, background-color 0.18s ease, color 0.18s ease;
 }
 
-.otx-offer .offer-mode-tab:hover {
-  border-color: var(--offer-line-strong);
+.otx-offer .offer-seg-tab:hover {
   color: #fff;
+  background: rgba(207, 228, 247, 0.04);
 }
 
-.otx-offer .offer-mode-tab[data-state='active'] {
-  background: linear-gradient(180deg, rgba(143, 227, 192, 0.07) 0%, rgba(9, 16, 27, 0.95) 100%);
+.otx-offer .offer-seg-tab[data-state='active'] {
+  background: linear-gradient(180deg, rgba(16, 27, 44, 0.96) 0%, rgba(10, 17, 29, 0.98) 100%);
+  border-color: rgba(143, 227, 192, 0.36);
   color: #fff;
-  border-color: var(--offer-line-strong);
-  border-top-color: var(--offer-green);
-  box-shadow: none;
+  box-shadow: inset 0 1px 0 rgba(207, 228, 247, 0.14);
 }
 
-.otx-offer .offer-mode-index {
+.otx-offer .offer-seg-left {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.otx-offer .offer-seg-num {
   font-family: var(--offer-mono);
   font-size: 11px;
   color: var(--offer-green);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
 }
 
-.otx-offer .offer-mode-title {
-  display: block;
-  margin-top: 6px;
-  font-size: 18px;
+.otx-offer .offer-seg-label {
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: -0.02em;
   color: #fff;
 }
 
-.otx-offer .offer-mode-sub {
-  display: block;
-  margin-top: 2px;
-  font-size: 12.5px;
+.otx-offer .offer-seg-meta {
+  font-family: var(--offer-mono);
+  font-size: 11px;
   color: var(--offer-ice-3);
 }
 
-.otx-offer .offer-mode-ref {
-  display: block;
-  margin-top: 12px;
-  font-family: var(--offer-mono);
-  font-size: 11.5px;
+.otx-offer .offer-seg-tab[data-state='active'] .offer-seg-meta {
   color: var(--offer-ice);
 }
 
 /* Shared Primary & Text Links */
-.otx-offer .offer-plan-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 22px;
-  align-items: center;
-}
-
 .otx-offer .offer-primary {
   display: inline-flex;
   align-items: center;
@@ -643,16 +668,20 @@
 .otx-offer .offer-text-link {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  color: var(--offer-ice);
-  font-size: 12px;
-  line-height: 1.6;
+  min-height: 36px;
+  padding: 0 0 2px;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid rgba(207, 228, 247, 0.26);
+  color: var(--offer-ice-2);
+  font-size: 12.5px;
+  line-height: 1.4;
+  cursor: pointer;
 }
 
 .otx-offer .offer-text-link:hover {
   color: #fff;
-  text-decoration: underline;
-  text-underline-offset: 5px;
+  border-color: #fff;
 }
 
 .otx-offer :is(a, button, input, summary, [role='tabpanel']):focus-visible {
@@ -665,194 +694,360 @@
   margin: 0;
 }
 
-.otx-offer .offer-plan-layout {
+/* Direct Side-by-Side Comparison Grids */
+.otx-offer .offer-diptych-grid {
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: clamp(32px, 6vw, 88px);
-  align-items: start;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 24px;
+  align-items: stretch;
 }
 
-.otx-offer .offer-plan-options {
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--offer-line);
+.otx-offer .offer-triptych-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
 }
 
-.otx-offer .offer-plan-option {
+.otx-offer .offer-plan-card {
   display: flex;
-  gap: 18px;
-  padding: 24px 22px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 32px 28px;
+  background: linear-gradient(165deg, rgba(12, 20, 34, 0.92) 0%, rgba(6, 11, 19, 0.96) 100%);
+  border: 1px solid rgba(207, 228, 247, 0.17);
+  border-top: 2px solid rgba(207, 228, 247, 0.32);
+  box-shadow: 0 22px 52px rgba(0, 0, 0, 0.46);
+}
+
+.otx-offer .offer-triptych-grid .offer-plan-card {
+  padding: 28px 26px;
+}
+
+.otx-offer .offer-plan-card.is-middle-tier {
+  background: linear-gradient(165deg, rgba(14, 25, 41, 0.95) 0%, rgba(7, 13, 22, 0.98) 100%);
+  border-color: rgba(143, 227, 192, 0.34);
+  border-top: 2px solid var(--offer-green);
+}
+
+/* Pack 5 Asistencias — Restrained Satin Champagne Card */
+.otx-offer .offer-plan-card.is-champagne-card {
+  padding: 0;
+  background:
+    linear-gradient(162deg, rgba(27, 24, 22, 0.95) 0%, rgba(12, 16, 25, 0.98) 58%, rgba(7, 11, 19, 0.99) 100%);
+  border: 1px solid rgba(229, 211, 179, 0.38);
+  border-top: 2px solid var(--offer-champagne);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.54);
+}
+
+.otx-offer .offer-champagne-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 32px;
+  background: rgba(229, 211, 179, 0.10);
+  border-bottom: 1px solid rgba(229, 211, 179, 0.24);
+}
+
+.otx-offer .offer-champagne-kicker {
+  font-family: var(--offer-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #EFE1C6;
+}
+
+.otx-offer .offer-champagne-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgba(229, 211, 179, 0.18);
+  border: 1px solid rgba(229, 211, 179, 0.46);
+  color: #EFE1C6;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.otx-offer .offer-champagne-body {
+  padding: 26px 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  gap: 22px;
+}
+
+.otx-offer .offer-card-kicker {
+  margin: 0 0 8px;
+  font-family: var(--offer-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--offer-ice-3);
+}
+
+.otx-offer .offer-card-kicker.is-green {
+  color: var(--offer-green);
+}
+
+.otx-offer .offer-card-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.otx-offer .offer-card-title-row h3 {
+  margin: 0;
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  color: #fff;
+}
+
+.otx-offer .is-champagne-card .offer-card-title-row h3 {
+  font-size: 28px;
+}
+
+.otx-offer .offer-triptych-grid .offer-card-title-row h3 {
+  font-size: 23px;
+}
+
+.otx-offer .offer-validity-tag {
+  font-family: var(--offer-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--offer-champagne);
+}
+
+.otx-offer .offer-scope-badges {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 4px;
+  flex-wrap: wrap;
+}
+
+.otx-offer .offer-scope-badge {
+  font-family: var(--offer-mono);
+  font-size: 11px;
+  padding: 4px 9px;
+  background: rgba(207, 228, 247, 0.06);
+  border: 1px solid rgba(207, 228, 247, 0.16);
+  color: var(--offer-ice);
+}
+
+.otx-offer .is-middle-tier .offer-scope-badge {
+  border-color: rgba(143, 227, 192, 0.35);
+}
+
+.otx-offer .offer-card-desc {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.58;
+  color: var(--offer-ice-2);
+}
+
+.otx-offer .offer-price-box {
+  margin-top: 18px;
+  padding: 16px 0;
+  border-top: 1px solid var(--offer-line);
   border-bottom: 1px solid var(--offer-line);
-  border-left: 2px solid transparent;
-  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-.otx-offer .offer-plan-option.is-selected {
-  background: rgba(207, 228, 247, 0.04);
-  border-left-color: var(--offer-green);
+.otx-offer .offer-price-box.is-champagne-box {
+  padding: 16px 20px;
+  background: rgba(4, 7, 12, 0.44);
+  border: 1px solid rgba(229, 211, 179, 0.22);
 }
 
-.otx-offer .offer-plan-option.is-pack-ahorro {
-  border-left-color: rgba(229, 211, 179, 0.5);
-  background: rgba(229, 211, 179, 0.025);
+.otx-offer .offer-price-figure {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
 }
 
-.otx-offer .offer-plan-option.is-pack-ahorro.is-selected {
-  border-left-color: var(--offer-champagne);
-  background: rgba(229, 211, 179, 0.06);
+.otx-offer .offer-price-figure > small {
+  font-family: var(--offer-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--offer-ice-2);
 }
 
-.otx-offer .offer-plan-option input {
-  width: 18px;
-  height: 18px;
-  margin-top: 5px;
-  accent-color: var(--offer-green);
-  flex-shrink: 0;
+.otx-offer .offer-price-figure.is-champagne > small {
+  color: var(--offer-champagne);
 }
 
-.otx-offer .offer-option-body {
+.otx-offer .offer-price-figure > strong {
+  font-size: 42px;
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 0.96;
+  color: #fff;
+}
+
+.otx-offer .offer-triptych-grid .offer-price-figure > strong {
+  font-size: 38px;
+}
+
+.otx-offer .offer-price-figure.is-champagne > strong {
+  font-size: 50px;
+  color: #EFE1C6;
+}
+
+.otx-offer .offer-price-figure > span {
+  font-size: 14px;
+  color: var(--offer-ice-2);
+}
+
+.otx-offer .offer-price-equivalence {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.48;
+  color: var(--offer-ice-2);
+  text-align: right;
+}
+
+.otx-offer .offer-price-equivalence strong {
   display: block;
-  min-width: 0;
-  width: 100%;
+  color: var(--offer-champagne);
+  font-weight: 500;
+  font-size: 13px;
 }
 
-.otx-offer .offer-option-header {
+.otx-offer .offer-price-equivalence small {
+  display: block;
+  font-size: 12px;
+  color: var(--offer-ice-3);
+}
+
+.otx-offer .offer-card-features {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 22px;
+  display: grid;
+  gap: 10px;
+}
+
+.otx-offer .offer-card-features.is-two-col {
+  margin: 18px 0 6px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px 18px;
+}
+
+.otx-offer .offer-card-features li {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 10px;
+  align-items: start;
+  font-size: 13.8px;
+  line-height: 1.48;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.otx-offer .offer-card-features li > svg {
+  flex-shrink: 0;
+  color: var(--offer-green);
+  margin-top: 3px;
+}
+
+.otx-offer .offer-card-features li > svg.is-champagne-check {
+  color: var(--offer-champagne);
+}
+
+.otx-offer .offer-card-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 8px 12px;
+  gap: 12px 16px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(207, 228, 247, 0.12);
 }
 
-.otx-offer .offer-option-name {
-  display: inline-block;
-  font-size: 16px;
-  color: #fff;
-  line-height: 1.5;
+.otx-offer .offer-card-actions.is-champagne-actions {
+  border-top-color: rgba(229, 211, 179, 0.20);
 }
 
-.otx-offer .offer-pack-badge {
+.otx-offer .offer-triptych-grid .offer-card-actions {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.otx-offer .offer-btn-card {
   display: inline-flex;
   align-items: center;
-  padding: 3px 10px;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 12px 22px;
   border-radius: 999px;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--offer-champagne);
-  border: 1px solid rgba(229, 211, 179, 0.38);
-  background: rgba(229, 211, 179, 0.08);
-  line-height: 1.4;
+  border: 1px solid rgba(143, 227, 192, 0.5);
+  background: rgba(143, 227, 192, 0.10);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: background-color 0.18s ease, color 0.18s ease;
 }
 
-.otx-offer .offer-price {
+.otx-offer .offer-btn-card:hover {
+  background: var(--offer-green);
+  color: #04070C;
+}
+
+.otx-offer .offer-btn-card.is-solid-green {
+  background: var(--offer-green);
+  color: #04070C;
+}
+
+.otx-offer .offer-btn-card.is-solid-green:hover {
+  background: var(--offer-ice);
+}
+
+.otx-offer .offer-btn-champagne {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: var(--offer-champagne);
+  color: #04070C;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: background-color 0.18s ease;
+}
+
+.otx-offer .offer-btn-champagne:hover {
+  background: #EFE1C6;
+}
+
+.otx-offer .offer-card-sublinks {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.otx-offer .offer-price > small {
-  color: var(--offer-ice);
-  font-size: 10px;
-  letter-spacing: 0.04em;
-}
-
-.otx-offer .offer-price > strong {
-  color: #fff;
-  font-size: clamp(28px, 3vw, 44px);
-  font-weight: 400;
-  letter-spacing: -0.04em;
-  line-height: 1.2;
-}
-
-.otx-offer .offer-price > span {
-  font-size: 12px;
-  color: var(--offer-ice);
-}
-
-.otx-offer .offer-option-description {
-  display: block;
-  margin-top: 10px;
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--offer-ice-2);
-}
-
-.otx-offer .offer-plan-detail {
-  padding: 26px 28px;
-  background: rgba(9, 16, 27, 0.65);
-  border: 1px solid var(--offer-line);
-}
-
-.otx-offer .offer-plan-detail h3 {
-  margin-top: 12px;
-  font-size: 28px;
-  line-height: 1.25;
-  font-weight: 450;
-  letter-spacing: -0.025em;
-}
-
-.otx-offer .offer-coverage {
-  margin-top: 12px;
-  font-size: 13px;
-  color: var(--offer-green);
-  line-height: 1.7;
-}
-
-.otx-offer .offer-plan-detail ul {
-  display: grid;
-  gap: 14px;
-  padding: 0;
-  margin-top: 22px;
-  list-style: none;
-}
-
-.otx-offer .offer-plan-detail li {
-  display: flex;
-  gap: 12px;
-  align-items: start;
-  font-size: 14px;
-  color: var(--offer-ice);
-  line-height: 1.7;
-}
-
-.otx-offer .offer-plan-detail li > svg {
-  flex-shrink: 0;
-  color: var(--offer-green);
-  margin-top: 5px;
-}
-
-.otx-offer .offer-selection-bar {
-  display: grid;
-  grid-template-columns: 0.75fr 1.25fr;
   align-items: center;
-  gap: 40px;
-  padding: 24px 0;
-  margin-top: 36px;
-  border-top: 1px solid var(--offer-line);
-  border-bottom: 1px solid var(--offer-line);
+  justify-content: space-between;
+  gap: 10px 16px;
 }
 
-.otx-offer .offer-selection-bar > p {
-  overflow-wrap: anywhere;
-}
-
-.otx-offer .offer-selection-bar > p > span {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--offer-ice-3);
-}
-
-.otx-offer .offer-selection-bar strong {
-  font-size: 13.5px;
-  line-height: 1.7;
-  font-weight: 500;
+/* Conditions Drawer */
+.otx-offer .offer-conditions {
+  margin-top: 22px;
+  background: rgba(4, 7, 12, 0.68);
+  border: 1px solid rgba(207, 228, 247, 0.14);
 }
 
 .otx-offer .offer-conditions > summary {
@@ -860,11 +1055,16 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  padding: 22px 0;
-  font-size: 13.5px;
+  padding: 16px 22px;
+  font-size: 13px;
   color: var(--offer-ice-2);
   cursor: pointer;
   list-style: none;
+}
+
+.otx-offer .offer-conditions > summary strong {
+  color: #fff;
+  font-weight: 500;
 }
 
 .otx-offer .offer-conditions > summary::-webkit-details-marker {
@@ -876,43 +1076,49 @@
 }
 
 .otx-offer .offer-conditions > div {
-  padding-bottom: 20px;
-  max-width: 900px;
+  padding: 16px 22px 20px;
+  border-top: 1px solid rgba(207, 228, 247, 0.10);
 }
 
 .otx-offer .offer-conditions p {
   font-size: 13px;
-  line-height: 1.8;
+  line-height: 1.72;
   color: var(--offer-ice-2);
-  margin: 0 0 16px;
+  margin: 0 0 14px;
+}
+
+.otx-offer .offer-conditions p:last-child {
+  margin-bottom: 0;
 }
 
 .otx-offer .offer-conditions dl {
-  margin: 20px 0;
+  margin: 14px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
 }
 
 .otx-offer .offer-conditions dl > div {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  border-bottom: 1px solid var(--offer-line);
-  padding: 12px 0;
-  font-size: 13px;
-  line-height: 1.7;
+  padding: 10px 14px;
+  background: rgba(9, 16, 28, 0.72);
+  border: 1px solid rgba(207, 228, 247, 0.10);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.otx-offer .offer-conditions dt {
+  color: var(--offer-ice-3);
+  font-size: 11.5px;
 }
 
 .otx-offer .offer-conditions dd {
+  margin: 4px 0 0;
   color: var(--offer-green);
+  font-weight: 500;
 }
 
 /* ---------- Responsive (320px to Desktop) ---------- */
 @media (max-width: 960px) {
-  .otx-offer .otx-ambient-texture {
-    background-image:
-      linear-gradient(180deg, #04070C 0%, transparent 18%, transparent 82%, #04070C 100%),
-      url('../assets/otx-surface-mobile.webp');
-  }
-
   .otx-offer .a-support {
     padding: 68px 6% 64px;
   }
@@ -1027,86 +1233,150 @@
   }
 
   .otx-offer.offer-pricing {
-    padding: 68px 6% 64px;
+    padding: 64px 6% 60px;
+  }
+
+  .otx-offer.offer-pricing::before {
+    background-image:
+      linear-gradient(180deg, #060B13 0%, rgba(7, 13, 23, 0.42) 45%, rgba(4, 7, 12, 0.84) 100%),
+      url('../assets/otx-surface-mobile.webp');
   }
 
   .otx-offer .offer-price-heading {
-    display: block;
-    margin-bottom: 28px;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
   }
 
   .otx-offer .offer-price-heading > p {
-    margin-top: 14px;
+    justify-self: start;
   }
 
-  .otx-offer .offer-mode-tabs {
+  .otx-offer .offer-segmented-nav {
     grid-template-columns: 1fr;
-    gap: 10px;
-    margin-bottom: 28px;
+    gap: 4px;
+    padding: 4px;
+    margin-bottom: 22px;
   }
 
-  .otx-offer .offer-mode-tab {
-    min-height: 0;
-    padding: 16px 18px;
-    display: grid;
-    grid-template-columns: 28px 1fr;
-    column-gap: 10px;
-    row-gap: 2px;
+  .otx-offer .offer-seg-tab {
+    min-height: 44px;
+    padding: 10px 14px;
   }
 
-  .otx-offer .offer-mode-index {
-    grid-row: 1 / 4;
-    padding-top: 3px;
-  }
-
-  .otx-offer .offer-mode-title,
-  .otx-offer .offer-mode-sub,
-  .otx-offer .offer-mode-ref {
-    grid-column: 2;
-    margin-top: 0;
-  }
-
-  .otx-offer .offer-mode-ref {
-    margin-top: 6px;
+  .otx-offer .offer-diptych-grid,
+  .otx-offer .offer-triptych-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
   }
 }
 
 @media (max-width: 767px) {
-  .otx-offer .offer-plan-layout {
-    grid-template-columns: 1fr;
-    gap: 24px;
+  .otx-offer.offer-pricing {
+    padding: 52px 5.5% 56px;
   }
 
-  .otx-offer .offer-plan-option {
-    padding: 20px 14px;
-    gap: 14px;
+  .otx-offer .offer-price-heading h2 {
+    font-size: 32px;
   }
 
-  .otx-offer .offer-plan-detail {
+  .otx-offer .offer-price-heading > p {
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .otx-offer .offer-seg-label {
+    font-size: 13.5px;
+  }
+
+  .otx-offer .offer-seg-meta {
+    font-size: 10.5px;
+  }
+
+  .otx-offer .offer-plan-card,
+  .otx-offer .offer-triptych-grid .offer-plan-card {
     padding: 20px 18px;
   }
 
-  .otx-offer .offer-plan-detail h3 {
-    font-size: 24px;
+  .otx-offer .offer-champagne-strip {
+    padding: 10px 18px;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
-  .otx-offer .offer-selection-bar {
+  .otx-offer .offer-champagne-body {
+    padding: 18px 18px 20px;
+    gap: 16px;
+  }
+
+  .otx-offer .offer-card-title-row h3,
+  .otx-offer .is-champagne-card .offer-card-title-row h3,
+  .otx-offer .offer-triptych-grid .offer-card-title-row h3 {
+    font-size: 22px;
+  }
+
+  .otx-offer .offer-card-desc {
+    font-size: 13px;
+    margin-top: 6px;
+    line-height: 1.48;
+  }
+
+  .otx-offer .offer-price-box,
+  .otx-offer .offer-price-box.is-champagne-box {
+    margin-top: 12px;
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .otx-offer .offer-price-figure > strong,
+  .otx-offer .offer-triptych-grid .offer-price-figure > strong {
+    font-size: 34px;
+  }
+
+  .otx-offer .offer-price-figure.is-champagne > strong {
+    font-size: 38px;
+  }
+
+  .otx-offer .offer-price-equivalence {
+    text-align: left;
+    font-size: 12px;
+  }
+
+  .otx-offer .offer-card-features,
+  .otx-offer .offer-card-features.is-two-col {
+    margin: 12px 0 14px;
     grid-template-columns: 1fr;
-    gap: 18px;
-    margin-top: 28px;
+    gap: 8px;
   }
 
-  .otx-offer .offer-plan-actions > .offer-primary {
+  .otx-offer .offer-card-features li {
+    font-size: 13px;
+  }
+
+  .otx-offer .offer-card-actions {
+    padding-top: 14px;
+    gap: 10px;
+  }
+
+  .otx-offer .offer-btn-card,
+  .otx-offer .offer-btn-champagne {
+    width: 100%;
+    padding: 12px 16px;
+  }
+
+  .otx-offer .offer-card-sublinks {
     width: 100%;
   }
 
-  .otx-offer .offer-plan-actions {
-    gap: 4px 24px;
+  .otx-offer .offer-conditions > summary {
+    padding: 14px 16px;
+    font-size: 12px;
   }
 
-  .otx-offer .offer-conditions dl > div {
-    grid-template-columns: 1fr;
-    gap: 4px;
+  .otx-offer .offer-conditions > div {
+    padding: 14px 16px 16px;
   }
 }
 

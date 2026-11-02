@@ -20,10 +20,17 @@ Manteniendo intactos **Header**, **Hero** (`Tecnología sin complicaciones.`), l
 4. **Unificación de jerarquía en Precios sin redundancia (`Pricing.jsx`)**:
    - Las 3 modalidades comerciales (`01 Soporte puntual`, `02 Abonos mensuales`, `03 Proyectos y Microsoft 365`) funcionan directamente como tarjetas selectoras interactivas (`<TabsTrigger>`), eliminando la duplicación entre resumen previo y pestañas.
    - **Reducción de altura en Precios**: de `2.632 px` a **`1.730 px`** en móvil (**`-902 px` / `-34%`**) y de `1.664 px` a **`1.029 px`** en escritorio (**`-635 px` / `-38%`**).
-   - Todos los precios, planes de empresas, implementaciones Microsoft 365, condiciones y el destaque champagne `Pack Ahorro · Ahorrás $10.000` se mantienen intactos.
-5. **Eliminación de apariencia ficticia y validación honesta en formularios (`Contact.jsx`, `TicketPage.jsx`, `mock.js`)**:
-   - Se eliminaron todos los placeholders ficticios (`Juan Pérez`, `juan@email.com`, `11 1234-5678`) y se reemplazaron por indicaciones neutras (`Tu nombre`, `Correo electrónico`, `Teléfono o WhatsApp (opcional)`, `Motivo de la consulta (opcional)` / `Motivo de la solicitud`, `Contanos qué necesitás`).
-   - En `/ticket`, la pantalla de confirmación únicamente se muestra cuando el backend responde con `success: true` y un `ticket_id` válido (`typeof response.data?.ticket_id === 'string' && response.data.ticket_id.trim()`), sin generar jamás números de ticket ficticios ni simular envíos reales.
+   - Todos los precios vigentes en `mock.js` se mantienen intactos:
+     - **Personas (`planesParticulares`)**: `Asistencia Remota` (`$20.000`) y `Pack 5 Asistencias` (`$90.000`, con destaque champagne satinado `Pack Ahorro · Ahorrás $10.000` y equivalencia de `$18.000 por asistencia`).
+     - **Empresas (`planesPymes`)**: `Empresa Inicial` (`$120.000/mes`, 3 asistencias, hasta 3 puestos), `Empresa Operativa` (`$180.000/mes`, 5 asistencias, hasta 6 puestos) y `Empresa Plus` (`A cotizar`, más de 6 puestos).
+     - **Microsoft 365 (`planesM365`)**: `Implementación Inicial` (`Desde $85.000`), `Gestión Mensual` (`Desde $25.000/mes`) y `SharePoint/OneDrive Básico` (`Desde $45.000`).
+   - No se utilizan insignias `"Más elegido"` ni etiquetas comerciales sin respaldo.
+5. **Eliminación de apariencia ficticia, respaldo por WhatsApp y validación rigurosa en formularios (`Contact.jsx`, `TicketPage.jsx`, `offer-catalog.js`, `backend/routers/tickets.py`)**:
+   - Se eliminaron todos los placeholders ficticios (`Juan Pérez`, `juan@email.com`, `11 1234-5678`) y el marcador `[DESCRIBIR BREVEMENTE]`, reemplazándolos por indicaciones neutras y mensajes de WhatsApp generados dinámicamente con los datos reales del formulario (`buildWhatsAppUrl` con `encodeURIComponent`).
+   - **Circuito real de tickets (`FastAPI` + `Google Apps Script`)**:
+     - `Contact.jsx` (`canal: "Landing"`) y `TicketPage.jsx` (`canal: "TicketWeb"`) envían `POST ${REACT_APP_BACKEND_URL}/api/tickets`.
+     - `backend/routers/tickets.py` valida los campos, aplica rate-limit por IP y reenvía la solicitud a `GOOGLE_APPS_SCRIPT_URL` (`backend/google_apps_script.js`), el cual registra el ticket en Google Sheets (`OTX-AA-NNNN`) y envía la notificación por correo mediante `MailApp.sendEmail`. (`MONGO_URL` y `DB_NAME` en `backend/server.py` solo se utilizan en las rutas de plantilla `/api/status`, no en `/api/tickets`).
+     - Se eliminó el fallback `ticket_id = "N/A"` y cualquier confirmación ficticia (`"BLOCKED"`): tanto el backend (`is_valid_ticket_id`) como el frontend (`isValidTicketId`) exigen HTTP 2xx, `success: true` y un identificador real válido antes de mostrar la pantalla de confirmación. Si el servicio falla o no está disponible, se conservan todos los datos ingresados por el usuario y se ofrecen accesos directos a WhatsApp y correo con la consulta ya redactada.
    - Se depuró el lenguaje comercial en todo el sitio para eliminar promesas absolutas de velocidad (*"atención inmediata"*, *"en el día"*, *"en el acto"*), comunicando asistencia remota y visitas técnicas coordinadas según disponibilidad.
 
 ---
