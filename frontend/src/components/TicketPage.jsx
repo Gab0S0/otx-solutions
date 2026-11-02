@@ -7,8 +7,10 @@ import {
   buildWhatsAppUrl,
   buildMailtoUrl,
   validateTicketFormData,
+  getTicketsApiBaseUrl,
+  getTurnstileSiteKey,
 } from '../lib/offer-catalog';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { AlertCircle, CheckCircle, ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -18,16 +20,18 @@ import { companyInfo, services } from '../data/mock';
 import { toast } from 'sonner';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import TurnstileWidget from './TurnstileWidget';
 import './PremiumIntro.css';
 import './PremiumSections.css';
 
-const BACKEND_URL = (process.env.REACT_APP_BACKEND_URL || '').trim();
+const BACKEND_URL = getTicketsApiBaseUrl();
+const TURNSTILE_SITE_KEY = getTurnstileSiteKey();
 
 const resolveErrorDetail = (err, fallbackMessage) => {
   if (err?.code === 'ECONNABORTED' || /timeout/i.test(err?.message || '')) {
     return 'El servidor tardó demasiado en responder. Tus datos siguen cargados: podés intentar de nuevo o continuar directamente por WhatsApp.';
   }
-  const detail = err?.response?.data?.detail;
+  const detail = err?.response?.data?.detail || err?.response?.data?.message;
   if (typeof detail === 'string' && detail.trim()) {
     return detail.trim();
   }
@@ -47,12 +51,22 @@ const TicketPage = () => {
     mensaje: '',
     plan: '',
     servicio: '',
-    website: '' // Honeypot
+    website: '', // Honeypot
+    turnstileToken: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const submittingRef = useRef(false);
+  const turnstileRef = useRef(null);
   const [error, setError] = useState(null);
   const [ticketCreated, setTicketCreated] = useState(null);
+
+  const handleTurnstileVerify = useCallback((token) => {
+    setFormData((prev) => ({ ...prev, turnstileToken: token || '' }));
+  }, []);
+
+  const handleTurnstileExpire = useCallback(() => {
+    setFormData((prev) => ({ ...prev, turnstileToken: '' }));
+  }, []);
 
   // Check URL params for prefill and scroll to top on mount
   useEffect(() => {
@@ -102,8 +116,10 @@ const TicketPage = () => {
     e.preventDefault();
     if (submittingRef.current || isSubmitting) return;
 
+    const requireTurnstile = Boolean(BACKEND_URL && TURNSTILE_SITE_KEY);
     const validation = validateTicketFormData(formData, {
       requireSubject: true,
+      requireTurnstile,
       canal: 'TicketWeb',
     });
 
@@ -144,6 +160,8 @@ const TicketPage = () => {
         throw new Error('Respuesta sin confirmación válida de ticket');
       }
     } catch (err) {
+      turnstileRef.current?.reset();
+
       const errorMessage = resolveErrorDetail(
         err,
         'No pudimos registrar el ticket automáticamente en este momento. Tus datos siguen cargados: podés continuar ahora mismo por WhatsApp o correo electrónico.'
@@ -372,6 +390,17 @@ const TicketPage = () => {
                     className="otx-textarea"
                   />
                 </div>
+
+                {TURNSTILE_SITE_KEY && (
+                  <TurnstileWidget
+                    ref={turnstileRef}
+                    siteKey={TURNSTILE_SITE_KEY}
+                    action="ticket_submit"
+                    onVerify={handleTurnstileVerify}
+                    onExpire={handleTurnstileExpire}
+                    onError={handleTurnstileExpire}
+                  />
+                )}
 
                 <div className="otx-form-footer">
                   <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="otx-inline-link">

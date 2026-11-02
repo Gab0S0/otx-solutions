@@ -1,0 +1,17 @@
+# Copiar este archivo como `.dev.vars` para desarrollo local con `wrangler dev`
+# NUNCA subir `.dev.vars` a Git.
+
+ENVIRONMENT="development"
+ALLOWED_ORIGINS="http://localhost:3000,http://127.0.0.1:3000"
+
+# Clave secreta oficial de prueba de Cloudflare Turnstile (siempre pasa en desarrollo)
+# En producción usar `wrangler secret put TURNSTILE_SECRET_KEY` con la clave real del dashboard
+TURNSTILE_SECRET_KEY="1x0000000000000000000000000000000AA"
+
+# Sal para anonimizar IPs en la tabla de rate-limit
+IP_HASH_SALT="dev-local-salt-otx-2026"
+
+# Opcional: configurar cuando el dominio esté verificado en Resend
+RESEND_API_KEY=""
+NOTIFICATION_FROM_EMAIL="OTX Solutions <notificaciones@otxsolutions.com.ar>"
+NOTIFICATION_TO_EMAIL="solutionsotx@gmail.com"

@@ -1,0 +1,19 @@
+{
+  "name": "otx-tickets-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare Worker API (TypeScript + D1 + Turnstile + Resend) para el sistema de tickets de OTX Solutions",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply otx-tickets-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply otx-tickets-db --remote",
+    "test": "node --experimental-strip-types tests/tickets-worker.test.ts"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250214.0",
+    "typescript": "^5.7.3",
+    "wrangler": "^3.109.0"
+  }
+}

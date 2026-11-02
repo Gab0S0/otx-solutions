@@ -648,6 +648,14 @@
   align-items: center;
 }
 
+.otx-turnstile-slot {
+  margin-top: 8px;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+}
+
 .otx-form-footer {
   margin-top: 20px;
   display: flex;

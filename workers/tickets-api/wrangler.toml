@@ -1,0 +1,21 @@
+name = "otx-tickets-api"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+
+[vars]
+ENVIRONMENT = "production"
+ALLOWED_ORIGINS = "https://otxsolutions.com.ar,https://www.otxsolutions.com.ar"
+NOTIFICATION_FROM_EMAIL = "OTX Solutions <notificaciones@otxsolutions.com.ar>"
+NOTIFICATION_TO_EMAIL = "solutionsotx@gmail.com"
+
+# Base de datos Cloudflare D1 (reemplazar database_id tras ejecutar `wrangler d1 create otx-tickets-db`)
+[[d1_databases]]
+binding = "DB"
+database_name = "otx-tickets-db"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+# Secretos privados (NO guardar en este archivo; cargar con `wrangler secret put`):
+# - TURNSTILE_SECRET_KEY
+# - RESEND_API_KEY (opcional hasta configurar el dominio en Resend)
+# - IP_HASH_SALT (opcional, sal criptográfica para el hash de IP)
