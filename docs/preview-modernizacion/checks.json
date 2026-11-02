@@ -1,0 +1,228 @@
+{
+  "responsiveResults": [
+    {
+      "viewport": "320x740",
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "overflowX": false,
+      "supportCardsCount": 4,
+      "optimizationCardsCount": 4,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 7
+    },
+    {
+      "viewport": "375x667",
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "overflowX": false,
+      "supportCardsCount": 4,
+      "optimizationCardsCount": 4,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 7
+    },
+    {
+      "viewport": "390x844",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "overflowX": false,
+      "supportCardsCount": 4,
+      "optimizationCardsCount": 4,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 7
+    },
+    {
+      "viewport": "768x1024",
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "overflowX": false,
+      "supportCardsCount": 4,
+      "optimizationCardsCount": 4,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 7
+    },
+    {
+      "viewport": "1280x720",
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "overflowX": false,
+      "supportCardsCount": 4,
+      "optimizationCardsCount": 4,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 7
+    },
+    {
+      "viewport": "1440x900",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "overflowX": false,
+      "supportCardsCount": 4,
+      "optimizationCardsCount": 4,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 7
+    },
+    {
+      "viewport": "1920x1080",
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "overflowX": false,
+      "supportCardsCount": 4,
+      "optimizationCardsCount": 4,
+      "stepsCount": 3,
+      "pillarsCount": 4,
+      "faqCount": 7
+    }
+  ],
+  "heightComparison": {
+    "services": {
+      "desktop": {
+        "before": 4197,
+        "after": 2531,
+        "diffPx": -1666,
+        "diffPct": "-40%"
+      },
+      "mobile": {
+        "before": 6245,
+        "after": 4472,
+        "diffPx": -1773,
+        "diffPct": "-28%"
+      }
+    },
+    "pricing": {
+      "desktop": {
+        "before": 1664,
+        "after": 1029,
+        "diffPx": -635,
+        "diffPct": "-38%"
+      },
+      "mobile": {
+        "before": 2632,
+        "after": 1730,
+        "diffPx": -902,
+        "diffPct": "-34%"
+      }
+    },
+    "howItWorks": {
+      "desktop": {
+        "before": 565,
+        "after": 589,
+        "diffPx": 24,
+        "diffPct": "4%"
+      },
+      "mobile": {
+        "before": 972,
+        "after": 972,
+        "diffPx": 0,
+        "diffPct": "0%"
+      }
+    },
+    "whyUs": {
+      "desktop": {
+        "before": 658,
+        "after": 658,
+        "diffPx": 0,
+        "diffPct": "0%"
+      },
+      "mobile": {
+        "before": 1033,
+        "after": 1083,
+        "diffPx": 50,
+        "diffPct": "5%"
+      }
+    },
+    "faq": {
+      "desktop": {
+        "before": 749,
+        "after": 749,
+        "diffPx": 0,
+        "diffPct": "0%"
+      },
+      "mobile": {
+        "before": 1222,
+        "after": 1247,
+        "diffPx": 25,
+        "diffPct": "2%"
+      }
+    },
+    "contact": {
+      "desktop": {
+        "before": 727,
+        "after": 727,
+        "diffPx": 0,
+        "diffPct": "0%"
+      },
+      "mobile": {
+        "before": 1298,
+        "after": 1298,
+        "diffPx": 0,
+        "diffPct": "0%"
+      }
+    },
+    "footer": {
+      "desktop": {
+        "before": 397,
+        "after": 397,
+        "diffPx": 0,
+        "diffPct": "0%"
+      },
+      "mobile": {
+        "before": 541,
+        "after": 541,
+        "diffPx": 0,
+        "diffPct": "0%"
+      }
+    },
+    "ticket": {
+      "desktop": {
+        "before": 1082,
+        "after": 1082,
+        "diffPx": 0,
+        "diffPct": "0%"
+      },
+      "mobile": {
+        "before": 1264,
+        "after": 1264,
+        "diffPx": 0,
+        "diffPct": "0%"
+      }
+    }
+  },
+  "automationHeight": {
+    "desktop": 623,
+    "mobile": 1299
+  },
+  "servicePrefillCheck": {
+    "prefilledAsunto": "Consulta sobre: Evaluación de proceso para automatizar",
+    "prefillPillText": "Seleccionado:Automatizaciones e inteligencia artificial\nQuitar",
+    "activeElementId": "nombre",
+    "placeholders": {
+      "nombre": "Tu nombre",
+      "email": "Correo electrónico",
+      "telefono": "Teléfono o WhatsApp (opcional)",
+      "asunto": "Motivo de la consulta (opcional)",
+      "mensaje": "Contanos qué necesitás"
+    }
+  },
+  "ticketPrefillCheck": {
+    "asunto": "Consulta sobre: Asesoramiento tecnológico y productividad",
+    "servicioText": "Asesoramiento tecnológico y productividad",
+    "ticketDotColor": "rgb(143, 227, 192)",
+    "overflowMobile": false,
+    "placeholders": {
+      "nombre": "Tu nombre",
+      "email": "Correo electrónico",
+      "telefono": "Teléfono o WhatsApp (opcional)",
+      "asunto": "Motivo de la solicitud",
+      "mensaje": "Contanos qué necesitás"
+    }
+  },
+  "wordmarkCheck": {
+    "headerDotColor": "rgb(143, 227, 192)",
+    "footerDotColor": "rgb(143, 227, 192)"
+  }
+}
